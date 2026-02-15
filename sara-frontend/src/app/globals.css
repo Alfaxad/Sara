@@ -2,26 +2,387 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   Sara Design System - CSS Custom Properties
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Backgrounds */
+  --sara-bg-base: #0B0F14;
+  --sara-bg-surface: #111820;
+  --sara-bg-elevated: #1A2230;
+  --sara-bg-subtle: #222D3D;
+
+  /* Text */
+  --sara-text-primary: #E8ECF1;
+  --sara-text-secondary: #8899AA;
+  --sara-text-muted: #556677;
+
+  /* Borders */
+  --sara-border: #1E2A3A;
+  --sara-border-focus: #3B82F6;
+
+  /* Accent */
+  --sara-accent: #6A9BCC;
+  --sara-accent-hover: #7DAAD6;
+  --sara-accent-soft: #6A9BCC15;
+  --sara-accent-glow: #6A9BCC40;
+  --sara-secondary: #788C5D;
+  --sara-secondary-soft: #788C5D20;
+
+  /* Semantic */
+  --sara-critical: #EF4444;
+  --sara-critical-soft: #EF444420;
+  --sara-warning: #F59E0B;
+  --sara-warning-soft: #F59E0B20;
+  --sara-success: #10B981;
+  --sara-success-soft: #10B98120;
+  --sara-info: #3B82F6;
+  --sara-info-soft: #3B82F620;
+
+  /* Font families (set by next/font) */
+  --font-display: var(--font-playfair);
+  --font-body: var(--font-dm-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Light Mode */
+:root.light {
+  --sara-bg-base: #F8FAFB;
+  --sara-bg-surface: #FFFFFF;
+  --sara-bg-elevated: #FFFFFF;
+  --sara-bg-subtle: #F1F4F8;
+  --sara-text-primary: #111827;
+  --sara-text-secondary: #6B7280;
+  --sara-text-muted: #9CA3AF;
+  --sara-border: #E5E7EB;
+  --sara-border-focus: #3B82F6;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--sara-bg-base);
+    color: var(--sara-text-primary);
+    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* Headings default to display font */
+  h1, h2, h3 {
+    font-family: var(--font-display), Georgia, serif;
+  }
+
+  h4, h5, h6 {
+    font-family: var(--font-body), system-ui, sans-serif;
+  }
+
+  /* Focus styles */
+  :focus-visible {
+    outline: 2px solid var(--sara-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: var(--sara-accent-soft);
+    color: var(--sara-text-primary);
+  }
+
+  /* Scrollbar styling (webkit) */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--sara-bg-surface);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--sara-bg-subtle);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--sara-text-muted);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================
+   Typography Classes
+   ============================================ */
+
+@layer components {
+  /* Display Typography - Playfair Display */
+  .sara-display-xl {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: 2.25rem; /* 36px */
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .sara-display-lg {
+    font-family: var(--font-display), Georgia, serif;
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  /* Heading Typography - DM Sans */
+  .sara-heading {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .sara-subheading {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 1rem; /* 16px */
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  /* Body Typography - DM Sans */
+  .sara-body {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.9375rem; /* 15px */
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .sara-body-small {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* Caption/Label Typography - DM Sans */
+  .sara-caption {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.6875rem; /* 11px */
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .sara-label {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.8125rem; /* 13px */
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--sara-text-secondary);
+  }
+
+  /* Surface Components */
+  .sara-surface {
+    background-color: var(--sara-bg-surface);
+    border: 1px solid var(--sara-border);
+    border-radius: 0.75rem;
+  }
+
+  .sara-elevated {
+    background-color: var(--sara-bg-elevated);
+    border: 1px solid var(--sara-border);
+    border-radius: 0.75rem;
+  }
+
+  /* Card Component */
+  .sara-card {
+    background-color: var(--sara-bg-surface);
+    border: 1px solid var(--sara-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+  }
+
+  .sara-card:hover {
+    border-color: var(--sara-accent-soft);
+  }
+
+  /* Button Base */
+  .sara-btn {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    padding: 0.625rem 1rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .sara-btn-primary {
+    background-color: var(--sara-accent);
+    color: var(--sara-bg-base);
+    border: none;
+  }
+
+  .sara-btn-primary:hover {
+    background-color: var(--sara-accent-hover);
+  }
+
+  .sara-btn-secondary {
+    background-color: transparent;
+    color: var(--sara-text-primary);
+    border: 1px solid var(--sara-border);
+  }
+
+  .sara-btn-secondary:hover {
+    background-color: var(--sara-bg-subtle);
+    border-color: var(--sara-text-muted);
+  }
+
+  /* Input Base */
+  .sara-input {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.9375rem;
+    padding: 0.625rem 0.875rem;
+    background-color: var(--sara-bg-surface);
+    border: 1px solid var(--sara-border);
+    border-radius: 0.5rem;
+    color: var(--sara-text-primary);
+    transition: border-color 0.2s ease;
+  }
+
+  .sara-input:focus {
+    outline: none;
+    border-color: var(--sara-border-focus);
+  }
+
+  .sara-input::placeholder {
+    color: var(--sara-text-muted);
+  }
+
+  /* Status Badges */
+  .sara-badge {
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .sara-badge-critical {
+    background-color: var(--sara-critical-soft);
+    color: var(--sara-critical);
+  }
+
+  .sara-badge-warning {
+    background-color: var(--sara-warning-soft);
+    color: var(--sara-warning);
+  }
+
+  .sara-badge-success {
+    background-color: var(--sara-success-soft);
+    color: var(--sara-success);
+  }
+
+  .sara-badge-info {
+    background-color: var(--sara-info-soft);
+    color: var(--sara-info);
+  }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+@keyframes sara-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--sara-accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px var(--sara-accent-glow);
+  }
+}
+
+@keyframes sara-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sara-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sara-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @layer utilities {
+  /* Agent Working State */
+  .sara-working {
+    animation: sara-pulse 2s ease-in-out infinite;
+  }
+
+  /* Fade In */
+  .sara-fade-in {
+    animation: sara-fade-in 0.3s ease-out;
+  }
+
+  /* Slide Up */
+  .sara-slide-up {
+    animation: sara-slide-up 0.3s ease-out;
+  }
+
+  /* Spinning loader */
+  .sara-spin {
+    animation: sara-spin 1s linear infinite;
+  }
+
+  /* Text utilities */
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Accent glow effect */
+  .sara-glow {
+    box-shadow: 0 0 20px var(--sara-accent-glow);
+  }
+
+  /* Glass effect */
+  .sara-glass {
+    background: rgba(17, 24, 32, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 }
