@@ -1,0 +1,6 @@
+.git
+*.pyc
+__pycache__/
+.dockerignore
+Dockerfile
+iterative_langgraph_Agentic_RAG_with_MedGemma.ipynb
