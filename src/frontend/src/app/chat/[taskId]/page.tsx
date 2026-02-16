@@ -1,6 +1,5 @@
 'use client';
 
-import { use } from 'react';
 import { useChat } from '@/hooks/useChat';
 import { ChatPanel } from '@/components/chat';
 import { SplitPane, ErrorBoundary, SkeletonCard } from '@/components/ui';
@@ -8,9 +7,9 @@ import { cn } from '@/lib/utils';
 import { FileText } from 'lucide-react';
 
 interface ChatPageProps {
-  params: Promise<{
+  params: {
     taskId: string;
-  }>;
+  };
 }
 
 // Loading skeleton for artifacts
@@ -101,8 +100,7 @@ function ArtifactPanel({ artifacts, isLoading }: ArtifactPanelProps) {
 }
 
 export default function ChatPage({ params }: ChatPageProps) {
-  const resolvedParams = use(params);
-  const { taskId } = resolvedParams;
+  const { taskId } = params;
 
   const {
     task,
