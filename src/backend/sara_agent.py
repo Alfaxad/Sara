@@ -110,6 +110,7 @@ app = modal.App("sara-agent")
     memory=AGENT_MEMORY,
     timeout=AGENT_TIMEOUT,
     min_containers=1,  # Keep one instance warm for responsiveness
+    secrets=[modal.Secret.from_name("sara-api-key")],
 )
 @modal.concurrent(max_inputs=AGENT_CONCURRENT_INPUTS)
 @modal.asgi_app()
@@ -491,9 +492,12 @@ Question: {question}"""
             self.sara_url = sara_url
             self.fhir_url = fhir_url
             self.functions = functions
+            # Get API key for authenticating with Sara model
+            api_key = os.environ.get("SARA_API_KEY", "not-needed")
             self._sara_client = AsyncOpenAI(
                 base_url=f"{sara_url}/v1",
-                api_key="not-needed"
+                api_key=api_key,
+                default_headers={"X-API-Key": api_key}
             )
 
         def _build_prompt(self, context: str, question: str) -> str:
@@ -624,6 +628,15 @@ Question: {question}"""
             json_data = json.dumps(data)
             return f"event: {event_type}\ndata: {json_data}\n\n"
 
+    # Production allowed origins (no wildcards for security)
+    ALLOWED_ORIGINS = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "https://sara-agent.vercel.app",
+        "https://sara-alfaxad.vercel.app",
+        "https://sara.nadhari.ai",
+    ]
+
     fastapi_app = FastAPI(
         title="Sara Agent API",
         description="Clinical workflow agent API with SSE streaming",
@@ -632,25 +645,41 @@ Question: {question}"""
 
     fastapi_app.add_middleware(
         CORSMiddleware,
-        allow_origins=[
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "https://*.vercel.app",
-            "*"
-        ],
+        allow_origins=ALLOWED_ORIGINS,
         allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
+        allow_methods=["GET", "POST", "OPTIONS"],
+        allow_headers=["Authorization", "Content-Type", "X-API-Key"],
     )
+
+    def verify_api_key(request) -> bool:
+        """Verify API key from request headers."""
+        # Get API key from environment at runtime (set via Modal secret)
+        expected_key = os.environ.get("SARA_API_KEY", "")
+        if not expected_key:
+            # If no API key is configured, allow all requests (dev mode)
+            return True
+        # Check X-API-Key header
+        provided_key = request.headers.get("X-API-Key", "")
+        if provided_key == expected_key:
+            return True
+        # Check Authorization header (Bearer token)
+        auth_header = request.headers.get("Authorization", "")
+        if auth_header.startswith("Bearer ") and auth_header[7:] == expected_key:
+            return True
+        return False
 
     @fastapi_app.get("/health")
     async def health():
-        """Health check endpoint."""
+        """Health check endpoint (no auth required)."""
         return {"status": "ok", "service": "sara-agent"}
 
+    from fastapi import Request, HTTPException
+
     @fastapi_app.get("/api/tasks")
-    async def list_tasks():
+    async def list_tasks(request: Request):
         """List all available demo tasks."""
+        if not verify_api_key(request):
+            raise HTTPException(status_code=401, detail="Invalid or missing API key")
         return {
             "tasks": [
                 {"id": task_id, **task_data}
@@ -659,7 +688,7 @@ Question: {question}"""
         }
 
     @fastapi_app.post("/api/run")
-    async def run_agent(request: RunRequest):
+    async def run_agent(http_request: Request, request: RunRequest):
         """
         Run the Sara agent with SSE streaming.
 
@@ -671,6 +700,10 @@ Question: {question}"""
         - complete: Task completed with final answer
         - error: Error occurred
         """
+        # Verify API key
+        if not verify_api_key(http_request):
+            raise HTTPException(status_code=401, detail="Invalid or missing API key")
+
         async def event_generator():
             tool_call_id = 0
 

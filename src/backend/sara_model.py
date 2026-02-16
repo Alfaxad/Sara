@@ -47,7 +47,7 @@ app = modal.App("sara-model")
 @app.function(
     image=image,
     gpu=f"{SARA_GPU}:1",
-    secrets=[modal.Secret.from_name("huggingface-nadhari")],
+    secrets=[modal.Secret.from_name("huggingface-nadhari"), modal.Secret.from_name("sara-api-key")],
     volumes={"/root/.cache/huggingface": hf_cache_vol},
     scaledown_window=GPU_WARM_WINDOW,
     timeout=REQUEST_TIMEOUT,
@@ -66,15 +66,34 @@ import time
 import uuid
 import torch
 import uvicorn
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Depends
 from fastapi.responses import JSONResponse
+from fastapi.security import APIKeyHeader
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, Literal
 
 MODEL_NAME = os.environ.get("MODEL_NAME", "Nadhari/Sara-1.5-4B-it")
 MODEL_REVISION = os.environ.get("MODEL_REVISION", "main")
+API_KEY = os.environ.get("SARA_API_KEY", "")
 
 app = FastAPI(title="Sara Model API", version="1.0.0")
+
+# API Key authentication
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+def verify_api_key(request: Request, api_key: str = Depends(api_key_header)):
+    """Verify API key from request headers."""
+    if not API_KEY:
+        # If no API key is configured, allow all requests (dev mode)
+        return True
+    # Check X-API-Key header
+    if api_key == API_KEY:
+        return True
+    # Check Authorization header (Bearer token)
+    auth_header = request.headers.get("Authorization", "")
+    if auth_header.startswith("Bearer ") and auth_header[7:] == API_KEY:
+        return True
+    raise HTTPException(status_code=401, detail="Invalid or missing API key")
 
 
 # --- Pydantic Models for Request Validation ---
@@ -127,7 +146,7 @@ def health():
 
 
 @app.get("/v1/models")
-def list_models():
+def list_models(auth: bool = Depends(verify_api_key)):
     return {
         "object": "list",
         "data": [{"id": MODEL_NAME, "object": "model", "owned_by": "user"}],
@@ -135,7 +154,7 @@ def list_models():
 
 
 @app.post("/v1/chat/completions")
-def chat_completions(request: ChatRequest):
+def chat_completions(request: ChatRequest, auth: bool = Depends(verify_api_key)):
     try:
         # Convert Pydantic models to dicts for tokenizer
         messages = [{"role": msg.role, "content": msg.content} for msg in request.messages]
@@ -240,6 +259,9 @@ if __name__ == "__main__":
     env = os.environ.copy()
     env["MODEL_NAME"] = MODEL_NAME
     env["MODEL_REVISION"] = MODEL_REVISION
+    # Ensure API key is passed to the subprocess
+    if "SARA_API_KEY" in os.environ:
+        env["SARA_API_KEY"] = os.environ["SARA_API_KEY"]
 
     subprocess.Popen([sys.executable, server_path], env=env)
 
