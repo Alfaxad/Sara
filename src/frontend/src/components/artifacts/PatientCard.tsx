@@ -1,8 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card, CardContent } from '@/components/ui/Card';
 import { User, MapPin, Phone, Calendar, Hash } from 'lucide-react';
+import { ExpandableSection } from '@/components/ui/ExpandableSection';
 
 interface PatientName {
   use?: string;
@@ -158,22 +158,22 @@ export function PatientCard({ data, className }: PatientCardProps) {
   const mrn = getMRN(data.identifier);
 
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header with name and basic info */}
         <div className="flex items-start gap-3 mb-4">
-          <div className="w-10 h-10 rounded-full bg-sara-accent-soft flex items-center justify-center flex-shrink-0">
-            <User className="w-5 h-5 text-sara-accent" />
+          <div className="sara-icon-box">
+            <User className="w-[17px] h-[17px]" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="font-display text-display-lg text-sara-text-primary truncate">
+            <h3 className="text-subheading text-sara-text-primary truncate">
               {name}
             </h3>
-            <div className="flex items-center gap-2 text-body-small text-sara-text-secondary mt-1">
+            <div className="flex items-center gap-2 text-body-small text-sara-text-muted mt-1">
               {age && <span>{age}</span>}
-              {age && gender && <span className="text-sara-text-muted">|</span>}
+              {age && gender && <span>·</span>}
               {gender && <span>{gender}</span>}
-              {(age || gender) && dob && <span className="text-sara-text-muted">|</span>}
+              {(age || gender) && dob && <span>·</span>}
               {dob && (
                 <span className="flex items-center gap-1">
                   <Calendar className="w-3 h-3" />
@@ -186,36 +186,63 @@ export function PatientCard({ data, className }: PatientCardProps) {
 
         {/* MRN - Highlighted */}
         {mrn && (
-          <div className="mb-4 p-3 bg-sara-accent-soft rounded-sara-sm border border-sara-accent/20">
+          <div className="mb-4 p-3 bg-sara-accent-soft rounded-sara-sm border border-sara-border">
             <div className="flex items-center gap-2">
-              <Hash className="w-4 h-4 text-sara-accent" />
-              <span className="text-caption text-sara-text-secondary uppercase tracking-wider">
+              <Hash className="w-3.5 h-3.5 text-sara-text-secondary" />
+              <span className="text-caption text-sara-text-muted uppercase tracking-wider">
                 MRN
               </span>
-              <span className="text-body font-semibold text-sara-accent ml-auto">
+              <span className="text-body font-medium text-sara-text-primary ml-auto font-mono">
                 {mrn}
               </span>
             </div>
           </div>
         )}
 
-        {/* Additional details */}
-        <CardContent className="p-0 space-y-2">
-          {address && (
-            <div className="flex items-start gap-2 text-body-small">
-              <MapPin className="w-4 h-4 text-sara-text-muted flex-shrink-0 mt-0.5" />
-              <span className="text-sara-text-secondary">{address}</span>
+        {/* Expandable: Contact Information */}
+        {(address || phone) && (
+          <ExpandableSection
+            title="Contact Information"
+            count={[address, phone].filter(Boolean).length}
+          >
+            <div className="space-y-2 pl-5">
+              {address && (
+                <div className="flex items-start gap-2 text-body-small">
+                  <MapPin className="w-3.5 h-3.5 text-sara-text-muted flex-shrink-0 mt-0.5" />
+                  <span className="text-sara-text-secondary">{address}</span>
+                </div>
+              )}
+              {phone && (
+                <div className="flex items-center gap-2 text-body-small">
+                  <Phone className="w-3.5 h-3.5 text-sara-text-muted flex-shrink-0" />
+                  <span className="text-sara-text-secondary">{phone}</span>
+                </div>
+              )}
             </div>
-          )}
-          {phone && (
-            <div className="flex items-center gap-2 text-body-small">
-              <Phone className="w-4 h-4 text-sara-text-muted flex-shrink-0" />
-              <span className="text-sara-text-secondary">{phone}</span>
+          </ExpandableSection>
+        )}
+
+        {/* Expandable: All Identifiers */}
+        {data.identifier && data.identifier.length > 1 && (
+          <ExpandableSection
+            title="Identifiers"
+            count={data.identifier.length}
+          >
+            <div className="space-y-2 pl-5">
+              {data.identifier.map((id, index) => (
+                <div key={index} className="flex items-center gap-2 text-body-small">
+                  <Hash className="w-3.5 h-3.5 text-sara-text-muted flex-shrink-0" />
+                  <span className="text-sara-text-muted">
+                    {id.type?.text || id.type?.coding?.[0]?.display || 'ID'}:
+                  </span>
+                  <span className="text-sara-text-secondary font-mono">{id.value}</span>
+                </div>
+              ))}
             </div>
-          )}
-        </CardContent>
+          </ExpandableSection>
+        )}
       </div>
-    </Card>
+    </div>
   );
 }
 
