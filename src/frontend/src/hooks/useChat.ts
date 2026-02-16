@@ -4,6 +4,7 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { useStreaming } from './useStreaming';
 import { TASKS } from '@/lib/tasks';
 import type { SSEEvent } from '@/lib/api';
+import { WorkflowStep, parseActionToDescription, generateStepId } from '@/lib/workflow';
 
 export interface Message {
   id: string;
@@ -29,8 +30,10 @@ export interface Artifact {
 export interface ChatState {
   messages: Message[];
   artifacts: Artifact[];
+  workflowSteps: WorkflowStep[];
   isComplete: boolean;
   finalAnswer: string | null;
+  isWarmingUp: boolean;
 }
 
 function generateId(): string {
@@ -41,8 +44,10 @@ export function useChat(taskId: string) {
   const [state, setState] = useState<ChatState>({
     messages: [],
     artifacts: [],
+    workflowSteps: [],
     isComplete: false,
     finalAnswer: null,
+    isWarmingUp: false,
   });
 
   const hasStartedRef = useRef(false);
@@ -86,10 +91,25 @@ export function useChat(taskId: string) {
         break;
 
       case 'tool_call':
-        // Tool is being called
         setState(prev => {
-          // Remove thinking indicator
           const filteredMessages = prev.messages.filter(m => m.type !== 'thinking');
+          const toolName = event.data.tool as string;
+          const args = event.data.args as Record<string, unknown>;
+
+          // Create action string from tool call
+          const method = args?.method as string || 'GET';
+          const endpoint = args?.endpoint as string || `/${toolName}`;
+          const action = `${method} ${endpoint}`;
+
+          // Create new workflow step
+          const newStep: WorkflowStep = {
+            id: event.data.id as string || generateStepId(),
+            action,
+            description: parseActionToDescription(action),
+            status: 'running',
+            timestamp: Date.now(),
+          };
+
           return {
             ...prev,
             messages: [
@@ -107,6 +127,7 @@ export function useChat(taskId: string) {
                 },
               },
             ],
+            workflowSteps: [...prev.workflowSteps, newStep],
           };
         });
         break;
@@ -116,16 +137,23 @@ export function useChat(taskId: string) {
         setState(prev => {
           const toolId = event.data.id as string;
           const result = event.data.result;
+          const status = event.data.status as string;
+
+          // Find the matching tool call to get the tool name
+          const matchingToolCall = prev.messages.find(
+            m => m.type === 'tool_call' && m.toolCall?.id === toolId
+          );
+          const toolName = matchingToolCall?.toolCall?.tool || 'FHIR';
 
           // Update the tool call message
           const updatedMessages = prev.messages.map(m => {
             if (m.type === 'tool_call' && m.toolCall?.id === toolId) {
               return {
                 ...m,
-                content: `${m.toolCall.tool} completed`,
+                content: status === 'error' ? `${m.toolCall.tool} failed` : `${m.toolCall.tool} completed`,
                 toolCall: {
                   ...m.toolCall,
-                  status: 'complete' as const,
+                  status: status === 'error' ? 'error' as const : 'complete' as const,
                   result,
                 },
               };
@@ -133,12 +161,53 @@ export function useChat(taskId: string) {
             return m;
           });
 
-          // Add artifact if present
+          // Update workflow step status
+          const updatedSteps = prev.workflowSteps.map(step => {
+            if (step.id === toolId) {
+              return {
+                ...step,
+                status: status === 'error' ? 'error' as const : 'complete' as const,
+              };
+            }
+            return step;
+          });
+
+          // Add artifact if present (only for SUCCESSFUL results with meaningful FHIR data)
           const newArtifacts = [...prev.artifacts];
-          if (result && typeof result === 'object') {
+          if (result && typeof result === 'object' && status !== 'error') {
+            const resultObj = result as Record<string, unknown>;
+
+            // Skip error responses
+            if (resultObj.error || resultObj.status_code === 0) {
+              // Don't add error results as artifacts
+              return {
+                ...prev,
+                messages: updatedMessages,
+                workflowSteps: updatedSteps,
+              };
+            }
+
+            // Skip empty bundles (total: 0 or no entries)
+            if (resultObj.resourceType === 'Bundle') {
+              const entries = resultObj.entry as Array<unknown> | undefined;
+              const total = resultObj.total as number | undefined;
+              if (!entries || entries.length === 0 || total === 0) {
+                // Don't add empty bundles as artifacts
+                return {
+                  ...prev,
+                  messages: updatedMessages,
+                  workflowSteps: updatedSteps,
+                };
+              }
+            }
+
+            // Determine the FHIR resource type from the result
+            const resourceType = resultObj.resourceType as string ||
+              (resultObj.entry ? 'Bundle' : toolName);
+
             newArtifacts.push({
               id: generateId(),
-              type: event.data.tool as string || 'unknown',
+              type: resourceType,
               data: result,
               timestamp: Date.now(),
             });
@@ -148,6 +217,7 @@ export function useChat(taskId: string) {
             ...prev,
             messages: updatedMessages,
             artifacts: newArtifacts,
+            workflowSteps: updatedSteps,
           };
         });
         break;
@@ -201,6 +271,8 @@ export function useChat(taskId: string) {
   }, []);
 
   const handleError = useCallback((error: string) => {
+    // Don't show timeout errors as chat errors - the UI will show a warmup indicator
+    const isTimeoutError = error.includes('timeout') || error.includes('timed out');
     setState(prev => ({
       ...prev,
       messages: [
@@ -208,18 +280,34 @@ export function useChat(taskId: string) {
         {
           id: generateId(),
           type: 'assistant',
-          content: `Connection error: ${error}`,
+          content: isTimeoutError
+            ? 'The server is taking longer than expected. Please try again.'
+            : `Connection error: ${error}`,
           timestamp: Date.now(),
         },
       ],
       isComplete: true,
+      isWarmingUp: false,
     }));
   }, []);
 
-  const { isLoading, error, startStream, stopStream } = useStreaming({
+  const handleWarmingUp = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      isWarmingUp: true,
+      messages: prev.messages.map(m =>
+        m.type === 'thinking'
+          ? { ...m, content: 'Connecting to Sara... (server warming up)' }
+          : m
+      ),
+    }));
+  }, []);
+
+  const { isLoading, error, startStream, stopStream, isWarmingUp: streamWarmingUp } = useStreaming({
     onEvent: handleEvent,
     onComplete: handleComplete,
     onError: handleError,
+    onWarmingUp: handleWarmingUp,
   });
 
   const sendMessage = useCallback((content: string) => {
@@ -249,8 +337,10 @@ export function useChat(taskId: string) {
     setState({
       messages: [],
       artifacts: [],
+      workflowSteps: [],
       isComplete: false,
       finalAnswer: null,
+      isWarmingUp: false,
     });
     hasStartedRef.current = false;
   }, [stopStream]);
@@ -270,8 +360,10 @@ export function useChat(taskId: string) {
           },
         ],
         artifacts: [],
+        workflowSteps: [],
         isComplete: false,
         finalAnswer: null,
+        isWarmingUp: false,
       });
 
       // Start streaming with task question
@@ -284,6 +376,7 @@ export function useChat(taskId: string) {
     task,
     isLoading,
     error,
+    isWarmingUp: state.isWarmingUp || streamWarmingUp,
     sendMessage,
     reset,
     stopStream,
