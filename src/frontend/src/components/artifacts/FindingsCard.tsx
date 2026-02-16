@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
 import {
   AlertCircle,
   AlertTriangle,
@@ -30,35 +29,35 @@ function getSeverityConfig(severity?: Finding['severity']) {
     case 'critical':
       return {
         icon: AlertCircle,
-        bgColor: 'bg-sara-critical-soft',
-        textColor: 'text-sara-critical',
-        borderColor: 'border-sara-critical/30',
-        dotColor: 'bg-sara-critical',
+        bgColor: 'bg-sara-accent-soft',
+        textColor: 'text-sara-text-primary',
+        borderColor: 'border-sara-accent/30',
+        dotColor: 'bg-sara-accent',
       };
     case 'warning':
       return {
         icon: AlertTriangle,
-        bgColor: 'bg-sara-warning-soft',
-        textColor: 'text-sara-warning',
-        borderColor: 'border-sara-warning/30',
-        dotColor: 'bg-sara-warning',
+        bgColor: 'bg-sara-bg-elevated',
+        textColor: 'text-sara-text-secondary',
+        borderColor: 'border-sara-border',
+        dotColor: 'bg-sara-text-secondary',
       };
     case 'normal':
       return {
         icon: CheckCircle,
-        bgColor: 'bg-sara-success-soft',
-        textColor: 'text-sara-success',
-        borderColor: 'border-sara-success/30',
-        dotColor: 'bg-sara-success',
+        bgColor: 'bg-sara-bg-surface',
+        textColor: 'text-sara-text-muted',
+        borderColor: 'border-sara-border',
+        dotColor: 'bg-sara-text-muted',
       };
     case 'info':
     default:
       return {
         icon: Info,
-        bgColor: 'bg-sara-info-soft',
-        textColor: 'text-sara-info',
-        borderColor: 'border-sara-info/30',
-        dotColor: 'bg-sara-info',
+        bgColor: 'bg-sara-bg-elevated',
+        textColor: 'text-sara-text-secondary',
+        borderColor: 'border-sara-border',
+        dotColor: 'bg-sara-text-secondary',
       };
   }
 }
@@ -126,26 +125,28 @@ export function FindingsCard({
   const warningCount = findings.filter((f) => f.severity === 'warning').length;
 
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-sara-accent" />
-            <h4 className="text-subheading text-sara-text-primary font-semibold">
+            <div className="sara-icon-box">
+              <Sparkles className="w-[17px] h-[17px]" />
+            </div>
+            <h4 className="text-subheading text-sara-text-primary">
               {title}
             </h4>
           </div>
           <div className="flex items-center gap-2 text-caption">
             {criticalCount > 0 && (
-              <span className="flex items-center gap-1 text-sara-critical">
-                <span className="w-2 h-2 rounded-full bg-sara-critical" />
+              <span className="flex items-center gap-1 text-sara-text-primary">
+                <span className="w-2 h-2 rounded-full bg-sara-accent" />
                 {criticalCount}
               </span>
             )}
             {warningCount > 0 && (
-              <span className="flex items-center gap-1 text-sara-warning">
-                <span className="w-2 h-2 rounded-full bg-sara-warning" />
+              <span className="flex items-center gap-1 text-sara-text-secondary">
+                <span className="w-2 h-2 rounded-full bg-sara-text-secondary" />
                 {warningCount}
               </span>
             )}
@@ -159,7 +160,7 @@ export function FindingsCard({
           ))}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

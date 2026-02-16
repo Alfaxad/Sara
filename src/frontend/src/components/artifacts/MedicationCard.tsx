@@ -1,8 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
 import { Pill, Clock, User as UserIcon } from 'lucide-react';
 
 interface CodeableConcept {
@@ -128,20 +126,24 @@ function getStatusBadge(status?: string) {
 
   const statusLower = status.toLowerCase();
 
-  const statusMap: Record<string, { variant: 'success' | 'warning' | 'critical' | 'info' | 'default'; label: string }> = {
-    active: { variant: 'success', label: 'Active' },
-    completed: { variant: 'default', label: 'Completed' },
-    'entered-in-error': { variant: 'critical', label: 'Error' },
-    stopped: { variant: 'warning', label: 'Stopped' },
-    'on-hold': { variant: 'warning', label: 'On Hold' },
-    cancelled: { variant: 'critical', label: 'Cancelled' },
-    draft: { variant: 'info', label: 'Draft' },
-    intended: { variant: 'info', label: 'Intended' },
+  const statusMap: Record<string, { bg: string; text: string; label: string }> = {
+    active: { bg: 'bg-sara-accent-soft', text: 'text-sara-text-primary', label: 'Active' },
+    completed: { bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted', label: 'Completed' },
+    'entered-in-error': { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Error' },
+    stopped: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Stopped' },
+    'on-hold': { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'On Hold' },
+    cancelled: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Cancelled' },
+    draft: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Draft' },
+    intended: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Intended' },
   };
 
-  const config = statusMap[statusLower] || { variant: 'default' as const, label: status };
+  const config = statusMap[statusLower] || { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: status };
 
-  return <Badge variant={config.variant} size="sm">{config.label}</Badge>;
+  return (
+    <span className={cn('px-2 py-0.5 rounded-full text-caption font-medium', config.bg, config.text)}>
+      {config.label}
+    </span>
+  );
 }
 
 function formatDate(dateString?: string): string {
@@ -176,15 +178,15 @@ export function MedicationCard({ data, className }: MedicationCardProps) {
   const date = formatDate(getDate(data));
 
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-sara-secondary-soft flex items-center justify-center flex-shrink-0">
-              <Pill className="w-4 h-4 text-sara-secondary" />
+            <div className="sara-icon-box">
+              <Pill className="w-[17px] h-[17px]" />
             </div>
-            <h4 className="text-subheading text-sara-text-primary font-semibold">
+            <h4 className="text-subheading text-sara-text-primary">
               {name}
             </h4>
           </div>
@@ -216,7 +218,7 @@ export function MedicationCard({ data, className }: MedicationCardProps) {
           )}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

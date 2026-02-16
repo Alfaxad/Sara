@@ -1,8 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
 import { HeartPulse, Calendar, AlertTriangle } from 'lucide-react';
 
 interface CodeableConcept {
@@ -43,44 +41,42 @@ function getConditionName(code?: CodeableConcept): string {
   return 'Unknown Condition';
 }
 
-function getClinicalStatus(status?: CodeableConcept): { label: string; variant: 'success' | 'warning' | 'critical' | 'info' | 'default' } {
-  if (!status) return { label: 'Unknown', variant: 'default' };
+function getClinicalStatus(status?: CodeableConcept): { label: string; bg: string; text: string } {
+  if (!status) return { label: 'Unknown', bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted' };
 
   const code = status.coding?.[0]?.code?.toLowerCase() || status.text?.toLowerCase();
 
   switch (code) {
     case 'active':
-      return { label: 'Active', variant: 'warning' };
+      return { label: 'Active', bg: 'bg-sara-accent-soft', text: 'text-sara-text-primary' };
     case 'recurrence':
-      return { label: 'Recurrence', variant: 'critical' };
     case 'relapse':
-      return { label: 'Relapse', variant: 'critical' };
+      return { label: code.charAt(0).toUpperCase() + code.slice(1), bg: 'bg-sara-accent-soft', text: 'text-sara-text-primary' };
     case 'inactive':
-      return { label: 'Inactive', variant: 'default' };
+      return { label: 'Inactive', bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted' };
     case 'remission':
-      return { label: 'Remission', variant: 'success' };
     case 'resolved':
-      return { label: 'Resolved', variant: 'success' };
+      return { label: code.charAt(0).toUpperCase() + code.slice(1), bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted' };
     default:
-      return { label: status.text || code || 'Unknown', variant: 'default' };
+      return { label: status.text || code || 'Unknown', bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted' };
   }
 }
 
-function getSeverity(severity?: CodeableConcept): { label: string; variant: 'success' | 'warning' | 'critical' } | null {
+function getSeverity(severity?: CodeableConcept): { label: string; bg: string; text: string } | null {
   if (!severity) return null;
 
   const code = severity.coding?.[0]?.code?.toLowerCase() || severity.text?.toLowerCase();
 
   switch (code) {
     case 'severe':
-      return { label: 'Severe', variant: 'critical' };
+      return { label: 'Severe', bg: 'bg-sara-accent-soft', text: 'text-sara-text-primary' };
     case 'moderate':
-      return { label: 'Moderate', variant: 'warning' };
+      return { label: 'Moderate', bg: 'bg-sara-bg-elevated', text: 'text-sara-text-secondary' };
     case 'mild':
-      return { label: 'Mild', variant: 'success' };
+      return { label: 'Mild', bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted' };
     default:
       if (severity.text) {
-        return { label: severity.text, variant: 'warning' };
+        return { label: severity.text, bg: 'bg-sara-bg-elevated', text: 'text-sara-text-secondary' };
       }
       return null;
   }
@@ -118,43 +114,29 @@ export function ConditionCard({ data, className }: ConditionCardProps) {
   const onsetDate = formatDate(getOnsetDate(data));
   const category = getCategory(data.category);
 
-  const isActive = clinicalStatus.label.toLowerCase() === 'active' ||
-                   clinicalStatus.label.toLowerCase() === 'recurrence' ||
-                   clinicalStatus.label.toLowerCase() === 'relapse';
-
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex items-center gap-2">
-            <div
-              className={cn(
-                'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0',
-                isActive ? 'bg-sara-warning-soft' : 'bg-sara-bg-subtle'
-              )}
-            >
-              <HeartPulse
-                className={cn(
-                  'w-4 h-4',
-                  isActive ? 'text-sara-warning' : 'text-sara-text-muted'
-                )}
-              />
+            <div className="sara-icon-box">
+              <HeartPulse className="w-[17px] h-[17px]" />
             </div>
-            <h4 className="text-subheading text-sara-text-primary font-semibold">
+            <h4 className="text-subheading text-sara-text-primary">
               {name}
             </h4>
           </div>
           <div className="flex items-center gap-2">
             {severity && (
-              <Badge variant={severity.variant} size="sm">
-                <AlertTriangle className="w-3 h-3 mr-1" />
+              <span className={cn('px-2 py-0.5 rounded-full text-caption font-medium flex items-center gap-1', severity.bg, severity.text)}>
+                <AlertTriangle className="w-3 h-3" />
                 {severity.label}
-              </Badge>
+              </span>
             )}
-            <Badge variant={clinicalStatus.variant} size="sm">
+            <span className={cn('px-2 py-0.5 rounded-full text-caption font-medium', clinicalStatus.bg, clinicalStatus.text)}>
               {clinicalStatus.label}
-            </Badge>
+            </span>
           </div>
         </div>
 
@@ -171,7 +153,7 @@ export function ConditionCard({ data, className }: ConditionCardProps) {
           )}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

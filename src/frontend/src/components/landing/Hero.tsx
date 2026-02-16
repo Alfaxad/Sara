@@ -10,33 +10,28 @@ export function Hero({ className }: HeroProps) {
   return (
     <section
       className={cn(
-        "flex flex-col items-center justify-center text-center py-16 px-4",
+        "flex flex-col items-center justify-center text-center pt-12 pb-14 px-5",
+        "animate-fade-up",
         className
       )}
     >
-      {/* Logo with pulse animation */}
-      <div className="relative mb-6">
-        <div className="w-20 h-20 rounded-full bg-sara-accent-soft flex items-center justify-center animate-sara-pulse">
-          <span className="text-4xl font-display text-sara-accent font-bold">
-            S
-          </span>
-        </div>
+      {/* Logo - White circle with S */}
+      <div className="mb-6">
+        <div className="sara-avatar">S</div>
       </div>
 
-      {/* Title with Playfair Display */}
-      <h1 className="font-display text-display-xl text-sara-text-primary mb-2">
-        Sara
-      </h1>
+      {/* Title */}
+      <h1 className="text-display-xl text-sara-text-primary mb-0">Sara</h1>
 
-      {/* Tagline */}
-      <p className="text-heading text-sara-accent mb-4">
+      {/* Subtitle */}
+      <div className="text-body text-sara-text-muted mt-3 tracking-tight">
         Clinical Workflow Agent
-      </p>
+      </div>
 
       {/* Description */}
-      <p className="text-body text-sara-text-secondary max-w-md">
+      <p className="text-body text-sara-text-secondary mt-4 max-w-[480px] leading-relaxed">
         An intelligent assistant that helps healthcare professionals manage
-        clinical workflows, patient data, and medical documentation with ease.
+        clinical workflows, patient data, and medical documentation.
       </p>
     </section>
   );

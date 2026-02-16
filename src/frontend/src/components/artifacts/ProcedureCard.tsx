@@ -1,8 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
 import { Stethoscope, Calendar, User as UserIcon } from 'lucide-react';
 
 interface CodeableConcept {
@@ -56,20 +54,24 @@ function getStatusBadge(status?: string) {
 
   const statusLower = status.toLowerCase();
 
-  const statusMap: Record<string, { variant: 'success' | 'warning' | 'critical' | 'info' | 'default'; label: string }> = {
-    completed: { variant: 'success', label: 'Completed' },
-    'in-progress': { variant: 'info', label: 'In Progress' },
-    'not-done': { variant: 'warning', label: 'Not Done' },
-    'on-hold': { variant: 'warning', label: 'On Hold' },
-    stopped: { variant: 'critical', label: 'Stopped' },
-    'entered-in-error': { variant: 'critical', label: 'Error' },
-    unknown: { variant: 'default', label: 'Unknown' },
-    preparation: { variant: 'info', label: 'Preparation' },
+  const statusMap: Record<string, { bg: string; text: string; label: string }> = {
+    completed: { bg: 'bg-sara-accent-soft', text: 'text-sara-text-primary', label: 'Completed' },
+    'in-progress': { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-secondary', label: 'In Progress' },
+    'not-done': { bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted', label: 'Not Done' },
+    'on-hold': { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'On Hold' },
+    stopped: { bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted', label: 'Stopped' },
+    'entered-in-error': { bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted', label: 'Error' },
+    unknown: { bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted', label: 'Unknown' },
+    preparation: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-secondary', label: 'Preparation' },
   };
 
-  const config = statusMap[statusLower] || { variant: 'default' as const, label: status };
+  const config = statusMap[statusLower] || { bg: 'bg-sara-bg-surface', text: 'text-sara-text-muted', label: status };
 
-  return <Badge variant={config.variant} size="sm">{config.label}</Badge>;
+  return (
+    <span className={cn('px-2 py-0.5 rounded-full text-caption font-medium', config.bg, config.text)}>
+      {config.label}
+    </span>
+  );
 }
 
 function formatDate(dateString?: string): string {
@@ -114,28 +116,16 @@ export function ProcedureCard({ data, className }: ProcedureCardProps) {
   const outcome = getOutcome(data.outcome);
   const category = getCategory(data.category);
 
-  const isCompleted = data.status?.toLowerCase() === 'completed';
-
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-2">
           <div className="flex items-center gap-2">
-            <div
-              className={cn(
-                'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0',
-                isCompleted ? 'bg-sara-success-soft' : 'bg-sara-info-soft'
-              )}
-            >
-              <Stethoscope
-                className={cn(
-                  'w-4 h-4',
-                  isCompleted ? 'text-sara-success' : 'text-sara-info'
-                )}
-              />
+            <div className="sara-icon-box">
+              <Stethoscope className="w-[17px] h-[17px]" />
             </div>
-            <h4 className="text-subheading text-sara-text-primary font-semibold">
+            <h4 className="text-subheading text-sara-text-primary">
               {name}
             </h4>
           </div>
@@ -170,7 +160,7 @@ export function ProcedureCard({ data, className }: ProcedureCardProps) {
           )}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

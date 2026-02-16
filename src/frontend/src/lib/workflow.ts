@@ -90,5 +90,5 @@ export function extractEndpoint(action: string): string {
  * Generate a unique step ID
  */
 export function generateStepId(): string {
-  return `step-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  return `step-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 }

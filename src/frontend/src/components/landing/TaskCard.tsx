@@ -14,7 +14,6 @@ import {
   Microscope,
   LucideIcon,
 } from "lucide-react";
-import { Card } from "@/components/ui/Card";
 import { cn } from "@/lib/utils";
 import type { Task } from "@/lib/tasks";
 
@@ -33,43 +32,40 @@ const iconMap: Record<string, LucideIcon> = {
 
 export interface TaskCardProps {
   task: Task;
+  index: number;
   className?: string;
 }
 
-export function TaskCard({ task, className }: TaskCardProps) {
+export function TaskCard({ task, index, className }: TaskCardProps) {
   const IconComponent = iconMap[task.icon] || Activity;
 
   return (
     <Link href={`/chat/${task.id}`} className="block group">
-      <Card
-        variant="surface"
+      <div
         className={cn(
-          "h-full cursor-pointer",
-          "border border-sara-border",
-          "hover:bg-sara-bg-elevated hover:border-sara-accent-soft",
-          "hover:shadow-sara-glow",
-          "transition-all duration-200",
-          "group-focus-visible:ring-2 group-focus-visible:ring-sara-border-focus",
+          "sara-card",
+          "flex items-start gap-3.5",
+          "cursor-pointer",
+          "animate-card-in",
           className
         )}
+        style={{ animationDelay: `${index * 45}ms` }}
       >
-        <div className="flex items-start gap-4">
-          {/* Icon */}
-          <div className="flex-shrink-0 w-10 h-10 rounded-sara-sm bg-sara-accent-soft flex items-center justify-center">
-            <IconComponent className="w-5 h-5 text-sara-accent" />
-          </div>
-
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <h3 className="font-body text-subheading text-sara-text-primary mb-1 group-hover:text-sara-accent transition-colors">
-              {task.name}
-            </h3>
-            <p className="text-body-small text-sara-text-secondary line-clamp-2">
-              {task.description}
-            </p>
-          </div>
+        {/* Icon */}
+        <div className="sara-icon-box">
+          <IconComponent className="w-[17px] h-[17px]" />
         </div>
-      </Card>
+
+        {/* Content */}
+        <div className="flex-1 min-w-0">
+          <h3 className="text-subheading text-sara-text-primary mb-1 group-hover:text-sara-accent transition-colors">
+            {task.name}
+          </h3>
+          <p className="text-body-small text-sara-text-muted leading-snug">
+            {task.description}
+          </p>
+        </div>
+      </div>
     </Link>
   );
 }

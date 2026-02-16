@@ -9,64 +9,46 @@ export interface ToolCallStatusProps {
   className?: string;
 }
 
-const toolDisplayNames: Record<string, string> = {
-  get_patient: 'Fetching patient data',
-  search_patients: 'Searching patients',
-  get_medications: 'Retrieving medications',
-  get_allergies: 'Checking allergies',
-  get_conditions: 'Loading conditions',
-  get_observations: 'Fetching observations',
-  get_lab_results: 'Retrieving lab results',
-  create_medication_request: 'Creating prescription',
-  create_service_request: 'Creating order',
-  create_observation: 'Recording observation',
-  calculate_dose: 'Calculating dosage',
-  default: 'Processing',
-};
-
-function getToolDisplayName(tool: string): string {
-  return toolDisplayNames[tool] || toolDisplayNames.default;
-}
-
 export function ToolCallStatus({ tool, status, className }: ToolCallStatusProps) {
-  const displayName = getToolDisplayName(tool);
+  // Display the actual FHIR endpoint being called
+  const displayName = tool.includes('/fhir/') ? tool : `FHIR ${tool}`;
 
   return (
     <div
       className={cn(
-        'flex items-center gap-3 px-4 py-3 rounded-sara-sm',
-        'bg-sara-bg-subtle border border-sara-border',
-        'animate-sara-fade-in',
+        'flex items-center gap-2.5 px-3 py-2',
+        'animate-msg-in',
         className
       )}
     >
       {status === 'running' && (
-        <Loader2 className="w-4 h-4 text-sara-info animate-sara-spin" />
+        <Loader2 className="w-3.5 h-3.5 text-sara-text-muted sara-spin" />
       )}
       {status === 'complete' && (
-        <Check className="w-4 h-4 text-sara-success" />
+        <Check className="w-3.5 h-3.5 text-sara-success" />
       )}
       {status === 'error' && (
-        <AlertCircle className="w-4 h-4 text-sara-critical" />
+        <AlertCircle className="w-3.5 h-3.5 text-sara-error" />
       )}
       {status === 'pending' && (
-        <div className="w-4 h-4 rounded-full border-2 border-sara-text-muted border-t-transparent animate-sara-spin" />
+        <div className="w-3.5 h-3.5 rounded-full border border-sara-text-muted border-t-transparent sara-spin" />
       )}
 
       <span
         className={cn(
-          'text-body-small',
-          status === 'running' && 'text-sara-text-secondary',
-          status === 'complete' && 'text-sara-success',
-          status === 'error' && 'text-sara-critical',
+          'text-body-small font-mono',
+          status === 'running' && 'text-sara-text-muted',
+          status === 'complete' && 'text-sara-text-secondary',
+          status === 'error' && 'text-sara-error',
           status === 'pending' && 'text-sara-text-muted'
         )}
       >
-        {status === 'running' && `${displayName}...`}
-        {status === 'complete' && `${displayName} - Done`}
-        {status === 'error' && `${displayName} - Failed`}
-        {status === 'pending' && `${displayName} - Waiting`}
+        {displayName}
       </span>
+
+      {status === 'complete' && (
+        <span className="text-body-small text-sara-success">✓</span>
+      )}
     </div>
   );
 }

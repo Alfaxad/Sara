@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
 import {
   CheckCircle,
   Clock,
@@ -30,28 +29,28 @@ function getStatusConfig(status?: Action['status']) {
     case 'completed':
       return {
         icon: CheckCircle,
-        textColor: 'text-sara-success',
-        bgColor: 'bg-sara-success-soft',
+        textColor: 'text-sara-text-muted',
+        bgColor: 'bg-sara-bg-surface',
         label: 'Completed',
       };
     case 'in-progress':
       return {
         icon: Clock,
-        textColor: 'text-sara-info',
-        bgColor: 'bg-sara-info-soft',
+        textColor: 'text-sara-text-secondary',
+        bgColor: 'bg-sara-bg-elevated',
         label: 'In Progress',
       };
     case 'failed':
       return {
         icon: AlertCircle,
-        textColor: 'text-sara-critical',
-        bgColor: 'bg-sara-critical-soft',
+        textColor: 'text-sara-text-muted',
+        bgColor: 'bg-sara-bg-surface',
         label: 'Failed',
       };
     case 'suggested':
       return {
         icon: ArrowRight,
-        textColor: 'text-sara-accent',
+        textColor: 'text-sara-text-primary',
         bgColor: 'bg-sara-accent-soft',
         label: 'Suggested',
       };
@@ -60,7 +59,7 @@ function getStatusConfig(status?: Action['status']) {
       return {
         icon: Circle,
         textColor: 'text-sara-text-muted',
-        bgColor: 'bg-sara-bg-subtle',
+        bgColor: 'bg-sara-bg-surface',
         label: 'Pending',
       };
   }
@@ -147,25 +146,27 @@ export function ActionsCard({
   const pendingCount = pendingActions.length;
 
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-sara-accent" />
-            <h4 className="text-subheading text-sara-text-primary font-semibold">
+            <div className="sara-icon-box">
+              <Zap className="w-[17px] h-[17px]" />
+            </div>
+            <h4 className="text-subheading text-sara-text-primary">
               {title}
             </h4>
           </div>
           <div className="flex items-center gap-3 text-caption">
             {completedCount > 0 && (
-              <span className="flex items-center gap-1 text-sara-success">
+              <span className="flex items-center gap-1 text-sara-text-muted">
                 <CheckCircle className="w-3 h-3" />
                 {completedCount} done
               </span>
             )}
             {pendingCount > 0 && (
-              <span className="flex items-center gap-1 text-sara-text-muted">
+              <span className="flex items-center gap-1 text-sara-text-secondary">
                 <Clock className="w-3 h-3" />
                 {pendingCount} pending
               </span>
@@ -186,7 +187,7 @@ export function ActionsCard({
           ))}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

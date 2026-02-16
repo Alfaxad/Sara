@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react';
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
 import { Brain, CheckCircle, ArrowRight } from 'lucide-react';
 
 export interface ReasoningPanelProps {
@@ -103,7 +102,7 @@ function parseReasoning(reasoning: string): ReasoningStep[] {
   return [{ number: 1, content: reasoning.trim() }];
 }
 
-function ReasoningStep({ step }: { step: ReasoningStep }) {
+function ReasoningStepItem({ step }: { step: ReasoningStep }) {
   return (
     <div className="flex items-start gap-3 py-2">
       <div
@@ -111,11 +110,11 @@ function ReasoningStep({ step }: { step: ReasoningStep }) {
           'w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0',
           step.isConclusion
             ? 'bg-sara-accent-soft'
-            : 'bg-sara-bg-subtle'
+            : 'bg-sara-bg-surface'
         )}
       >
         {step.isConclusion ? (
-          <CheckCircle className="w-3.5 h-3.5 text-sara-accent" />
+          <CheckCircle className="w-3.5 h-3.5 text-sara-text-primary" />
         ) : (
           <span className="text-caption font-medium text-sara-text-muted">
             {step.number}
@@ -146,15 +145,16 @@ export function ReasoningPanel({ reasoning, className }: ReasoningPanelProps) {
   }
 
   return (
-    <Card
-      variant="outline"
-      className={cn('overflow-hidden bg-sara-bg-base', className)}
+    <div
+      className={cn('overflow-hidden bg-sara-bg-base rounded-sara border border-sara-border', className)}
     >
       <div className="p-4">
         {/* Header */}
         <div className="flex items-center gap-2 mb-4">
-          <Brain className="w-4 h-4 text-sara-accent" />
-          <h4 className="text-subheading text-sara-text-primary font-semibold">
+          <div className="sara-icon-box">
+            <Brain className="w-[17px] h-[17px]" />
+          </div>
+          <h4 className="text-subheading text-sara-text-primary">
             Sara&apos;s Reasoning
           </h4>
         </div>
@@ -163,7 +163,7 @@ export function ReasoningPanel({ reasoning, className }: ReasoningPanelProps) {
         <div className="space-y-1">
           {steps.map((step, index) => (
             <div key={index}>
-              <ReasoningStep step={step} />
+              <ReasoningStepItem step={step} />
               {index < steps.length - 1 && !step.isConclusion && (
                 <div className="flex items-center pl-9 py-1">
                   <ArrowRight className="w-3 h-3 text-sara-text-muted" />
@@ -173,7 +173,7 @@ export function ReasoningPanel({ reasoning, className }: ReasoningPanelProps) {
           ))}
         </div>
       </div>
-    </Card>
+    </div>
   );
 }
 

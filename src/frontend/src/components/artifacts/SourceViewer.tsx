@@ -2,7 +2,6 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
 import {
   ChevronDown,
   ChevronRight,
@@ -57,12 +56,12 @@ function tokenizeJson(json: string): JsonToken[] {
 
 function TokenSpan({ token }: { token: JsonToken }) {
   const colorClass = {
-    key: 'text-sara-accent',
-    string: 'text-sara-success',
-    number: 'text-sara-warning',
-    boolean: 'text-sara-info',
+    key: 'text-sara-text-primary',
+    string: 'text-sara-text-secondary',
+    number: 'text-sara-text-secondary',
+    boolean: 'text-sara-text-muted',
     null: 'text-sara-text-muted',
-    punctuation: 'text-sara-text-secondary',
+    punctuation: 'text-sara-text-muted',
   }[token.type];
 
   return <span className={colorClass}>{token.value}</span>;
@@ -94,9 +93,8 @@ export function SourceViewer({
   const lineCount = jsonString.split('\n').length;
 
   return (
-    <Card
-      variant="outline"
-      className={cn('overflow-hidden bg-sara-bg-base', className)}
+    <div
+      className={cn('overflow-hidden bg-sara-bg-base rounded-sara border border-sara-border', className)}
     >
       {/* Header - always visible */}
       <button
@@ -113,7 +111,7 @@ export function SourceViewer({
           ) : (
             <ChevronRight className="w-4 h-4" />
           )}
-          <FileJson className="w-4 h-4 text-sara-accent" />
+          <FileJson className="w-4 h-4 text-sara-text-primary" />
           <span className="font-medium">{title}</span>
           <span className="text-sara-text-muted text-caption">
             ({lineCount} lines)
@@ -136,7 +134,7 @@ export function SourceViewer({
                 'flex items-center gap-1.5 px-2 py-1 rounded-sara-sm',
                 'text-caption text-sara-text-secondary',
                 'hover:bg-sara-bg-elevated transition-colors duration-150',
-                copied && 'text-sara-success'
+                copied && 'text-sara-text-primary'
               )}
             >
               {copied ? (
@@ -163,7 +161,7 @@ export function SourceViewer({
           </div>
         </div>
       )}
-    </Card>
+    </div>
   );
 }
 

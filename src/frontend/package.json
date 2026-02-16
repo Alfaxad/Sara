@@ -11,11 +11,11 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "eventsource-parser": "^3.0.6",
-    "fhir-react": "^2.1.0",
     "lucide-react": "^0.564.0",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
+    "react-json-tree": "^0.20.0",
     "tailwind-merge": "^3.4.1"
   },
   "devDependencies": {
