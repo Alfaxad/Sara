@@ -1,4 +1,4 @@
-# modal/sara_model.py
+# src/backend/sara_model.py
 # Deploy Sara-1.5-4B-it on Modal with transformers + FastAPI
 # OpenAI-compatible /v1/chat/completions endpoint
 #
@@ -7,19 +7,19 @@
 #   modal setup
 #   modal secret create huggingface HF_TOKEN=<your-token>
 #
-# Run:   modal run modal/sara_model.py
-# Deploy: modal deploy modal/sara_model.py
+# Run:   modal run src/backend/sara_model.py
+# Deploy: modal deploy src/backend/sara_model.py
 
 import modal
 
-from .config import (
-    MODEL_NAME,
-    MODEL_REVISION,
-    GPU_WARM_WINDOW,
-    REQUEST_TIMEOUT,
-    SARA_GPU,
-    SARA_CONCURRENT_INPUTS,
-)
+# --- Config (inlined for Modal deployment) ---
+MODEL_NAME = "Alfaxad/Sara-1.5-4B-it"
+MODEL_REVISION = "main"
+MINUTES = 60
+GPU_WARM_WINDOW = 15 * MINUTES
+REQUEST_TIMEOUT = 10 * MINUTES
+SARA_GPU = "A100"
+SARA_CONCURRENT_INPUTS = 8
 
 # --- Container image ---
 image = (

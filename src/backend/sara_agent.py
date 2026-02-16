@@ -14,10 +14,12 @@ AGENT_MEMORY = 2048
 AGENT_CONCURRENT_INPUTS = 50
 AGENT_TIMEOUT = 10 * MINUTES
 
-# Service URLs (Modal internal URLs when deployed)
-# Note: Update these with the actual deployed URLs after deployment
-SARA_URL = "https://nadhari--sara-model-serve.modal.run"
-FHIR_URL = "https://nadhari--fhir-server-serve.modal.run"
+# Service URLs (can be overridden via environment variables)
+# For production: use Modal-deployed FHIR server
+# For development: use localhost:8080 (MedAgentBench Docker container)
+import os
+SARA_URL = os.environ.get("SARA_URL", "https://nadhari--sara-model-serve.modal.run")
+FHIR_URL = os.environ.get("FHIR_URL", "https://nadhari--fhir-server-serve.modal.run/fhir")
 
 # --- FHIR Functions (from MedAgentBench) ---
 FHIR_FUNCTIONS = [
@@ -362,6 +364,9 @@ def api():
                 return FHIRResult(success=False, status_code=0, error=f"Unsupported action type: {action.type}")
 
         async def get(self, endpoint: str, params: Dict[str, str]) -> FHIRResult:
+            # Endpoint may already contain /fhir prefix, avoid duplication
+            if endpoint.startswith("/fhir"):
+                endpoint = endpoint[5:]  # Remove /fhir prefix since base_url already has it
             url = f"{self.base_url}{endpoint}"
             try:
                 response = await self._client.get(url, params=params if params else None)
@@ -372,6 +377,9 @@ def api():
                 return FHIRResult(success=False, status_code=0, error=f"Request error: {str(e)}")
 
         async def post(self, endpoint: str, body: Dict[str, Any]) -> FHIRResult:
+            # Endpoint may already contain /fhir prefix, avoid duplication
+            if endpoint.startswith("/fhir"):
+                endpoint = endpoint[5:]  # Remove /fhir prefix since base_url already has it
             url = f"{self.base_url}{endpoint}"
             try:
                 response = await self._client.post(url, json=body)

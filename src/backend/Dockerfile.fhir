@@ -1,0 +1,24 @@
+# Multi-stage build to extract MedAgentBench data into a Python+Java image
+FROM jyxsu6/medagentbench:latest AS source
+
+# Use Python+Java base
+FROM eclipse-temurin:17-jre-jammy
+
+# Install Python for Modal compatibility
+RUN apt-get update && apt-get install -y python3 python3-pip && \
+    ln -sf /usr/bin/python3 /usr/bin/python && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Copy the HAPI FHIR WAR from MedAgentBench
+COPY --from=source /app /app
+
+# Copy the configs including application.yaml
+COPY --from=source /configs /configs
+
+# Copy the pre-loaded H2 database with 100 patient profiles
+COPY --from=source /data /data
+
+WORKDIR /app
+
+# Default command (Modal will override this)
+CMD ["java", "-Xmx2g", "-jar", "/app/main.war", "--server.port=8080"]

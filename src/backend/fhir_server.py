@@ -1,88 +1,90 @@
-# modal/fhir_server.py
-# Deploy MedAgentBench HAPI FHIR server on Modal (CPU only)
-# Provides /fhir/* endpoints with 100 pre-loaded patient profiles
+# src/backend/fhir_server.py
+# Deploy MedAgentBench HAPI FHIR server on Modal
+# Uses multi-stage Dockerfile to get data from jyxsu6/medagentbench
 #
 # Setup:
 #   pip install modal
 #   modal setup
 #
-# Run:   modal run modal/fhir_server.py
-# Deploy: modal deploy modal/fhir_server.py
+# Run:   modal run src/backend/fhir_server.py
+# Deploy: modal deploy src/backend/fhir_server.py
 
 import modal
+from pathlib import Path
 
-from .config import (
-    FHIR_CPU,
-    FHIR_MEMORY,
-    FHIR_CONCURRENT_INPUTS,
-    MINUTES,
-)
-
-FHIR_IMAGE = "jyxsu6/medagentbench:latest"
+# --- Config ---
+MINUTES = 60
 FHIR_PORT = 8080
-FHIR_TIMEOUT = 30 * MINUTES
-FHIR_STARTUP_TIMEOUT = 5 * MINUTES
-
-# --- Container image from MedAgentBench Docker ---
-# The image has a built-in entrypoint that starts the HAPI FHIR server
-# We preserve the entrypoint so Modal runs the default startup
-image = modal.Image.from_registry(FHIR_IMAGE)
+FHIR_TIMEOUT = 60 * MINUTES
 
 app = modal.App("fhir-server")
+
+# Build image from multi-stage Dockerfile
+dockerfile_path = Path(__file__).parent / "Dockerfile.fhir"
+image = modal.Image.from_dockerfile(dockerfile_path)
 
 
 @app.function(
     image=image,
-    cpu=FHIR_CPU,
-    memory=FHIR_MEMORY,
+    cpu=2.0,
+    memory=4096,
     timeout=FHIR_TIMEOUT,
 )
-@modal.concurrent(max_inputs=FHIR_CONCURRENT_INPUTS)
-@modal.web_server(port=FHIR_PORT, startup_timeout=FHIR_STARTUP_TIMEOUT)
+@modal.concurrent(max_inputs=100)
+@modal.web_server(port=FHIR_PORT, startup_timeout=5 * MINUTES)
 def serve():
     """Start the HAPI FHIR server with pre-loaded MedAgentBench data.
 
-    The MedAgentBench Docker image includes:
+    The MedAgentBench Docker image (jyxsu6/medagentbench:latest) includes:
     - HAPI FHIR server (Java-based)
-    - 100 pre-loaded synthetic patient profiles
+    - 100 pre-loaded synthetic patient profiles (in H2 database)
     - Exposes /fhir/* endpoints on port 8080
     """
     import subprocess
+    import os
 
-    # Run the HAPI FHIR server using the image's default startup
-    # The server runs as a Java WAR file on port 8080
+    os.chdir("/app")
+
+    # Start the HAPI FHIR server using the same command as the Docker image
+    # This uses the configs/application.yaml which points to /data/test_db
     subprocess.Popen(
-        ["java", "-jar", "/app/main.war"],
+        [
+            "java",
+            "-Xmx2g",
+            "--class-path", "/app/main.war",
+            "-Dloader.path=main.war!/WEB-INF/classes/,main.war!/WEB-INF/,/app/extra-classes",
+            "-Dspring.config.location=/configs/application.yaml",
+            "org.springframework.boot.loader.PropertiesLauncher",
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
     )
 
 
 # --- Local test entrypoint ---
 @app.local_entrypoint()
 def main():
-    import json
+    import asyncio
 
     try:
         import aiohttp
     except ImportError:
         import subprocess as sp
-
         sp.run(["pip", "install", "aiohttp"], check=True)
         import aiohttp
-
-    import asyncio
 
     async def test():
         url = serve.get_web_url()
         print(f"\nFHIR Server endpoint: {url}")
         print(f"FHIR base URL: {url}/fhir\n")
 
-        async with aiohttp.ClientSession(base_url=url) as session:
-            # Wait for server readiness by checking /fhir/metadata
+        async with aiohttp.ClientSession() as session:
+            # Wait for server readiness
             print("Waiting for FHIR server to be ready...")
             for attempt in range(60):
                 try:
                     async with session.get(
-                        "/fhir/metadata",
+                        f"{url}/fhir/metadata",
                         timeout=aiohttp.ClientTimeout(total=10),
                         headers={"Accept": "application/fhir+json"},
                     ) as resp:
@@ -90,7 +92,7 @@ def main():
                             data = await resp.json()
                             print(f"Server is ready! FHIR version: {data.get('fhirVersion', 'unknown')}\n")
                             break
-                except Exception as e:
+                except Exception:
                     if attempt % 10 == 0:
                         print(f"  Attempt {attempt + 1}/60: waiting...")
                 await asyncio.sleep(5)
@@ -101,7 +103,7 @@ def main():
             # Test a patient search
             print("Testing patient search...")
             async with session.get(
-                "/fhir/Patient",
+                f"{url}/fhir/Patient",
                 params={"_count": "5"},
                 timeout=aiohttp.ClientTimeout(total=30),
                 headers={"Accept": "application/fhir+json"},
@@ -112,7 +114,6 @@ def main():
                     print(f"Patient search successful!")
                     print(f"Total patients available: {total}")
 
-                    # Show first few patient names
                     entries = result.get("entry", [])[:3]
                     if entries:
                         print("\nSample patients:")
