@@ -114,16 +114,8 @@ export default function ChatPage({ params }: ChatPageProps) {
     isComplete,
     error,
     sendMessage,
-    reset,
     finalAnswer,
   } = useChat(taskId);
-
-  // Retry handler for connection errors
-  const handleRetry = () => {
-    if (task) {
-      reset();
-    }
-  };
 
   // Show error if task not found
   if (!task) {
@@ -160,8 +152,6 @@ export default function ChatPage({ params }: ChatPageProps) {
               isComplete={isComplete}
               error={error}
               onSendMessage={sendMessage}
-              onReset={reset}
-              onRetry={handleRetry}
             />
           }
           right={

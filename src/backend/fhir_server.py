@@ -16,6 +16,7 @@ from pathlib import Path
 MINUTES = 60
 FHIR_PORT = 8080
 FHIR_TIMEOUT = 60 * MINUTES
+FHIR_WARM_WINDOW = 60 * MINUTES  # Keep warm for 1 hour to avoid cold starts
 
 app = modal.App("fhir-server")
 
@@ -29,6 +30,7 @@ image = modal.Image.from_dockerfile(dockerfile_path)
     cpu=2.0,
     memory=4096,
     timeout=FHIR_TIMEOUT,
+    scaledown_window=FHIR_WARM_WINDOW,  # Keep container warm to avoid slow Java cold starts
 )
 @modal.concurrent(max_inputs=100)
 @modal.web_server(port=FHIR_PORT, startup_timeout=5 * MINUTES)

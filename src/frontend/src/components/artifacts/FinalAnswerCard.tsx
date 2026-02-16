@@ -24,6 +24,7 @@ function parseAnswer(taskId: string, answer: string): ParsedAnswer {
   // Patient Lookup (task1)
   if (taskId === 'task1') {
     if (answerLower.includes('not found') || answerLower.includes('no patient')) {
+      // In demo context, patient should always exist - this indicates an issue
       return { type: 'not-found', label: 'Patient', value: 'Not found', status: 'warning' };
     }
     // Extract MRN - look for S followed by digits

@@ -54,7 +54,7 @@ export function ChatInput({
         )}
       >
         <div className="text-center text-body-small text-sara-text-muted py-2">
-          Demo complete. Click Reset to try again.
+          Demo complete. Use the back arrow to try another task.
         </div>
       </div>
     );

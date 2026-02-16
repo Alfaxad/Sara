@@ -303,13 +303,16 @@ def api():
         error: str = ""
 
     class FHIRClient:
-        """Async FHIR client for executing GET/POST requests."""
+        """Async FHIR client for executing GET/POST requests with retry logic."""
+
+        MAX_RETRIES = 3
+        RETRY_DELAY = 2.0  # seconds
 
         def __init__(self, base_url: str):
             self.base_url = base_url.rstrip("/")
             # Longer timeout for Modal cold starts, with separate connect timeout
             self._client = httpx.AsyncClient(
-                timeout=httpx.Timeout(60.0, connect=30.0),
+                timeout=httpx.Timeout(120.0, connect=120.0),  # 2-minute timeout for cold starts
                 headers={"Accept": "application/fhir+json", "Content-Type": "application/fhir+json"},
                 follow_redirects=True
             )
@@ -327,39 +330,47 @@ def api():
             else:
                 return FHIRResult(success=False, status_code=0, error=f"Unsupported action type: {action.type}")
 
+        async def _request_with_retry(self, method: str, url: str, **kwargs) -> FHIRResult:
+            """Execute HTTP request with retry logic for transient errors."""
+            import asyncio
+
+            last_error = None
+            for attempt in range(self.MAX_RETRIES):
+                try:
+                    if method == "GET":
+                        response = await self._client.get(url, **kwargs)
+                    else:
+                        response = await self._client.post(url, **kwargs)
+                    return self._process_response(response)
+                except httpx.TimeoutException as e:
+                    last_error = f"Timeout: {repr(e)}"
+                except httpx.ConnectError as e:
+                    last_error = f"Connection error: {repr(e)}"
+                except httpx.RequestError as e:
+                    last_error = f"Request error: {type(e).__name__}: {repr(e)}"
+                except Exception as e:
+                    # Catch TransferEncodingError and similar issues
+                    last_error = f"Unexpected error: {type(e).__name__}: {str(e)}"
+
+                # Retry after delay if not last attempt
+                if attempt < self.MAX_RETRIES - 1:
+                    await asyncio.sleep(self.RETRY_DELAY * (attempt + 1))
+
+            return FHIRResult(success=False, status_code=0, error=last_error or "Unknown error")
+
         async def get(self, endpoint: str, params: Dict[str, str]) -> FHIRResult:
             # Endpoint may already contain /fhir prefix, avoid duplication
             if endpoint.startswith("/fhir"):
                 endpoint = endpoint[5:]  # Remove /fhir prefix since base_url already has it
             url = f"{self.base_url}{endpoint}"
-            try:
-                response = await self._client.get(url, params=params if params else None)
-                return self._process_response(response)
-            except httpx.TimeoutException as e:
-                return FHIRResult(success=False, status_code=0, error=f"Timeout: {repr(e)}")
-            except httpx.ConnectError as e:
-                return FHIRResult(success=False, status_code=0, error=f"Connection error: {repr(e)}")
-            except httpx.RequestError as e:
-                return FHIRResult(success=False, status_code=0, error=f"Request error: {type(e).__name__}: {repr(e)}")
-            except Exception as e:
-                return FHIRResult(success=False, status_code=0, error=f"Unexpected error: {type(e).__name__}: {str(e)}")
+            return await self._request_with_retry("GET", url, params=params if params else None)
 
         async def post(self, endpoint: str, body: Dict[str, Any]) -> FHIRResult:
             # Endpoint may already contain /fhir prefix, avoid duplication
             if endpoint.startswith("/fhir"):
                 endpoint = endpoint[5:]  # Remove /fhir prefix since base_url already has it
             url = f"{self.base_url}{endpoint}"
-            try:
-                response = await self._client.post(url, json=body)
-                return self._process_response(response)
-            except httpx.TimeoutException as e:
-                return FHIRResult(success=False, status_code=0, error=f"Timeout: {repr(e)}")
-            except httpx.ConnectError as e:
-                return FHIRResult(success=False, status_code=0, error=f"Connection error: {repr(e)}")
-            except httpx.RequestError as e:
-                return FHIRResult(success=False, status_code=0, error=f"Request error: {type(e).__name__}: {repr(e)}")
-            except Exception as e:
-                return FHIRResult(success=False, status_code=0, error=f"Unexpected error: {type(e).__name__}: {str(e)}")
+            return await self._request_with_retry("POST", url, json=body)
 
         def _process_response(self, response: httpx.Response) -> FHIRResult:
             status_code = response.status_code

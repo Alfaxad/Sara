@@ -1,7 +1,7 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { ArrowLeft, RotateCcw } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import type { Task } from '@/lib/tasks';
 import type { Message } from '@/hooks/useChat';
@@ -18,7 +18,6 @@ export interface ChatPanelProps {
   isComplete: boolean;
   error?: string | null;
   onSendMessage: (message: string) => void;
-  onReset?: () => void;
   onRetry?: () => void;
   className?: string;
 }
@@ -31,7 +30,6 @@ export function ChatPanel({
   isComplete,
   error,
   onSendMessage,
-  onReset,
   onRetry,
   className,
 }: ChatPanelProps) {
@@ -76,22 +74,6 @@ export function ChatPanel({
           </div>
         </div>
 
-        {onReset && isComplete && (
-          <button
-            onClick={onReset}
-            className={cn(
-              'flex items-center gap-2 px-3 py-1.5 rounded-full',
-              'border border-sara-border',
-              'text-body-small text-sara-text-secondary',
-              'hover:border-sara-border-hover hover:bg-sara-accent-soft',
-              'transition-all'
-            )}
-            aria-label="Reset conversation"
-          >
-            <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-            Reset
-          </button>
-        )}
       </header>
 
       {/* Error State */}

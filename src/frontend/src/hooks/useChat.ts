@@ -100,15 +100,34 @@ export function useChat(taskId: string) {
           const method = args?.method as string || 'GET';
           const endpoint = args?.endpoint as string || `/${toolName}`;
           const action = `${method} ${endpoint}`;
+          const description = parseActionToDescription(action);
+          const stepId = event.data.id as string || generateStepId();
 
-          // Create new workflow step
-          const newStep: WorkflowStep = {
-            id: event.data.id as string || generateStepId(),
-            action,
-            description: parseActionToDescription(action),
-            status: 'running',
-            timestamp: Date.now(),
-          };
+          // Check if there's already a step with the same description
+          // If so, don't add a duplicate - just update it to running
+          const existingStepIndex = prev.workflowSteps.findIndex(
+            s => s.description === description
+          );
+
+          let updatedSteps: WorkflowStep[];
+          if (existingStepIndex >= 0) {
+            // Update the existing step to running (it's a retry)
+            updatedSteps = prev.workflowSteps.map((step, idx) =>
+              idx === existingStepIndex
+                ? { ...step, id: stepId, status: 'running' as const }
+                : step
+            );
+          } else {
+            // Create new workflow step
+            const newStep: WorkflowStep = {
+              id: stepId,
+              action,
+              description,
+              status: 'running',
+              timestamp: Date.now(),
+            };
+            updatedSteps = [...prev.workflowSteps, newStep];
+          }
 
           return {
             ...prev,
@@ -120,14 +139,14 @@ export function useChat(taskId: string) {
                 content: `Calling ${event.data.tool}...`,
                 timestamp: Date.now(),
                 toolCall: {
-                  id: event.data.id as string || generateId(),
+                  id: stepId,
                   tool: event.data.tool as string,
                   status: 'running',
                   args: event.data.args as Record<string, unknown>,
                 },
               },
             ],
-            workflowSteps: [...prev.workflowSteps, newStep],
+            workflowSteps: updatedSteps,
           };
         });
         break;
@@ -137,36 +156,34 @@ export function useChat(taskId: string) {
         setState(prev => {
           const toolId = event.data.id as string;
           const result = event.data.result;
-          const status = event.data.status as string;
+          const status = event.data.status as string; // Keep for artifact filtering
 
-          // Find the matching tool call to get the tool name
-          const matchingToolCall = prev.messages.find(
-            m => m.type === 'tool_call' && m.toolCall?.id === toolId
-          );
-          const toolName = matchingToolCall?.toolCall?.tool || 'FHIR';
+          // Only mark as complete if it's a successful result
+          // For errors, keep it as running - the agent will retry or continue
+          const isSuccess = status !== 'error';
 
           // Update the tool call message
           const updatedMessages = prev.messages.map(m => {
             if (m.type === 'tool_call' && m.toolCall?.id === toolId) {
               return {
                 ...m,
-                content: status === 'error' ? `${m.toolCall.tool} failed` : `${m.toolCall.tool} completed`,
+                content: isSuccess ? `${m.toolCall.tool} completed` : `Calling ${m.toolCall.tool}...`,
                 toolCall: {
                   ...m.toolCall,
-                  status: status === 'error' ? 'error' as const : 'complete' as const,
-                  result,
+                  status: isSuccess ? 'complete' as const : 'running' as const,
+                  result: isSuccess ? result : m.toolCall.result,
                 },
               };
             }
             return m;
           });
 
-          // Update workflow step status
+          // Update workflow step status - only mark complete on success
           const updatedSteps = prev.workflowSteps.map(step => {
             if (step.id === toolId) {
               return {
                 ...step,
-                status: status === 'error' ? 'error' as const : 'complete' as const,
+                status: isSuccess ? 'complete' as const : 'running' as const,
               };
             }
             return step;
@@ -203,7 +220,7 @@ export function useChat(taskId: string) {
 
             // Determine the FHIR resource type from the result
             const resourceType = resultObj.resourceType as string ||
-              (resultObj.entry ? 'Bundle' : toolName);
+              (resultObj.entry ? 'Bundle' : 'FHIR');
 
             newArtifacts.push({
               id: generateId(),
@@ -334,16 +351,40 @@ export function useChat(taskId: string) {
 
   const reset = useCallback(() => {
     stopStream();
-    setState({
-      messages: [],
-      artifacts: [],
-      workflowSteps: [],
-      isComplete: false,
-      finalAnswer: null,
-      isWarmingUp: false,
-    });
-    hasStartedRef.current = false;
-  }, [stopStream]);
+
+    // Reset state and immediately restart with the task question
+    if (task) {
+      setState({
+        messages: [
+          {
+            id: generateId(),
+            type: 'user',
+            content: task.question,
+            timestamp: Date.now(),
+          },
+        ],
+        artifacts: [],
+        workflowSteps: [],
+        isComplete: false,
+        finalAnswer: null,
+        isWarmingUp: false,
+      });
+
+      // Start streaming with task question after a brief delay to ensure state is reset
+      setTimeout(() => {
+        startStream(taskId, task.question, task.context);
+      }, 100);
+    } else {
+      setState({
+        messages: [],
+        artifacts: [],
+        workflowSteps: [],
+        isComplete: false,
+        finalAnswer: null,
+        isWarmingUp: false,
+      });
+    }
+  }, [stopStream, task, taskId, startStream]);
 
   // Auto-run on mount with task question
   useEffect(() => {

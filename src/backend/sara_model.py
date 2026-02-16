@@ -13,10 +13,10 @@
 import modal
 
 # --- Config (inlined for Modal deployment) ---
-MODEL_NAME = "Alfaxad/Sara-1.5-4B-it"
+MODEL_NAME = "Nadhari/Sara-1.5-4B-it"
 MODEL_REVISION = "main"
 MINUTES = 60
-GPU_WARM_WINDOW = 15 * MINUTES
+GPU_WARM_WINDOW = 60 * MINUTES
 REQUEST_TIMEOUT = 10 * MINUTES
 SARA_GPU = "A100"
 SARA_CONCURRENT_INPUTS = 8
@@ -47,7 +47,7 @@ app = modal.App("sara-model")
 @app.function(
     image=image,
     gpu=f"{SARA_GPU}:1",
-    secrets=[modal.Secret.from_name("huggingface")],
+    secrets=[modal.Secret.from_name("huggingface-nadhari")],
     volumes={"/root/.cache/huggingface": hf_cache_vol},
     scaledown_window=GPU_WARM_WINDOW,
     timeout=REQUEST_TIMEOUT,
@@ -71,7 +71,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, Literal
 
-MODEL_NAME = os.environ.get("MODEL_NAME", "Alfaxad/Sara-1.5-4B-it")
+MODEL_NAME = os.environ.get("MODEL_NAME", "Nadhari/Sara-1.5-4B-it")
 MODEL_REVISION = os.environ.get("MODEL_REVISION", "main")
 
 app = FastAPI(title="Sara Model API", version="1.0.0")
