@@ -120,11 +120,10 @@ export function ChatPanel({
         onSend={onSendMessage}
         isLoading={isLoading}
         disabled={!task || !!error}
+        isComplete={isComplete}
         placeholder={
           error
             ? 'Fix the error to continue...'
-            : isComplete
-            ? 'Ask a follow-up question...'
             : 'Message Sara...'
         }
       />
