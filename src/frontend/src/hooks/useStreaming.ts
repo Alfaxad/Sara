@@ -71,8 +71,13 @@ export function useStreaming(options: StreamingOptions) {
             return;
           }
           try {
-            const parsedEvent = JSON.parse(data) as SSEEvent;
-            onEvent(parsedEvent);
+            const parsedData = JSON.parse(data);
+            // The event type comes from the SSE 'event:' field, not from JSON data
+            const sseEvent: SSEEvent = {
+              type: (event.event || 'status') as SSEEvent['type'],
+              data: parsedData,
+            };
+            onEvent(sseEvent);
           } catch {
             // Skip invalid JSON
           }
