@@ -1,5 +1,4 @@
 export const API_URL = process.env.NEXT_PUBLIC_MODAL_URL || 'https://nadhari--sara-agent-api.modal.run';
-export const API_KEY = process.env.NEXT_PUBLIC_SARA_API_KEY || '';
 
 export interface RunRequest {
   taskId: string;
@@ -13,18 +12,11 @@ export interface SSEEvent {
 }
 
 export async function* streamRun(request: RunRequest): AsyncGenerator<SSEEvent> {
-  const headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
-
-  // Add API key if configured
-  if (API_KEY) {
-    headers['X-API-Key'] = API_KEY;
-  }
-
   const response = await fetch(`${API_URL}/api/run`, {
     method: 'POST',
-    headers,
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify(request),
   });
 

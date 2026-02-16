@@ -628,7 +628,7 @@ Question: {question}"""
             json_data = json.dumps(data)
             return f"event: {event_type}\ndata: {json_data}\n\n"
 
-    # Production allowed origins (no wildcards for security)
+    # Production allowed origins
     ALLOWED_ORIGINS = [
         "http://localhost:3000",
         "http://localhost:5173",
@@ -636,6 +636,18 @@ Question: {question}"""
         "https://sara-alfaxad.vercel.app",
         "https://sara.nadhari.ai",
     ]
+
+    # Regex pattern for Vercel preview deployments
+    ALLOWED_ORIGIN_REGEX = r"https://frontend-[a-z0-9]+-alfaxads-projects\.vercel\.app"
+
+    import re
+    def is_origin_allowed(origin: str) -> bool:
+        """Check if origin is allowed (exact match or regex pattern)."""
+        if origin in ALLOWED_ORIGINS:
+            return True
+        if re.match(ALLOWED_ORIGIN_REGEX, origin):
+            return True
+        return False
 
     fastapi_app = FastAPI(
         title="Sara Agent API",
@@ -646,6 +658,7 @@ Question: {question}"""
     fastapi_app.add_middleware(
         CORSMiddleware,
         allow_origins=ALLOWED_ORIGINS,
+        allow_origin_regex=ALLOWED_ORIGIN_REGEX,
         allow_credentials=True,
         allow_methods=["GET", "POST", "OPTIONS"],
         allow_headers=["Authorization", "Content-Type", "X-API-Key"],
@@ -687,10 +700,8 @@ Question: {question}"""
         return {"status": "ok", "service": "sara-agent"}
 
     @fastapi_app.get("/api/tasks")
-    async def list_tasks(request: Request):
+    async def list_tasks():
         """List all available demo tasks."""
-        if not verify_api_key(request):
-            raise HTTPException(status_code=401, detail="Invalid or missing API key")
         return {
             "tasks": [
                 {"id": task_id, **task_data}
@@ -699,7 +710,7 @@ Question: {question}"""
         }
 
     @fastapi_app.post("/api/run")
-    async def run_agent(http_request: Request, request: RunRequest):
+    async def run_agent(request: RunRequest):
         """
         Run the Sara agent with SSE streaming.
 
@@ -711,10 +722,6 @@ Question: {question}"""
         - complete: Task completed with final answer
         - error: Error occurred
         """
-        # Verify API key
-        if not verify_api_key(http_request):
-            raise HTTPException(status_code=401, detail="Invalid or missing API key")
-
         async def event_generator():
             tool_call_id = 0
 
