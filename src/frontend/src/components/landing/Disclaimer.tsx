@@ -29,9 +29,9 @@ export function Disclaimer({ className }: DisclaimerProps) {
                 of compliance to any regulations or standards for quality, safety
                 or efficacy. Any real-world application would require additional
                 development, training, and adaptation. The experience highlighted
-                in this demo shows MedGemma&apos;s baseline capability for the displayed
-                task and is intended to help developers and users explore possible
-                applications and inspire further development.
+                in this demo shows Sara&apos;s capability for the displayed task and is
+                intended to help developers and users explore possible applications
+                and inspire further development. Demo data obtained from MedAgentBench.
               </p>
             </div>
           </div>
