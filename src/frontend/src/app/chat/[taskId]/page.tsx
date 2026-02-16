@@ -6,6 +6,7 @@ import { SplitPane, ErrorBoundary, SkeletonCard } from '@/components/ui';
 import { FhirResourceRenderer } from '@/components/FhirResourceRenderer';
 import { cn } from '@/lib/utils';
 import { FileText } from 'lucide-react';
+import { FinalAnswerCard } from '@/components/artifacts/FinalAnswerCard';
 
 interface ChatPageProps {
   params: {
@@ -26,6 +27,8 @@ function ArtifactSkeleton() {
 interface ArtifactPanelProps {
   artifacts: Array<{ id: string; type: string; data: unknown }>;
   isLoading?: boolean;
+  taskId?: string;
+  finalAnswer?: string | null;
 }
 
 // Individual artifact wrapper
@@ -37,7 +40,7 @@ function ArtifactCard({ artifact }: { artifact: { id: string; type: string; data
   );
 }
 
-function ArtifactPanel({ artifacts, isLoading }: ArtifactPanelProps) {
+function ArtifactPanel({ artifacts, isLoading, taskId, finalAnswer }: ArtifactPanelProps) {
   return (
     <div
       className="h-full flex flex-col bg-sara-bg-surface"
@@ -59,6 +62,13 @@ function ArtifactPanel({ artifacts, isLoading }: ArtifactPanelProps) {
           </span>
         )}
       </header>
+
+      {/* Final Answer Card - shown prominently at top */}
+      {finalAnswer && taskId && (
+        <div className="p-4 border-b border-sara-border">
+          <FinalAnswerCard taskId={taskId} answer={finalAnswer} />
+        </div>
+      )}
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-4">
@@ -105,6 +115,7 @@ export default function ChatPage({ params }: ChatPageProps) {
     error,
     sendMessage,
     reset,
+    finalAnswer,
   } = useChat(taskId);
 
   // Retry handler for connection errors
@@ -154,7 +165,7 @@ export default function ChatPage({ params }: ChatPageProps) {
             />
           }
           right={
-            <ArtifactPanel artifacts={artifacts} isLoading={isLoading} />
+            <ArtifactPanel artifacts={artifacts} isLoading={isLoading} taskId={taskId} finalAnswer={finalAnswer} />
           }
           defaultLeftWidth={55}
           minLeftWidth={40}

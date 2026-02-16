@@ -13,10 +13,13 @@ import { FindingsCard } from './FindingsCard';
 import { ActionsCard } from './ActionsCard';
 import { SourceViewer } from './SourceViewer';
 import { ReasoningPanel } from './ReasoningPanel';
+import { FinalAnswerCard } from './FinalAnswerCard';
 
 export interface ArtifactPanelProps {
   artifacts: Artifact[];
   reasoning?: string;
+  taskId?: string;
+  finalAnswer?: string | null;
   className?: string;
 }
 
@@ -109,11 +112,17 @@ function renderBundle(bundle: FHIRResource) {
   );
 }
 
-export function ArtifactPanel({ artifacts, reasoning, className }: ArtifactPanelProps) {
+export function ArtifactPanel({
+  artifacts,
+  reasoning,
+  taskId,
+  finalAnswer,
+  className
+}: ArtifactPanelProps) {
   const [showSource, setShowSource] = useState(false);
   const [showReasoning, setShowReasoning] = useState(false);
 
-  if (artifacts.length === 0 && !reasoning) {
+  if (artifacts.length === 0 && !reasoning && !finalAnswer) {
     return null;
   }
 
@@ -128,12 +137,21 @@ export function ArtifactPanel({ artifacts, reasoning, className }: ArtifactPanel
       {/* Header */}
       <div className="p-4 border-b border-sara-border">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-sara-accent" />
-          <h2 className="font-display text-heading text-sara-text-primary">
+          <div className="sara-icon-box">
+            <Sparkles className="w-[17px] h-[17px]" />
+          </div>
+          <h2 className="text-subheading text-sara-text-primary">
             Key Findings
           </h2>
         </div>
       </div>
+
+      {/* Final Answer Card - shown prominently at top */}
+      {finalAnswer && taskId && (
+        <div className="p-4 border-b border-sara-border">
+          <FinalAnswerCard taskId={taskId} answer={finalAnswer} />
+        </div>
+      )}
 
       {/* Artifacts Stack */}
       <div className="p-4 space-y-4">
