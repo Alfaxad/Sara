@@ -1,9 +1,8 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import { Card } from '@/components/ui/Card';
-import { Badge } from '@/components/ui/Badge';
 import { FlaskConical, TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { ExpandableSection } from '@/components/ui/ExpandableSection';
 
 interface CodeableConcept {
   coding?: Array<{
@@ -156,20 +155,21 @@ function getStatusBadge(status?: string) {
 
   const statusLower = status.toLowerCase();
 
-  if (statusLower === 'final') {
-    return <Badge variant="success" size="sm">Final</Badge>;
-  }
-  if (statusLower === 'preliminary') {
-    return <Badge variant="warning" size="sm">Preliminary</Badge>;
-  }
-  if (statusLower === 'corrected') {
-    return <Badge variant="info" size="sm">Corrected</Badge>;
-  }
-  if (statusLower === 'cancelled' || statusLower === 'entered-in-error') {
-    return <Badge variant="critical" size="sm">{status}</Badge>;
-  }
+  const statusMap: Record<string, { bg: string; text: string; label: string }> = {
+    final: { bg: 'bg-sara-accent-soft', text: 'text-sara-text-primary', label: 'Final' },
+    preliminary: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Preliminary' },
+    corrected: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-secondary', label: 'Corrected' },
+    cancelled: { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Cancelled' },
+    'entered-in-error': { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: 'Error' },
+  };
 
-  return <Badge variant="default" size="sm">{status}</Badge>;
+  const config = statusMap[statusLower] || { bg: 'bg-sara-bg-elevated', text: 'text-sara-text-muted', label: status };
+
+  return (
+    <span className={cn('px-2 py-0.5 rounded-full text-caption font-medium', config.bg, config.text)}>
+      {config.label}
+    </span>
+  );
 }
 
 function formatDate(dateString?: string): string {
@@ -204,9 +204,9 @@ export function LabResultsCard({ data, className }: LabResultsCardProps) {
   const date = formatDate(data.effectiveDateTime || data.issued);
 
   const statusColors = {
-    normal: 'text-sara-success border-sara-success/30 bg-sara-success-soft',
-    abnormal: 'text-sara-warning border-sara-warning/30 bg-sara-warning-soft',
-    critical: 'text-sara-critical border-sara-critical/30 bg-sara-critical-soft',
+    normal: 'border-sara-border bg-sara-bg-elevated',
+    abnormal: 'border-sara-border bg-sara-bg-elevated',
+    critical: 'border-sara-accent/30 bg-sara-accent-soft',
   };
 
   const statusLabels = {
@@ -216,13 +216,15 @@ export function LabResultsCard({ data, className }: LabResultsCardProps) {
   };
 
   return (
-    <Card variant="surface" className={cn('overflow-hidden', className)}>
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
       <div className="p-4">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
-            <FlaskConical className="w-4 h-4 text-sara-accent flex-shrink-0" />
-            <h4 className="text-subheading text-sara-text-primary font-semibold">
+            <div className="sara-icon-box">
+              <FlaskConical className="w-[17px] h-[17px]" />
+            </div>
+            <h4 className="text-subheading text-sara-text-primary">
               {labName}
             </h4>
           </div>
@@ -238,22 +240,16 @@ export function LabResultsCard({ data, className }: LabResultsCardProps) {
         >
           <div className="flex items-center justify-between">
             <div className="flex items-baseline gap-2">
-              <span className="text-display-lg font-bold">
+              <span className="text-display-lg font-medium text-sara-text-primary">
                 {value}
               </span>
-              <Badge
-                variant={
-                  resultStatus === 'normal'
-                    ? 'success'
-                    : resultStatus === 'abnormal'
-                    ? 'warning'
-                    : 'critical'
-                }
-                size="sm"
-              >
+              <span className={cn(
+                'px-2 py-0.5 rounded-full text-caption font-medium flex items-center gap-1',
+                resultStatus === 'critical' ? 'bg-sara-accent-soft text-sara-text-primary' : 'bg-sara-bg-surface text-sara-text-muted'
+              )}>
                 {getTrendIcon(resultStatus)}
-                <span className="ml-1">{statusLabels[resultStatus]}</span>
-              </Badge>
+                <span>{statusLabels[resultStatus]}</span>
+              </span>
             </div>
           </div>
         </div>
@@ -269,8 +265,42 @@ export function LabResultsCard({ data, className }: LabResultsCardProps) {
             <span className="text-sara-text-muted">{date}</span>
           )}
         </div>
+
+        {/* Expandable: Interpretation Details */}
+        {data.interpretation && data.interpretation.length > 0 && (
+          <ExpandableSection title="Interpretation">
+            <div className="space-y-2 pl-5">
+              {data.interpretation.map((interp, index) => (
+                <div key={index} className="text-body-small text-sara-text-secondary">
+                  {interp.text || interp.coding?.[0]?.display || 'N/A'}
+                </div>
+              ))}
+            </div>
+          </ExpandableSection>
+        )}
+
+        {/* Expandable: Reference Ranges (if multiple) */}
+        {data.referenceRange && data.referenceRange.length > 1 && (
+          <ExpandableSection
+            title="Reference Ranges"
+            count={data.referenceRange.length}
+          >
+            <div className="space-y-2 pl-5">
+              {data.referenceRange.map((range, index) => (
+                <div key={index} className="text-body-small">
+                  <span className="text-sara-text-muted">
+                    {range.type?.text || `Range ${index + 1}`}:
+                  </span>
+                  <span className="text-sara-text-secondary ml-2">
+                    {range.text || `${range.low?.value || '?'} - ${range.high?.value || '?'} ${range.low?.unit || ''}`}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </ExpandableSection>
+        )}
       </div>
-    </Card>
+    </div>
   );
 }
 
