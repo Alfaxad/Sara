@@ -9,25 +9,31 @@ export interface DisclaimerProps {
 
 export function Disclaimer({ className }: DisclaimerProps) {
   return (
-    <section className={cn("w-full px-4 py-8", className)}>
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-start gap-4 p-4 rounded-sara bg-sara-warning-soft border border-sara-warning/30">
-          {/* Warning Icon */}
-          <div className="flex-shrink-0">
-            <AlertTriangle className="w-5 h-5 text-sara-warning" />
-          </div>
+    <section className={cn("w-full px-5 py-12", className)}>
+      <div className="max-w-[840px] mx-auto">
+        <div className="border-t border-sara-border pt-6">
+          <div className="flex items-start gap-3">
+            {/* Warning Icon */}
+            <div className="flex-shrink-0 mt-0.5">
+              <AlertTriangle className="w-4 h-4 text-sara-text-muted" />
+            </div>
 
-          {/* Disclaimer Text */}
-          <div className="flex-1">
-            <h3 className="font-body text-subheading text-sara-warning mb-1">
-              Research Demo Only
-            </h3>
-            <p className="text-body-small text-sara-text-secondary">
-              Sara is a research demonstration and should not be used for actual
-              clinical decision-making. This tool is intended for evaluation and
-              research purposes only. Always consult qualified healthcare
-              professionals for medical advice and treatment decisions.
-            </p>
+            {/* Disclaimer Text */}
+            <div className="flex-1">
+              <h3 className="text-body-small font-medium text-sara-text-secondary mb-2">
+                Disclaimer
+              </h3>
+              <p className="text-caption text-sara-text-muted leading-relaxed">
+                This demonstration is for illustrative purposes only and does not
+                represent a finished or approved product. It is not representative
+                of compliance to any regulations or standards for quality, safety
+                or efficacy. Any real-world application would require additional
+                development, training, and adaptation. The experience highlighted
+                in this demo shows MedGemma&apos;s baseline capability for the displayed
+                task and is intended to help developers and users explore possible
+                applications and inspire further development.
+              </p>
+            </div>
           </div>
         </div>
       </div>
