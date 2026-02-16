@@ -1,7 +1,0 @@
-__pycache__/
-*.pyc
-*.log
-jules-scratch/
-force_push*.sh
-test_*.sh
-*_git.sh
