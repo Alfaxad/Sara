@@ -2,7 +2,7 @@
 
 import { useState, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 export interface ExpandableSectionProps {
   title: string;
