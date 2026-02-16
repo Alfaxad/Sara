@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Environment
+.env
+.env.local
+.env*.local
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Reference folders (not part of Sara project)
+ehr-navigator-agent/
+modal-docs/
+adk-docs/
+jsoncrack.com/
+fhir-react/
+open-webui/
+jsonhero-web/
+ui-design-guidelines/
+
+# Planning/overview docs
+sara-overview.md
+sara_clinical_workflow_agent_plan_v2.md
+sara_modal.py
+
+# Notebooks
+Notebooks/
+
+# MedAgentBench - only keep benchmark_models.py and outputs/benchmarks
+MedAgentBench/*
+!MedAgentBench/benchmark_models.py
+!MedAgentBench/outputs/
+MedAgentBench/outputs/*
+!MedAgentBench/outputs/benchmarks/
