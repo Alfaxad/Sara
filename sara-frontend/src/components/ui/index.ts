@@ -16,3 +16,6 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from "./Button";
 
 export { Skeleton, SkeletonText, SkeletonCard } from "./Skeleton";
 export type { SkeletonProps, SkeletonVariant, SkeletonTextProps, SkeletonCardProps } from "./Skeleton";
+
+export { SplitPane } from "./SplitPane";
+export type { SplitPaneProps } from "./SplitPane";
