@@ -10,7 +10,7 @@ import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 from typing import List
 
-from modal.agent import SaraAgent, AgentEvent, MAX_ROUNDS
+from src.backend.agent import SaraAgent, AgentEvent, MAX_ROUNDS
 
 
 class TestAgentEvent:
@@ -354,7 +354,7 @@ class TestSaraAgentFormatFHIRResult:
             functions=functions
         )
 
-        from modal.utils.fhir_client import FHIRResult
+        from src.backend.utils.fhir_client import FHIRResult
 
         result = FHIRResult(
             success=True,
@@ -376,7 +376,7 @@ class TestSaraAgentFormatFHIRResult:
             functions=functions
         )
 
-        from modal.utils.fhir_client import FHIRResult
+        from src.backend.utils.fhir_client import FHIRResult
 
         result = FHIRResult(
             success=False,

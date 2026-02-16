@@ -10,7 +10,7 @@ from typing import Any, Dict
 
 import httpx
 
-from modal.utils.parser import Action, ActionType
+from src.backend.utils.parser import Action, ActionType
 
 
 @dataclass

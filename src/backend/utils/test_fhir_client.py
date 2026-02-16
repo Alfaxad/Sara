@@ -7,8 +7,8 @@ Uses pytest-httpx for mocking HTTP requests.
 import pytest
 from httpx import ConnectError
 
-from modal.utils.fhir_client import FHIRClient, FHIRResult
-from modal.utils.parser import Action, ActionType
+from src.backend.utils.fhir_client import FHIRClient, FHIRResult
+from src.backend.utils.parser import Action, ActionType
 
 
 class TestFHIRResult:

@@ -4,7 +4,7 @@ Written first following TDD approach.
 """
 
 import pytest
-from modal.utils.parser import ActionType, Action, parse_action
+from src.backend.utils.parser import ActionType, Action, parse_action
 
 
 class TestParseGetSimple:

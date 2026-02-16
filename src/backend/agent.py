@@ -13,8 +13,8 @@ from typing import Any, AsyncGenerator, Dict, List
 
 from openai import AsyncOpenAI
 
-from modal.utils.fhir_client import FHIRClient, FHIRResult
-from modal.utils.parser import parse_action, ActionType
+from src.backend.utils.fhir_client import FHIRClient, FHIRResult
+from src.backend.utils.parser import parse_action, ActionType
 
 # Maximum agent iterations before giving up
 MAX_ROUNDS = 8
