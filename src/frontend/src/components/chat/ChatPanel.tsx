@@ -5,7 +5,7 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 import Link from 'next/link';
 import type { Task } from '@/lib/tasks';
 import type { Message } from '@/hooks/useChat';
-import { Button } from '@/components/ui/Button';
+import type { WorkflowStep } from '@/lib/workflow';
 import { ErrorState } from '@/components/ui/ErrorState';
 import { MessageList } from './MessageList';
 import { ChatInput } from './ChatInput';
@@ -13,6 +13,7 @@ import { ChatInput } from './ChatInput';
 export interface ChatPanelProps {
   task: Task | null;
   messages: Message[];
+  workflowSteps?: WorkflowStep[];
   isLoading: boolean;
   isComplete: boolean;
   error?: string | null;
@@ -25,6 +26,7 @@ export interface ChatPanelProps {
 export function ChatPanel({
   task,
   messages,
+  workflowSteps = [],
   isLoading,
   isComplete,
   error,
@@ -47,14 +49,19 @@ export function ChatPanel({
       <header
         className={cn(
           'flex items-center justify-between gap-4 px-4 py-3',
-          'bg-sara-bg-surface border-b border-sara-border'
+          'border-b border-sara-border'
         )}
       >
         <div className="flex items-center gap-3">
-          <Link href="/" aria-label="Back to task list">
-            <Button variant="ghost" size="sm" aria-label="Back to tasks">
-              <ArrowLeft className="w-4 h-4" aria-hidden="true" />
-            </Button>
+          <Link
+            href="/"
+            className={cn(
+              'flex items-center justify-center w-8 h-8 rounded-full',
+              'hover:bg-sara-accent-soft transition-colors'
+            )}
+            aria-label="Back to tasks"
+          >
+            <ArrowLeft className="w-4 h-4 text-sara-text-secondary" aria-hidden="true" />
           </Link>
 
           <div>
@@ -62,7 +69,7 @@ export function ChatPanel({
               {task?.name || 'Chat'}
             </h1>
             {task && (
-              <p className="text-body-small text-sara-text-muted">
+              <p className="text-body-small text-sara-text-muted line-clamp-1 max-w-md">
                 {task.context}
               </p>
             )}
@@ -70,15 +77,20 @@ export function ChatPanel({
         </div>
 
         {onReset && isComplete && (
-          <Button
-            variant="secondary"
-            size="sm"
+          <button
             onClick={onReset}
-            leftIcon={<RotateCcw className="w-4 h-4" aria-hidden="true" />}
+            className={cn(
+              'flex items-center gap-2 px-3 py-1.5 rounded-full',
+              'border border-sara-border',
+              'text-body-small text-sara-text-secondary',
+              'hover:border-sara-border-hover hover:bg-sara-accent-soft',
+              'transition-all'
+            )}
             aria-label="Reset conversation"
           >
+            <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
             Reset
-          </Button>
+          </button>
         )}
       </header>
 
@@ -97,6 +109,7 @@ export function ChatPanel({
       {!error && (
         <MessageList
           messages={messages}
+          workflowSteps={workflowSteps}
           isLoading={isLoading}
           className="flex-1"
         />
@@ -112,7 +125,7 @@ export function ChatPanel({
             ? 'Fix the error to continue...'
             : isComplete
             ? 'Ask a follow-up question...'
-            : 'Type a message...'
+            : 'Message Sara...'
         }
       />
     </div>
