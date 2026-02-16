@@ -10,13 +10,13 @@ export function Hero({ className }: HeroProps) {
   return (
     <section
       className={cn(
-        "flex flex-col items-center justify-center text-center pt-12 pb-14 px-5",
+        "flex flex-col items-center justify-center text-center pt-8 pb-8 px-5",
         "animate-fade-up",
         className
       )}
     >
       {/* Logo - White circle with S */}
-      <div className="mb-6">
+      <div className="mb-4">
         <div className="sara-avatar">S</div>
       </div>
 
@@ -30,7 +30,7 @@ export function Hero({ className }: HeroProps) {
 
       {/* Description */}
       <p className="text-body text-sara-text-secondary mt-4 max-w-[480px] leading-relaxed">
-        An intelligent assistant that helps healthcare professionals manage
+        An intelligent agent that assists healthcare professionals in managing
         clinical workflows, patient data, and medical documentation.
       </p>
     </section>

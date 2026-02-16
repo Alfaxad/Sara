@@ -174,14 +174,24 @@ export function useStreaming(options: StreamingOptions) {
       }
 
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      setState({
-        isConnected: false,
-        isLoading: false,
-        error: errorMessage,
-        retryCount: retryAttempt,
-        isWarmingUp: false,
-      });
-      onError?.(errorMessage);
+
+      // Only show error to user after all retries have been exhausted
+      // This prevents showing errors during cold start retries
+      if (retryAttempt >= MAX_RETRIES) {
+        setState({
+          isConnected: false,
+          isLoading: false,
+          error: errorMessage,
+          retryCount: retryAttempt,
+          isWarmingUp: false,
+        });
+        onError?.(errorMessage);
+      } else {
+        // Silently retry without showing error
+        console.log(`Request failed, retrying (attempt ${retryAttempt + 1}/${MAX_RETRIES})...`);
+        await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+        return startStream(taskId, prompt, context, retryAttempt + 1);
+      }
     }
   }, [onEvent, onComplete, onError, onWarmingUp, clearTimeouts, state.isLoading]);
 

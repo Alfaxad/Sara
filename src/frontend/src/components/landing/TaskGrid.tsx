@@ -13,8 +13,8 @@ export function TaskGrid({ className }: TaskGridProps) {
     <section className={cn("w-full px-5", className)}>
       <div className="max-w-[840px] mx-auto">
         {/* Divider + Section Header */}
-        <div className="border-t border-sara-border mb-9">
-          <div className="pt-6">
+        <div className="border-t border-sara-border mb-6">
+          <div className="pt-4">
             <h2 className="text-heading text-sara-text-primary mb-1.5">
               Clinical Workflows
             </h2>

@@ -9,9 +9,9 @@ export interface DisclaimerProps {
 
 export function Disclaimer({ className }: DisclaimerProps) {
   return (
-    <section className={cn("w-full px-5 py-12", className)}>
+    <section className={cn("w-full px-5 py-6", className)}>
       <div className="max-w-[840px] mx-auto">
-        <div className="border-t border-sara-border pt-6">
+        <div className="border-t border-sara-border pt-4">
           <div className="flex items-start gap-3">
             {/* Warning Icon */}
             <div className="flex-shrink-0 mt-0.5">
