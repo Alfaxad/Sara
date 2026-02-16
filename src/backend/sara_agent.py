@@ -668,12 +668,23 @@ Question: {question}"""
             return True
         return False
 
+    from fastapi import Request, HTTPException
+    from fastapi.responses import Response
+
+    @fastapi_app.options("/api/run")
+    async def options_run():
+        """Handle CORS preflight request for /api/run."""
+        return Response(status_code=200)
+
+    @fastapi_app.options("/api/tasks")
+    async def options_tasks():
+        """Handle CORS preflight request for /api/tasks."""
+        return Response(status_code=200)
+
     @fastapi_app.get("/health")
     async def health():
         """Health check endpoint (no auth required)."""
         return {"status": "ok", "service": "sara-agent"}
-
-    from fastapi import Request, HTTPException
 
     @fastapi_app.get("/api/tasks")
     async def list_tasks(request: Request):
