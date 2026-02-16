@@ -1,0 +1,55 @@
+{
+  "model": "qwen/qwen3-14b",
+  "total": 300,
+  "completed": 275,
+  "correct": 222,
+  "skipped": 0,
+  "invalid_action": 23,
+  "limit_reached": 2,
+  "context_limit": 0,
+  "error": 0,
+  "task_breakdown": {
+    "task1": {
+      "total": 30,
+      "correct": 30
+    },
+    "task2": {
+      "total": 30,
+      "correct": 30
+    },
+    "task3": {
+      "total": 30,
+      "correct": 30
+    },
+    "task4": {
+      "total": 30,
+      "correct": 22
+    },
+    "task5": {
+      "total": 30,
+      "correct": 26
+    },
+    "task6": {
+      "total": 30,
+      "correct": 5
+    },
+    "task7": {
+      "total": 30,
+      "correct": 12
+    },
+    "task8": {
+      "total": 30,
+      "correct": 30
+    },
+    "task9": {
+      "total": 30,
+      "correct": 17
+    },
+    "task10": {
+      "total": 30,
+      "correct": 20
+    }
+  },
+  "elapsed_seconds": 10798.433640956879,
+  "accuracy": 74.0
+}

@@ -1,0 +1,11 @@
+Rank,Task,Description,Average Accuracy (%),Hardest For,Easiest For,Std Dev
+1,task7,Clinical Note Creation,35.5,Llama 4 Maverick,x-ai/grok-4.1-fast,21.7
+2,task9,Procedure History,49.3,Llama 4 Maverick,Sara 1.5 4B,37.4
+3,task6,Vital Signs Retrieval,49.8,meta-llama/llama-3.1-8b-instruct,Claude Opus 4.5,34.2
+4,task10,Care Plan Management,57.1,meta-llama/llama-3.1-8b-instruct,Claude Opus 4.5,35.1
+5,task3,Medication Verification,71.1,Sara 1.5 4B,Claude Opus 4.5,39.0
+6,task1,Patient Search,73.8,meta-llama/llama-3.1-8b-instruct,Sara 1.5 4B,39.2
+7,task8,Immunization Records,76.7,qwen/qwen3-8b,Sara 1.5 4B,34.0
+8,task4,Allergy Information,76.9,meta-llama/llama-3.1-8b-instruct,Sara 1.5 4B,23.8
+9,task2,Lab Result Retrieval,82.9,meta-llama/llama-3.1-8b-instruct,Claude Opus 4.5,28.8
+10,task5,Condition Lookup,84.9,Llama 4 Maverick,Claude Opus 4.5,19.6

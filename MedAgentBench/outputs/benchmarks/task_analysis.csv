@@ -1,0 +1,12 @@
+Task,Task Description,Claude Opus 4.5,Gemini 3 Flash,Claude Sonnet 4.5,GPT-4.1,GPT-4o,GPT-5.1,Gemini 2.5 Flash,Sara 1.5 4B,Llama 4 Scout,Llama 4 Maverick
+task1,Patient Search,100.0%,100.0%,100.0%,93.3%,96.7%,16.7%,100.0%,100.0%,66.7%,10.0%
+task2,Lab Result Retrieval,100.0%,100.0%,96.7%,100.0%,100.0%,96.7%,100.0%,80.0%,43.3%,60.0%
+task3,Medication Verification,100.0%,93.3%,100.0%,100.0%,100.0%,100.0%,0.0%,0.0%,86.7%,50.0%
+task4,Allergy Information,100.0%,100.0%,83.3%,73.3%,73.3%,80.0%,93.3%,100.0%,53.3%,76.7%
+task5,Condition Lookup,100.0%,96.7%,96.7%,100.0%,93.3%,93.3%,93.3%,93.3%,40.0%,40.0%
+task6,Vital Signs Retrieval,100.0%,90.0%,93.3%,30.0%,33.3%,56.7%,83.3%,33.3%,6.7%,50.0%
+task7,Clinical Note Creation,56.7%,53.3%,53.3%,53.3%,46.7%,50.0%,40.0%,30.0%,3.3%,0.0%
+task8,Immunization Records,100.0%,100.0%,100.0%,100.0%,100.0%,100.0%,83.3%,100.0%,63.3%,73.3%
+task9,Procedure History,93.3%,86.7%,53.3%,26.7%,56.7%,90.0%,63.3%,96.7%,16.7%,0.0%
+task10,Care Plan Management,100.0%,80.0%,83.3%,96.7%,70.0%,76.7%,73.3%,33.3%,33.3%,13.3%
+overall,Overall Accuracy,95.0%,90.0%,86.0%,77.3%,77.0%,76.0%,72.8%,66.7%,41.3%,37.3%

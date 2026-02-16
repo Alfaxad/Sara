@@ -1,0 +1,16 @@
+Model,task1 (Patient Search),task2 (Lab Result Retrieval),task3 (Medication Verification),task4 (Allergy Information),task5 (Condition Lookup),task6 (Vital Signs Retrieval),task7 (Clinical Note Creation),task8 (Immunization Records),task9 (Procedure History),task10 (Care Plan Management)
+Claude Opus 4.5,2nd,1st,1st,2nd,1st,1st,2nd,2nd,2nd,1st
+Gemini 3 Flash,5th,3rd,8th,3rd,4th,4th,4th,4th,5th,5th
+x-ai/grok-4.1-fast,8th,7th,7th,4th,5th,2nd,1st,13th,4th,2nd
+Claude Sonnet 4.5,3rd,8th,2nd,6th,3rd,3rd,3rd,3rd,9th,4th
+GPT-4.1,10th,4th,3rd,10th,2nd,10th,5th,5th,10th,3rd
+GPT-4o,9th,5th,4th,11th,8th,9th,7th,6th,7th,8th
+GPT-5.1,12th,9th,5th,8th,9th,6th,6th,7th,3rd,6th
+qwen/qwen3-14b,7th,6th,6th,12th,11th,13th,9th,8th,8th,9th
+Gemini 2.5 Flash,4th,2nd,15th,5th,7th,5th,8th,9th,6th,7th
+Sara 1.5 4B,1st,11th,14th,1st,6th,8th,10th,1st,1st,10th
+mistralai/mistral-small-3.2-24b-instruct,6th,12th,12th,7th,10th,11th,12th,10th,15th,14th
+Llama 4 Scout,11th,14th,9th,14th,15th,15th,14th,12th,11th,11th
+qwen/qwen3-8b,13th,10th,10th,13th,13th,12th,11th,15th,12th,12th
+Llama 4 Maverick,15th,13th,11th,9th,14th,7th,15th,11th,14th,13th
+meta-llama/llama-3.1-8b-instruct,14th,15th,13th,15th,12th,14th,13th,14th,13th,15th

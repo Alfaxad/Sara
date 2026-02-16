@@ -1,0 +1,6 @@
+Model,Parameters,Accuracy (%),vs Sara,Invalid Actions,Format Adherence
+Qwen3-14B,14B,74.0,+7.3%,23,23 errors
+Sara 1.5 4B,4B,66.7,+0.0%,0,Perfect
+Mistral Small 3.2,24B,51.7,-15.0%,0,Perfect
+Qwen3-8B,8B,40.0,-26.7%,93,93 errors
+Llama 3.1-8B Instruct,8B,14.0,-52.7%,14,14 errors

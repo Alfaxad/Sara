@@ -1,0 +1,55 @@
+{
+  "model": "meta-llama/llama-4-scout",
+  "total": 300,
+  "completed": 262,
+  "correct": 124,
+  "skipped": 0,
+  "invalid_action": 34,
+  "limit_reached": 4,
+  "context_limit": 0,
+  "error": 0,
+  "task_breakdown": {
+    "task1": {
+      "total": 30,
+      "correct": 20
+    },
+    "task2": {
+      "total": 30,
+      "correct": 13
+    },
+    "task3": {
+      "total": 30,
+      "correct": 26
+    },
+    "task4": {
+      "total": 30,
+      "correct": 16
+    },
+    "task5": {
+      "total": 30,
+      "correct": 12
+    },
+    "task6": {
+      "total": 30,
+      "correct": 2
+    },
+    "task7": {
+      "total": 30,
+      "correct": 1
+    },
+    "task8": {
+      "total": 30,
+      "correct": 19
+    },
+    "task9": {
+      "total": 30,
+      "correct": 5
+    },
+    "task10": {
+      "total": 30,
+      "correct": 10
+    }
+  },
+  "elapsed_seconds": 1023.7340762615204,
+  "accuracy": 41.333333333333336
+}

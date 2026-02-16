@@ -1,0 +1,11 @@
+Task,Description,Sara Score (%),Field Average (%),Delta (%),Sara Rank,Best Model,Best Score (%)
+task1,Patient Search,100.0,73.8,26.2,1st,Sara 1.5 4B,100.0
+task2,Lab Result Retrieval,80.0,82.9,-2.9,11th,Claude Opus 4.5,100.0
+task3,Medication Verification,0.0,71.1,-71.1,14th,Claude Opus 4.5,100.0
+task4,Allergy Information,100.0,76.9,23.1,1st,Sara 1.5 4B,100.0
+task5,Condition Lookup,93.3,84.9,8.4,6th,Claude Opus 4.5,100.0
+task6,Vital Signs Retrieval,33.3,49.8,-16.5,8th,Claude Opus 4.5,100.0
+task7,Clinical Note Creation,30.0,35.5,-5.5,10th,x-ai/grok-4.1-fast,63.3
+task8,Immunization Records,100.0,76.7,23.3,1st,Sara 1.5 4B,100.0
+task9,Procedure History,96.7,49.3,47.4,1st,Sara 1.5 4B,96.7
+task10,Care Plan Management,33.3,57.1,-23.8,10th,Claude Opus 4.5,100.0

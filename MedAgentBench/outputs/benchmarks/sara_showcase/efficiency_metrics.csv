@@ -1,0 +1,14 @@
+Model,Parameters,Param Count (B),Accuracy (%),Efficiency (Acc/B),vs Sara Efficiency,Category
+Sara 1.5 4B,4B,4,66.7,16.67,1.00x,Small (<10B)
+Qwen3-14B,14B,14,74.0,5.29,0.32x,Medium (10-30B)
+Qwen3-8B,8B,8,40.0,5.0,0.30x,Small (<10B)
+Mistral Small 3.2,24B,24,51.7,2.15,0.13x,Medium (10-30B)
+Llama 3.1-8B Instruct,8B,8,14.0,1.75,0.11x,Small (<10B)
+Llama 4 Scout,109B (MoE),109,41.3,0.38,0.02x,Large (>100B)
+Claude Sonnet 4.5,Frontier,700,86.0,0.12,0.01x,Frontier
+Grok 4.1 Fast,Frontier,800,87.7,0.11,0.01x,Frontier
+Claude Opus 4.5,Frontier,1000,95.0,0.1,0.01x,Frontier
+GPT-4.1,Frontier,900,77.3,0.09,0.01x,Frontier
+GPT-4o,Frontier,850,77.0,0.09,0.01x,Frontier
+Llama 4 Maverick,400B (MoE),400,37.3,0.09,0.01x,Large (>100B)
+GPT-5.1,Frontier,950,76.0,0.08,0.00x,Frontier

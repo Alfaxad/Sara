@@ -1,0 +1,300 @@
+{"index": 0, "task_id": "task1_1", "status": "completed", "correct": true, "result": "[\"S6534835\"]", "num_turns": 2, "time": "2026-02-11 20:08:36"}
+{"index": 1, "task_id": "task1_2", "status": "completed", "correct": true, "result": "[\"S6426560\"]", "num_turns": 2, "time": "2026-02-11 20:09:00"}
+{"index": 2, "task_id": "task1_3", "status": "completed", "correct": true, "result": "[\"S1986380\"]", "num_turns": 2, "time": "2026-02-11 20:09:35"}
+{"index": 3, "task_id": "task1_4", "status": "completed", "correct": true, "result": "[\"S6484983\"]", "num_turns": 2, "time": "2026-02-11 20:10:17"}
+{"index": 4, "task_id": "task1_5", "status": "completed", "correct": true, "result": "[\"S2703270\"]", "num_turns": 2, "time": "2026-02-11 20:10:55"}
+{"index": 5, "task_id": "task1_6", "status": "completed", "correct": true, "result": "[\"S2874099\"]", "num_turns": 2, "time": "2026-02-11 20:11:14"}
+{"index": 6, "task_id": "task1_7", "status": "completed", "correct": true, "result": "[\"S6200102\"]", "num_turns": 2, "time": "2026-02-11 20:11:29"}
+{"index": 7, "task_id": "task1_8", "status": "completed", "correct": true, "result": "[\"S6530532\"]", "num_turns": 2, "time": "2026-02-11 20:11:50"}
+{"index": 8, "task_id": "task1_9", "status": "completed", "correct": true, "result": "[\"S6539215\"]", "num_turns": 2, "time": "2026-02-11 20:12:17"}
+{"index": 9, "task_id": "task1_10", "status": "completed", "correct": true, "result": "[\"S6264184\"]", "num_turns": 2, "time": "2026-02-11 20:12:59"}
+{"index": 10, "task_id": "task1_11", "status": "completed", "correct": true, "result": "[\"S6521727\"]", "num_turns": 2, "time": "2026-02-11 20:13:21"}
+{"index": 11, "task_id": "task1_12", "status": "completed", "correct": true, "result": "[\"S0789363\"]", "num_turns": 2, "time": "2026-02-11 20:13:55"}
+{"index": 12, "task_id": "task1_13", "status": "completed", "correct": true, "result": "[\"S2154941\"]", "num_turns": 2, "time": "2026-02-11 20:14:27"}
+{"index": 13, "task_id": "task1_14", "status": "completed", "correct": true, "result": "[\"S2197736\"]", "num_turns": 2, "time": "2026-02-11 20:14:48"}
+{"index": 14, "task_id": "task1_15", "status": "completed", "correct": true, "result": "[\"S3228213\"]", "num_turns": 2, "time": "2026-02-11 20:15:15"}
+{"index": 15, "task_id": "task1_16", "status": "completed", "correct": true, "result": "[\"S6551923\"]", "num_turns": 2, "time": "2026-02-11 20:15:42"}
+{"index": 16, "task_id": "task1_17", "status": "completed", "correct": true, "result": "[\"S2119664\"]", "num_turns": 2, "time": "2026-02-11 20:15:59"}
+{"index": 17, "task_id": "task1_18", "status": "completed", "correct": true, "result": "[\"S2863714\"]", "num_turns": 2, "time": "2026-02-11 20:16:14"}
+{"index": 18, "task_id": "task1_19", "status": "completed", "correct": true, "result": "[\"S6192632\"]", "num_turns": 2, "time": "2026-02-11 20:16:54"}
+{"index": 19, "task_id": "task1_20", "status": "completed", "correct": true, "result": "[\"S0658561\"]", "num_turns": 2, "time": "2026-02-11 20:17:33"}
+{"index": 20, "task_id": "task1_21", "status": "completed", "correct": true, "result": "[\"S0547588\"]", "num_turns": 2, "time": "2026-02-11 20:17:51"}
+{"index": 21, "task_id": "task1_22", "status": "completed", "correct": true, "result": "[\"S0722219\"]", "num_turns": 2, "time": "2026-02-11 20:18:12"}
+{"index": 22, "task_id": "task1_23", "status": "completed", "correct": true, "result": "[\"S3057899\"]", "num_turns": 2, "time": "2026-02-11 20:18:38"}
+{"index": 23, "task_id": "task1_24", "status": "completed", "correct": true, "result": "[\"S6538722\"]", "num_turns": 2, "time": "2026-02-11 20:18:59"}
+{"index": 24, "task_id": "task1_25", "status": "completed", "correct": true, "result": "[\"S6545016\"]", "num_turns": 2, "time": "2026-02-11 20:19:18"}
+{"index": 25, "task_id": "task1_26", "status": "completed", "correct": true, "result": "[\"S3236936\"]", "num_turns": 2, "time": "2026-02-11 20:19:40"}
+{"index": 26, "task_id": "task1_27", "status": "completed", "correct": true, "result": "[\"S3213957\"]", "num_turns": 2, "time": "2026-02-11 20:20:00"}
+{"index": 27, "task_id": "task1_28", "status": "completed", "correct": true, "result": "[\"S2704870\"]", "num_turns": 2, "time": "2026-02-11 20:20:28"}
+{"index": 28, "task_id": "task1_29", "status": "completed", "correct": true, "result": "[\"Patient not found\"]", "num_turns": 2, "time": "2026-02-11 20:21:03"}
+{"index": 29, "task_id": "task1_30", "status": "completed", "correct": true, "result": "[\"Patient not found\"]", "num_turns": 2, "time": "2026-02-11 20:21:28"}
+{"index": 30, "task_id": "task2_1", "status": "completed", "correct": true, "result": "[60]", "num_turns": 2, "time": "2026-02-11 20:21:42"}
+{"index": 31, "task_id": "task2_2", "status": "completed", "correct": true, "result": "[80]", "num_turns": 2, "time": "2026-02-11 20:21:55"}
+{"index": 32, "task_id": "task2_3", "status": "completed", "correct": true, "result": "[68]", "num_turns": 2, "time": "2026-02-11 20:22:21"}
+{"index": 33, "task_id": "task2_4", "status": "completed", "correct": true, "result": "[55]", "num_turns": 2, "time": "2026-02-11 20:22:46"}
+{"index": 34, "task_id": "task2_5", "status": "completed", "correct": true, "result": "[67]", "num_turns": 2, "time": "2026-02-11 20:23:00"}
+{"index": 35, "task_id": "task2_6", "status": "completed", "correct": true, "result": "[39]", "num_turns": 2, "time": "2026-02-11 20:23:15"}
+{"index": 36, "task_id": "task2_7", "status": "completed", "correct": true, "result": "[72]", "num_turns": 2, "time": "2026-02-11 20:23:26"}
+{"index": 37, "task_id": "task2_8", "status": "completed", "correct": true, "result": "[89]", "num_turns": 2, "time": "2026-02-11 20:23:43"}
+{"index": 38, "task_id": "task2_9", "status": "completed", "correct": true, "result": "[48]", "num_turns": 2, "time": "2026-02-11 20:23:57"}
+{"index": 39, "task_id": "task2_10", "status": "completed", "correct": true, "result": "[79]", "num_turns": 2, "time": "2026-02-11 20:24:10"}
+{"index": 40, "task_id": "task2_11", "status": "completed", "correct": true, "result": "[44]", "num_turns": 2, "time": "2026-02-11 20:24:23"}
+{"index": 41, "task_id": "task2_12", "status": "completed", "correct": true, "result": "[90]", "num_turns": 2, "time": "2026-02-11 20:24:44"}
+{"index": 42, "task_id": "task2_13", "status": "completed", "correct": true, "result": "[81]", "num_turns": 2, "time": "2026-02-11 20:24:57"}
+{"index": 43, "task_id": "task2_14", "status": "completed", "correct": true, "result": "[75]", "num_turns": 2, "time": "2026-02-11 20:25:19"}
+{"index": 44, "task_id": "task2_15", "status": "completed", "correct": true, "result": "[86]", "num_turns": 2, "time": "2026-02-11 20:25:36"}
+{"index": 45, "task_id": "task2_16", "status": "completed", "correct": true, "result": "[66]", "num_turns": 2, "time": "2026-02-11 20:25:50"}
+{"index": 46, "task_id": "task2_17", "status": "completed", "correct": true, "result": "[76]", "num_turns": 2, "time": "2026-02-11 20:26:07"}
+{"index": 47, "task_id": "task2_18", "status": "completed", "correct": true, "result": "[84]", "num_turns": 2, "time": "2026-02-11 20:26:23"}
+{"index": 48, "task_id": "task2_19", "status": "completed", "correct": true, "result": "[28]", "num_turns": 2, "time": "2026-02-11 20:26:36"}
+{"index": 49, "task_id": "task2_20", "status": "completed", "correct": true, "result": "[67]", "num_turns": 2, "time": "2026-02-11 20:26:52"}
+{"index": 50, "task_id": "task2_21", "status": "completed", "correct": true, "result": "[63]", "num_turns": 2, "time": "2026-02-11 20:27:06"}
+{"index": 51, "task_id": "task2_22", "status": "completed", "correct": true, "result": "[82]", "num_turns": 2, "time": "2026-02-11 20:27:25"}
+{"index": 52, "task_id": "task2_23", "status": "completed", "correct": true, "result": "[62]", "num_turns": 2, "time": "2026-02-11 20:28:00"}
+{"index": 53, "task_id": "task2_24", "status": "completed", "correct": true, "result": "[54]", "num_turns": 2, "time": "2026-02-11 20:28:18"}
+{"index": 54, "task_id": "task2_25", "status": "completed", "correct": true, "result": "[51]", "num_turns": 2, "time": "2026-02-11 20:28:34"}
+{"index": 55, "task_id": "task2_26", "status": "completed", "correct": true, "result": "[69]", "num_turns": 2, "time": "2026-02-11 20:28:51"}
+{"index": 56, "task_id": "task2_27", "status": "completed", "correct": true, "result": "[70]", "num_turns": 2, "time": "2026-02-11 20:29:11"}
+{"index": 57, "task_id": "task2_28", "status": "completed", "correct": true, "result": "[50]", "num_turns": 2, "time": "2026-02-11 20:29:26"}
+{"index": 58, "task_id": "task2_29", "status": "completed", "correct": true, "result": "[62]", "num_turns": 2, "time": "2026-02-11 20:29:42"}
+{"index": 59, "task_id": "task2_30", "status": "completed", "correct": true, "result": "[80]", "num_turns": 2, "time": "2026-02-11 20:29:56"}
+{"index": 60, "task_id": "task3_1", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:30:21"}
+{"index": 61, "task_id": "task3_2", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:30:44"}
+{"index": 62, "task_id": "task3_3", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:31:01"}
+{"index": 63, "task_id": "task3_4", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:31:22"}
+{"index": 64, "task_id": "task3_5", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:31:38"}
+{"index": 65, "task_id": "task3_6", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:31:57"}
+{"index": 66, "task_id": "task3_7", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:32:13"}
+{"index": 67, "task_id": "task3_8", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:32:34"}
+{"index": 68, "task_id": "task3_9", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:32:53"}
+{"index": 69, "task_id": "task3_10", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:33:14"}
+{"index": 70, "task_id": "task3_11", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:33:38"}
+{"index": 71, "task_id": "task3_12", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:33:58"}
+{"index": 72, "task_id": "task3_13", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:34:27"}
+{"index": 73, "task_id": "task3_14", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:34:44"}
+{"index": 74, "task_id": "task3_15", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:35:04"}
+{"index": 75, "task_id": "task3_16", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:35:19"}
+{"index": 76, "task_id": "task3_17", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:35:39"}
+{"index": 77, "task_id": "task3_18", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:35:56"}
+{"index": 78, "task_id": "task3_19", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:36:16"}
+{"index": 79, "task_id": "task3_20", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:36:32"}
+{"index": 80, "task_id": "task3_21", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:36:50"}
+{"index": 81, "task_id": "task3_22", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:37:07"}
+{"index": 82, "task_id": "task3_23", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:37:27"}
+{"index": 83, "task_id": "task3_24", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:37:45"}
+{"index": 84, "task_id": "task3_25", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:38:04"}
+{"index": 85, "task_id": "task3_26", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:38:22"}
+{"index": 86, "task_id": "task3_27", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:38:42"}
+{"index": 87, "task_id": "task3_28", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:39:05"}
+{"index": 88, "task_id": "task3_29", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:39:26"}
+{"index": 89, "task_id": "task3_30", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 20:39:46"}
+{"index": 90, "task_id": "task4_1", "status": "completed", "correct": false, "result": "[2.3]", "num_turns": 2, "time": "2026-02-11 20:40:36"}
+{"index": 91, "task_id": "task4_2", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:41:05"}
+{"index": 92, "task_id": "task4_3", "status": "completed", "correct": true, "result": "[2.7]", "num_turns": 4, "time": "2026-02-11 20:42:11"}
+{"index": 93, "task_id": "task4_4", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:42:47"}
+{"index": 94, "task_id": "task4_5", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 20:44:47"}
+{"index": 95, "task_id": "task4_6", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:45:26"}
+{"index": 96, "task_id": "task4_7", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:46:13"}
+{"index": 97, "task_id": "task4_8", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:46:50"}
+{"index": 98, "task_id": "task4_9", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:47:30"}
+{"index": 99, "task_id": "task4_10", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:48:13"}
+{"index": 100, "task_id": "task4_11", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:48:50"}
+{"index": 101, "task_id": "task4_12", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:49:21"}
+{"index": 102, "task_id": "task4_13", "status": "completed", "correct": true, "result": "[2.2]", "num_turns": 2, "time": "2026-02-11 20:49:58"}
+{"index": 103, "task_id": "task4_14", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:50:40"}
+{"index": 104, "task_id": "task4_15", "status": "completed", "correct": true, "result": "[2.2]", "num_turns": 2, "time": "2026-02-11 20:51:49"}
+{"index": 105, "task_id": "task4_16", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:52:39"}
+{"index": 106, "task_id": "task4_17", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 3, "time": "2026-02-11 20:54:12"}
+{"index": 107, "task_id": "task4_18", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 3, "time": "2026-02-11 20:56:16"}
+{"index": 108, "task_id": "task4_19", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 2, "time": "2026-02-11 20:57:38"}
+{"index": 109, "task_id": "task4_20", "status": "completed", "correct": true, "result": "[2.0]", "num_turns": 2, "time": "2026-02-11 20:58:08"}
+{"index": 110, "task_id": "task4_21", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 20:58:58"}
+{"index": 111, "task_id": "task4_22", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 20:59:56"}
+{"index": 112, "task_id": "task4_23", "status": "completed", "correct": true, "result": "[1.6]", "num_turns": 2, "time": "2026-02-11 21:00:36"}
+{"index": 113, "task_id": "task4_24", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:01:16"}
+{"index": 114, "task_id": "task4_25", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:02:05"}
+{"index": 115, "task_id": "task4_26", "status": "completed", "correct": true, "result": "[2.5]", "num_turns": 2, "time": "2026-02-11 21:02:49"}
+{"index": 116, "task_id": "task4_27", "status": "completed", "correct": true, "result": "[1.8]", "num_turns": 2, "time": "2026-02-11 21:03:39"}
+{"index": 117, "task_id": "task4_28", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:04:29"}
+{"index": 118, "task_id": "task4_29", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:05:21"}
+{"index": 119, "task_id": "task4_30", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:06:23"}
+{"index": 120, "task_id": "task5_1", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:07:18"}
+{"index": 121, "task_id": "task5_2", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:07:41"}
+{"index": 122, "task_id": "task5_3", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:08:09"}
+{"index": 123, "task_id": "task5_4", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:08:41"}
+{"index": 124, "task_id": "task5_5", "status": "completed", "correct": true, "result": "[]", "num_turns": 3, "time": "2026-02-11 21:10:24"}
+{"index": 125, "task_id": "task5_6", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:11:11"}
+{"index": 126, "task_id": "task5_7", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:11:48"}
+{"index": 127, "task_id": "task5_8", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:12:41"}
+{"index": 128, "task_id": "task5_9", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:13:19"}
+{"index": 129, "task_id": "task5_10", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:14:00"}
+{"index": 130, "task_id": "task5_11", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:14:29"}
+{"index": 131, "task_id": "task5_12", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:15:10"}
+{"index": 132, "task_id": "task5_13", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:15:31"}
+{"index": 133, "task_id": "task5_14", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:15:55"}
+{"index": 134, "task_id": "task5_15", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:16:33"}
+{"index": 135, "task_id": "task5_16", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:17:27"}
+{"index": 136, "task_id": "task5_17", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:18:08"}
+{"index": 137, "task_id": "task5_18", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:18:42"}
+{"index": 138, "task_id": "task5_19", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:19:11"}
+{"index": 139, "task_id": "task5_20", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:19:46"}
+{"index": 140, "task_id": "task5_21", "status": "completed", "correct": false, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:20:16"}
+{"index": 141, "task_id": "task5_22", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:20:36"}
+{"index": 142, "task_id": "task5_23", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:21:01"}
+{"index": 143, "task_id": "task5_24", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:21:24"}
+{"index": 144, "task_id": "task5_25", "status": "completed", "correct": false, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:21:49"}
+{"index": 145, "task_id": "task5_26", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:22:12"}
+{"index": 146, "task_id": "task5_27", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:22:38"}
+{"index": 147, "task_id": "task5_28", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:23:04"}
+{"index": 148, "task_id": "task5_29", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 21:23:37"}
+{"index": 149, "task_id": "task5_30", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 21:24:19"}
+{"index": 150, "task_id": "task6_1", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:24:56"}
+{"index": 151, "task_id": "task6_2", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:25:43"}
+{"index": 152, "task_id": "task6_3", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:26:19"}
+{"index": 153, "task_id": "task6_4", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:26:58"}
+{"index": 154, "task_id": "task6_5", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 21:27:39"}
+{"index": 155, "task_id": "task6_6", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:28:14"}
+{"index": 156, "task_id": "task6_7", "status": "completed", "correct": true, "result": "[123.0]", "num_turns": 2, "time": "2026-02-11 21:29:06"}
+{"index": 157, "task_id": "task6_8", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 21:29:50"}
+{"index": 158, "task_id": "task6_9", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 3, "time": "2026-02-11 21:31:37"}
+{"index": 159, "task_id": "task6_10", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:32:24"}
+{"index": 160, "task_id": "task6_11", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:33:11"}
+{"index": 161, "task_id": "task6_12", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 21:33:51"}
+{"index": 162, "task_id": "task6_13", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:34:33"}
+{"index": 163, "task_id": "task6_14", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:35:14"}
+{"index": 164, "task_id": "task6_15", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:35:54"}
+{"index": 165, "task_id": "task6_16", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:36:30"}
+{"index": 166, "task_id": "task6_17", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:37:11"}
+{"index": 167, "task_id": "task6_18", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:37:52"}
+{"index": 168, "task_id": "task6_19", "status": "completed", "correct": true, "result": "[87.0]", "num_turns": 5, "time": "2026-02-11 21:39:48"}
+{"index": 169, "task_id": "task6_20", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:40:24"}
+{"index": 170, "task_id": "task6_21", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:41:28"}
+{"index": 171, "task_id": "task6_22", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 21:42:10"}
+{"index": 172, "task_id": "task6_23", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:42:59"}
+{"index": 173, "task_id": "task6_24", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:43:44"}
+{"index": 174, "task_id": "task6_25", "status": "completed", "correct": true, "result": "[94.3333333333]", "num_turns": 3, "time": "2026-02-11 21:45:09"}
+{"index": 175, "task_id": "task6_26", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 21:45:49"}
+{"index": 176, "task_id": "task6_27", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:46:35"}
+{"index": 177, "task_id": "task6_28", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:47:16"}
+{"index": 178, "task_id": "task6_29", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:47:56"}
+{"index": 179, "task_id": "task6_30", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 2, "time": "2026-02-11 21:48:35"}
+{"index": 180, "task_id": "task7_1", "status": "completed", "correct": false, "result": "[191.0]", "num_turns": 2, "time": "2026-02-11 21:49:03"}
+{"index": 181, "task_id": "task7_2", "status": "completed", "correct": true, "result": "[87.0]", "num_turns": 2, "time": "2026-02-11 21:49:20"}
+{"index": 182, "task_id": "task7_3", "status": "completed", "correct": false, "result": "[134.0, \"2023-11-13T02:09:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 21:49:47"}
+{"index": 183, "task_id": "task7_4", "status": "completed", "correct": true, "result": "[215.0]", "num_turns": 2, "time": "2026-02-11 21:50:14"}
+{"index": 184, "task_id": "task7_5", "status": "completed", "correct": true, "result": "[134.0]", "num_turns": 2, "time": "2026-02-11 21:50:39"}
+{"index": 185, "task_id": "task7_6", "status": "completed", "correct": true, "result": "[73.0]", "num_turns": 2, "time": "2026-02-11 21:51:00"}
+{"index": 186, "task_id": "task7_7", "status": "completed", "correct": true, "result": "[110.0]", "num_turns": 2, "time": "2026-02-11 21:51:17"}
+{"index": 187, "task_id": "task7_8", "status": "completed", "correct": false, "result": "[97.0, \"2023-11-12T13:40:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 21:51:53"}
+{"index": 188, "task_id": "task7_9", "status": "completed", "correct": true, "result": "[109.0]", "num_turns": 2, "time": "2026-02-11 21:52:16"}
+{"index": 189, "task_id": "task7_10", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 2, "time": "2026-02-11 21:53:15"}
+{"index": 190, "task_id": "task7_11", "status": "completed", "correct": false, "result": "[107.0, \"2023-11-12T12:50:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 21:53:52"}
+{"index": 191, "task_id": "task7_12", "status": "completed", "correct": false, "result": "[86.0]", "num_turns": 2, "time": "2026-02-11 21:54:27"}
+{"index": 192, "task_id": "task7_13", "status": "completed", "correct": false, "result": "[158.0]", "num_turns": 2, "time": "2026-02-11 22:05:06"}
+{"index": 193, "task_id": "task7_14", "status": "completed", "correct": false, "result": "[99.0, \"2023-11-10T14:02:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:05:32"}
+{"index": 194, "task_id": "task7_15", "status": "completed", "correct": false, "result": "[80.0, \"2023-11-10T14:29:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:06:18"}
+{"index": 195, "task_id": "task7_16", "status": "completed", "correct": false, "result": "[204.0]", "num_turns": 2, "time": "2026-02-11 22:06:46"}
+{"index": 196, "task_id": "task7_17", "status": "completed", "correct": true, "result": "[107.0]", "num_turns": 2, "time": "2026-02-11 22:07:10"}
+{"index": 197, "task_id": "task7_18", "status": "completed", "correct": false, "result": "[120.0, \"2023-10-21T06:59:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:07:37"}
+{"index": 198, "task_id": "task7_19", "status": "completed", "correct": false, "result": "[94.0]", "num_turns": 2, "time": "2026-02-11 22:08:05"}
+{"index": 199, "task_id": "task7_20", "status": "completed", "correct": false, "result": "[85.0, \"2023-11-12T12:28:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:08:40"}
+{"index": 200, "task_id": "task7_21", "status": "completed", "correct": true, "result": "[108.0]", "num_turns": 2, "time": "2026-02-11 22:09:05"}
+{"index": 201, "task_id": "task7_22", "status": "completed", "correct": true, "result": "[111.0]", "num_turns": 2, "time": "2026-02-11 22:09:24"}
+{"index": 202, "task_id": "task7_23", "status": "completed", "correct": false, "result": "[112.0, \"2023-11-10T16:26:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:10:01"}
+{"index": 203, "task_id": "task7_24", "status": "completed", "correct": false, "result": "[143.0]", "num_turns": 2, "time": "2026-02-11 22:10:37"}
+{"index": 204, "task_id": "task7_25", "status": "completed", "correct": true, "result": "[109.0]", "num_turns": 2, "time": "2026-02-11 22:10:52"}
+{"index": 205, "task_id": "task7_26", "status": "completed", "correct": true, "result": "[110.0]", "num_turns": 2, "time": "2026-02-11 22:11:33"}
+{"index": 206, "task_id": "task7_27", "status": "completed", "correct": false, "result": "[110.0]", "num_turns": 2, "time": "2026-02-11 22:12:06"}
+{"index": 207, "task_id": "task7_28", "status": "completed", "correct": true, "result": "[140.0]", "num_turns": 2, "time": "2026-02-11 22:12:24"}
+{"index": 208, "task_id": "task7_29", "status": "completed", "correct": false, "result": "[110.0, \"2023-11-12T11:48:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:12:57"}
+{"index": 209, "task_id": "task7_30", "status": "completed", "correct": false, "result": "[105.0]", "num_turns": 2, "time": "2026-02-11 22:13:28"}
+{"index": 210, "task_id": "task8_1", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:13:45"}
+{"index": 211, "task_id": "task8_2", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:14:03"}
+{"index": 212, "task_id": "task8_3", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:14:20"}
+{"index": 213, "task_id": "task8_4", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:14:38"}
+{"index": 214, "task_id": "task8_5", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:14:55"}
+{"index": 215, "task_id": "task8_6", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:15:12"}
+{"index": 216, "task_id": "task8_7", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:15:30"}
+{"index": 217, "task_id": "task8_8", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:15:46"}
+{"index": 218, "task_id": "task8_9", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:16:02"}
+{"index": 219, "task_id": "task8_10", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:16:20"}
+{"index": 220, "task_id": "task8_11", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:16:36"}
+{"index": 221, "task_id": "task8_12", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:16:53"}
+{"index": 222, "task_id": "task8_13", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:17:09"}
+{"index": 223, "task_id": "task8_14", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:17:25"}
+{"index": 224, "task_id": "task8_15", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:17:38"}
+{"index": 225, "task_id": "task8_16", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:17:56"}
+{"index": 226, "task_id": "task8_17", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:18:13"}
+{"index": 227, "task_id": "task8_18", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:18:28"}
+{"index": 228, "task_id": "task8_19", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:18:47"}
+{"index": 229, "task_id": "task8_20", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:19:06"}
+{"index": 230, "task_id": "task8_21", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:19:19"}
+{"index": 231, "task_id": "task8_22", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:19:36"}
+{"index": 232, "task_id": "task8_23", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:19:53"}
+{"index": 233, "task_id": "task8_24", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:20:10"}
+{"index": 234, "task_id": "task8_25", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:20:27"}
+{"index": 235, "task_id": "task8_26", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:20:47"}
+{"index": 236, "task_id": "task8_27", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:21:04"}
+{"index": 237, "task_id": "task8_28", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:21:20"}
+{"index": 238, "task_id": "task8_29", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:21:36"}
+{"index": 239, "task_id": "task8_30", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:21:52"}
+{"index": 240, "task_id": "task9_1", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:22:44"}
+{"index": 241, "task_id": "task9_2", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:23:33"}
+{"index": 242, "task_id": "task9_3", "status": "task limit reached", "correct": false, "result": null, "num_turns": 8, "time": "2026-02-11 22:27:15"}
+{"index": 243, "task_id": "task9_4", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:28:07"}
+{"index": 244, "task_id": "task9_5", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:29:07"}
+{"index": 245, "task_id": "task9_6", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:29:47"}
+{"index": 246, "task_id": "task9_7", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:30:28"}
+{"index": 247, "task_id": "task9_8", "status": "completed", "correct": false, "result": "[3.8, \"2023-11-12T15:12:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:31:08"}
+{"index": 248, "task_id": "task9_9", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:31:59"}
+{"index": 249, "task_id": "task9_10", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:32:23"}
+{"index": 250, "task_id": "task9_11", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:33:22"}
+{"index": 251, "task_id": "task9_12", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:34:16"}
+{"index": 252, "task_id": "task9_13", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:34:56"}
+{"index": 253, "task_id": "task9_14", "status": "completed", "correct": false, "result": "[3.9, \"2023-11-12T13:35:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:36:07"}
+{"index": 254, "task_id": "task9_15", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 2, "time": "2026-02-11 22:37:22"}
+{"index": 255, "task_id": "task9_16", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:38:04"}
+{"index": 256, "task_id": "task9_17", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:38:29"}
+{"index": 257, "task_id": "task9_18", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:39:10"}
+{"index": 258, "task_id": "task9_19", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:39:45"}
+{"index": 259, "task_id": "task9_20", "status": "completed", "correct": false, "result": "[4.0, \"2023-11-11T09:44:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:40:33"}
+{"index": 260, "task_id": "task9_21", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:41:19"}
+{"index": 261, "task_id": "task9_22", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:41:59"}
+{"index": 262, "task_id": "task9_23", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:42:51"}
+{"index": 263, "task_id": "task9_24", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:43:36"}
+{"index": 264, "task_id": "task9_25", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:44:42"}
+{"index": 265, "task_id": "task9_26", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:45:21"}
+{"index": 266, "task_id": "task9_27", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:45:50"}
+{"index": 267, "task_id": "task9_28", "status": "completed", "correct": true, "result": "[]", "num_turns": 2, "time": "2026-02-11 22:46:13"}
+{"index": 268, "task_id": "task9_29", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:46:53"}
+{"index": 269, "task_id": "task9_30", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 1, "time": "2026-02-11 22:47:33"}
+{"index": 270, "task_id": "task10_1", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:48:23"}
+{"index": 271, "task_id": "task10_2", "status": "completed", "correct": true, "result": "[5.9, \"2023-11-09T03:05:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:48:37"}
+{"index": 272, "task_id": "task10_3", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:49:12"}
+{"index": 273, "task_id": "task10_4", "status": "completed", "correct": true, "result": "[5.4, \"2023-08-01T20:29:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:49:30"}
+{"index": 274, "task_id": "task10_5", "status": "completed", "correct": true, "result": "[6.6, \"2023-11-04T14:54:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:49:50"}
+{"index": 275, "task_id": "task10_6", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:50:29"}
+{"index": 276, "task_id": "task10_7", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:51:03"}
+{"index": 277, "task_id": "task10_8", "status": "completed", "correct": true, "result": "[6.1, \"2023-10-13T22:22:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:51:20"}
+{"index": 278, "task_id": "task10_9", "status": "completed", "correct": true, "result": "[5.5, \"2023-10-14T18:44:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:51:42"}
+{"index": 279, "task_id": "task10_10", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:52:15"}
+{"index": 280, "task_id": "task10_11", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:52:59"}
+{"index": 281, "task_id": "task10_12", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:53:33"}
+{"index": 282, "task_id": "task10_13", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 5, "time": "2026-02-11 22:55:39"}
+{"index": 283, "task_id": "task10_14", "status": "agent invalid action", "correct": false, "result": null, "num_turns": 2, "time": "2026-02-11 22:56:27"}
+{"index": 284, "task_id": "task10_15", "status": "completed", "correct": true, "result": "[5.7, \"2023-07-07T11:27:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:56:45"}
+{"index": 285, "task_id": "task10_16", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 22:57:39"}
+{"index": 286, "task_id": "task10_17", "status": "completed", "correct": true, "result": "[5.0, \"2023-11-09T10:06:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:57:56"}
+{"index": 287, "task_id": "task10_18", "status": "completed", "correct": true, "result": "[5.9, \"2023-11-12T06:19:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:58:13"}
+{"index": 288, "task_id": "task10_19", "status": "completed", "correct": true, "result": "[5.9, \"2023-09-22T22:28:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 22:58:41"}
+{"index": 289, "task_id": "task10_20", "status": "task limit reached", "correct": false, "result": null, "num_turns": 8, "time": "2026-02-11 23:02:10"}
+{"index": 290, "task_id": "task10_21", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 23:03:04"}
+{"index": 291, "task_id": "task10_22", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 4, "time": "2026-02-11 23:03:55"}
+{"index": 292, "task_id": "task10_23", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 23:04:33"}
+{"index": 293, "task_id": "task10_24", "status": "completed", "correct": true, "result": "[5.2, \"2022-08-09T15:33:00+00:00\"]", "num_turns": 3, "time": "2026-02-11 23:05:25"}
+{"index": 294, "task_id": "task10_25", "status": "completed", "correct": false, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 23:06:09"}
+{"index": 295, "task_id": "task10_26", "status": "completed", "correct": true, "result": "[-1]", "num_turns": 3, "time": "2026-02-11 23:06:55"}
+{"index": 296, "task_id": "task10_27", "status": "completed", "correct": true, "result": "[5.4, \"2023-11-02T06:53:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 23:07:14"}
+{"index": 297, "task_id": "task10_28", "status": "completed", "correct": true, "result": "[7.4, \"2023-06-27T23:25:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 23:07:33"}
+{"index": 298, "task_id": "task10_29", "status": "completed", "correct": true, "result": "[6.2, \"2023-11-09T00:17:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 23:07:51"}
+{"index": 299, "task_id": "task10_30", "status": "completed", "correct": true, "result": "[8.3, \"2023-10-30T13:10:00+00:00\"]", "num_turns": 2, "time": "2026-02-11 23:08:13"}

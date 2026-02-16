@@ -1,0 +1,55 @@
+{
+  "model": "Alfaxad/Sara-1.5-4B-it",
+  "total": 300,
+  "completed": 300,
+  "correct": 200,
+  "skipped": 0,
+  "invalid_action": 0,
+  "limit_reached": 0,
+  "context_limit": 0,
+  "error": 0,
+  "task_breakdown": {
+    "task1": {
+      "total": 30,
+      "correct": 30
+    },
+    "task2": {
+      "total": 30,
+      "correct": 24
+    },
+    "task3": {
+      "total": 30,
+      "correct": 0
+    },
+    "task4": {
+      "total": 30,
+      "correct": 30
+    },
+    "task5": {
+      "total": 30,
+      "correct": 28
+    },
+    "task6": {
+      "total": 30,
+      "correct": 10
+    },
+    "task7": {
+      "total": 30,
+      "correct": 9
+    },
+    "task8": {
+      "total": 30,
+      "correct": 30
+    },
+    "task9": {
+      "total": 30,
+      "correct": 29
+    },
+    "task10": {
+      "total": 30,
+      "correct": 10
+    }
+  },
+  "elapsed_seconds": 1186.716726064682,
+  "accuracy": 66.66666666666666
+}

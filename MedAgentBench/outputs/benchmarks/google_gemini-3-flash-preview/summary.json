@@ -1,0 +1,55 @@
+{
+  "model": "google/gemini-3-flash-preview",
+  "total": 299,
+  "completed": 293,
+  "correct": 269,
+  "skipped": 1,
+  "invalid_action": 0,
+  "limit_reached": 0,
+  "context_limit": 0,
+  "error": 6,
+  "task_breakdown": {
+    "task1": {
+      "total": 29,
+      "correct": 29
+    },
+    "task2": {
+      "total": 30,
+      "correct": 30
+    },
+    "task3": {
+      "total": 30,
+      "correct": 28
+    },
+    "task4": {
+      "total": 30,
+      "correct": 30
+    },
+    "task5": {
+      "total": 30,
+      "correct": 29
+    },
+    "task6": {
+      "total": 30,
+      "correct": 27
+    },
+    "task7": {
+      "total": 30,
+      "correct": 16
+    },
+    "task8": {
+      "total": 30,
+      "correct": 30
+    },
+    "task9": {
+      "total": 30,
+      "correct": 26
+    },
+    "task10": {
+      "total": 30,
+      "correct": 24
+    }
+  },
+  "elapsed_seconds": 1563.8835618495941,
+  "accuracy": 89.96655518394648
+}

@@ -1,0 +1,14 @@
+Model,Parameters,Size vs Sara,Accuracy (%),Sara Accuracy (%),Accuracy Delta,Invalid Actions,Category
+Claude Opus 4.5,Frontier,250x,95.0,66.7,+28.3%,0,Frontier
+Grok 4.1 Fast,Frontier,200x,87.7,66.7,+21.0%,0,Frontier
+Claude Sonnet 4.5,Frontier,175x,86.0,66.7,+19.3%,0,Frontier
+GPT-4.1,Frontier,225x,77.3,66.7,+10.7%,0,Frontier
+GPT-4o,Frontier,212x,77.0,66.7,+10.3%,0,Frontier
+GPT-5.1,Frontier,238x,76.0,66.7,+9.3%,0,Frontier
+Qwen3-14B,14B,4x,74.0,66.7,+7.3%,23,Medium (10-30B)
+Sara 1.5 4B,4B,1x,66.7,66.7,+0.0%,0,Small (<10B)
+Mistral Small 3.2,24B,6x,51.7,66.7,-15.0%,0,Medium (10-30B)
+Llama 4 Scout,109B (MoE),27x,41.3,66.7,-25.3%,34,Large (>100B)
+Qwen3-8B,8B,2x,40.0,66.7,-26.7%,93,Small (<10B)
+Llama 4 Maverick,400B (MoE),100x,37.3,66.7,-29.3%,116,Large (>100B)
+Llama 3.1-8B Instruct,8B,2x,14.0,66.7,-52.7%,14,Small (<10B)

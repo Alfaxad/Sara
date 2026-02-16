@@ -1,0 +1,55 @@
+{
+  "model": "mistralai/mistral-small-3.2-24b-instruct",
+  "total": 300,
+  "completed": 300,
+  "correct": 155,
+  "skipped": 0,
+  "invalid_action": 0,
+  "limit_reached": 0,
+  "context_limit": 0,
+  "error": 0,
+  "task_breakdown": {
+    "task1": {
+      "total": 30,
+      "correct": 30
+    },
+    "task2": {
+      "total": 30,
+      "correct": 22
+    },
+    "task3": {
+      "total": 30,
+      "correct": 13
+    },
+    "task4": {
+      "total": 30,
+      "correct": 24
+    },
+    "task5": {
+      "total": 30,
+      "correct": 27
+    },
+    "task6": {
+      "total": 30,
+      "correct": 8
+    },
+    "task7": {
+      "total": 30,
+      "correct": 3
+    },
+    "task8": {
+      "total": 30,
+      "correct": 25
+    },
+    "task9": {
+      "total": 30,
+      "correct": 0
+    },
+    "task10": {
+      "total": 30,
+      "correct": 3
+    }
+  },
+  "elapsed_seconds": 1583.6766798496246,
+  "accuracy": 51.66666666666667
+}
