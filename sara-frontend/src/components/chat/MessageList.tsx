@@ -36,6 +36,10 @@ export function MessageList({
         'flex-1 overflow-y-auto p-4 space-y-4',
         className
       )}
+      role="log"
+      aria-label="Chat messages"
+      aria-live="polite"
+      aria-relevant="additions"
     >
       {messages.map((message) => {
         switch (message.type) {

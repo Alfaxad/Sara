@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
@@ -18,10 +18,19 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0B0F14",
+};
+
 export const metadata: Metadata = {
-  title: "Sara - Clinical Workflow Agent",
+  title: {
+    default: "Sara - Clinical Workflow Agent",
+    template: "%s | Sara",
+  },
   description:
-    "Sara is an intelligent clinical workflow agent that assists healthcare professionals with patient management, clinical tasks, and medical documentation.",
+    "Sara is an intelligent clinical workflow agent that assists healthcare professionals with patient management, clinical tasks, and medical documentation. Powered by AI and FHIR standards.",
   keywords: [
     "clinical workflow",
     "healthcare AI",
@@ -29,10 +38,40 @@ export const metadata: Metadata = {
     "medical assistant",
     "FHIR",
     "EHR",
+    "clinical decision support",
+    "medical AI",
+    "healthcare automation",
   ],
   authors: [{ name: "Sara Team" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#0B0F14",
+  creator: "Sara Team",
+  publisher: "Sara",
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Sara - Clinical Workflow Agent",
+    description:
+      "AI-powered clinical workflow assistant for healthcare professionals",
+    type: "website",
+    locale: "en_US",
+    siteName: "Sara",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sara - Clinical Workflow Agent",
+    description:
+      "AI-powered clinical workflow assistant for healthcare professionals",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/manifest.json",
+  category: "healthcare",
 };
 
 export default function RootLayout({
@@ -45,7 +84,16 @@ export default function RootLayout({
       <body
         className={`${dmSans.variable} ${playfair.variable} font-body antialiased`}
       >
-        {children}
+        {/* Skip link for keyboard navigation */}
+        <a
+          href="#main-content"
+          className="skip-link"
+        >
+          Skip to main content
+        </a>
+        <div id="main-content">
+          {children}
+        </div>
       </body>
     </html>
   );

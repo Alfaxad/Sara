@@ -386,3 +386,81 @@
     -webkit-backdrop-filter: blur(12px);
   }
 }
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .sara-working {
+    animation: none;
+  }
+
+  .sara-fade-in,
+  .sara-slide-up {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-pulse {
+    animation: none;
+  }
+
+  .animate-sara-spin,
+  .sara-spin {
+    animation: none;
+  }
+}
+
+/* ============================================
+   Skip Link for Keyboard Navigation
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  padding: 8px 16px;
+  background: var(--sara-accent);
+  color: white;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   Focus Visible Enhancements
+   ============================================ */
+
+@layer base {
+  /* Ensure all interactive elements have visible focus states */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--sara-border-focus);
+    outline-offset: 2px;
+  }
+
+  /* Remove default outline on mouse click */
+  button:focus:not(:focus-visible),
+  a:focus:not(:focus-visible) {
+    outline: none;
+  }
+}

@@ -49,14 +49,21 @@ export function ChatInput({
         'bg-sara-bg-surface border-t border-sara-border',
         className
       )}
+      role="form"
+      aria-label="Message input"
     >
+      <label htmlFor="chat-input" className="sr-only">
+        Type your message
+      </label>
       <input
+        id="chat-input"
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder={placeholder}
         disabled={isDisabled}
+        aria-describedby={isDisabled ? 'input-status' : undefined}
         className={cn(
           'flex-1 px-4 py-3 rounded-sara-sm',
           'bg-sara-bg-base border border-sara-border',
@@ -67,6 +74,11 @@ export function ChatInput({
           isDisabled && 'opacity-50 cursor-not-allowed'
         )}
       />
+      {isDisabled && (
+        <span id="input-status" className="sr-only">
+          {isLoading ? 'Processing message, please wait' : 'Input is disabled'}
+        </span>
+      )}
 
       <Button
         onClick={handleSend}
@@ -74,9 +86,9 @@ export function ChatInput({
         variant="primary"
         size="md"
         isLoading={isLoading}
-        aria-label="Send message"
+        aria-label={isLoading ? 'Sending message' : 'Send message'}
       >
-        {!isLoading && <Send className="w-4 h-4" />}
+        {!isLoading && <Send className="w-4 h-4" aria-hidden="true" />}
         <span className="sr-only">Send</span>
       </Button>
     </div>

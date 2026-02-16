@@ -19,3 +19,8 @@ export type { SkeletonProps, SkeletonVariant, SkeletonTextProps, SkeletonCardPro
 
 export { SplitPane } from "./SplitPane";
 export type { SplitPaneProps } from "./SplitPane";
+
+export { ErrorBoundary } from "./ErrorBoundary";
+
+export { ErrorState } from "./ErrorState";
+export type { ErrorStateProps } from "./ErrorState";
