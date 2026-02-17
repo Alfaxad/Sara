@@ -1,7 +1,7 @@
 {
   "name": "Sara - Clinical Workflow Agent",
   "short_name": "Sara",
-  "description": "AI-powered clinical workflow assistant for healthcare professionals",
+  "description": "A clinical workflow agent for physicians",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0B0F14",

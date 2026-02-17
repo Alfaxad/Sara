@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Sara - Clinical Workflow Agent",
     description:
-      "AI-powered clinical workflow assistant for healthcare professionals",
+      "A clinical workflow agent for physicians",
     type: "website",
     locale: "en_US",
     siteName: "Sara",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sara - Clinical Workflow Agent",
     description:
-      "AI-powered clinical workflow assistant for healthcare professionals",
+      "A clinical workflow agent for physicians",
   },
   icons: {
     icon: [
