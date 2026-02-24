@@ -85,8 +85,6 @@ Sara/
 │   ├── Sara.ipynb                  # QLoRA fine-tuning notebook
 │   └── Sara_Inference.ipynb        # Inference & demo notebook
 │
-├── docs/plans/                     # Design documents
-│
 └── src/
     ├── backend/                    # Modal-deployed Python services
     │   ├── sara_agent.py           # Agent API (FastAPI + SSE)
