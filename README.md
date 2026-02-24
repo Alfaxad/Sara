@@ -34,9 +34,9 @@ Three serverless services on [Modal](https://modal.com):
 
 | Service | Compute | Role |
 |---------|---------|------|
-| Sara Model | A100 GPU | Serves Sara 1.5 4B via OpenAI-compatible API |
-| Sara Agent | CPU | Orchestrates agent loop, streams SSE to frontend |
-| FHIR Server | CPU | HAPI FHIR R4 with 100 synthetic patients (700K+ records) |
+| Sara Model | A100 GPU | Serves Sara 1.5 4B via an API |
+| Sara Agent | CPU | Orchestrates agent loop |
+| FHIR Server | CPU | HAPI FHIR R4 |
 
 The frontend is a Next.js app deployed on Vercel at [sara.nadhari.ai](https://sara.nadhari.ai/).
 
