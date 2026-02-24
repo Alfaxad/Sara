@@ -6,6 +6,7 @@
 [![HuggingFace Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-MedToolCalling-blue)](https://huggingface.co/datasets/Nadhari/MedToolCalling)
 [![Demo](https://img.shields.io/badge/Demo-sara.nadhari.ai-green)](https://sara.nadhari.ai/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Writeup-20BEFF)](https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara)
+[![Blog](https://img.shields.io/badge/Blog-nadhari.ai-orange)](https://nadhari.ai/sara)
 [![YouTube](https://img.shields.io/badge/YouTube-Demo-red)](https://youtube.com)
 
 Sara is a 4-billion parameter clinical workflow agent capable of orchestrating end-to-end digital clinical tasks. Built on [MedGemma](https://huggingface.co/google/medgemma-1.5-4b-it) and fine-tuned on just 284 examples, Sara outperforms models up to 100x its size on the [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144) clinical benchmark.
