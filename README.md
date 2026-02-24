@@ -8,7 +8,7 @@
 [![Kaggle](https://img.shields.io/badge/Kaggle-Writeup-20BEFF)](https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara)
 [![YouTube](https://img.shields.io/badge/YouTube-Demo-red)](https://youtube.com)
 
-Sara is a 4-billion parameter clinical workflow agent that reads and writes to electronic health records via FHIR. Built on [MedGemma](https://huggingface.co/google/medgemma-1.5-4b-it) and fine-tuned on just 284 examples, Sara outperforms models up to 100x its size on the [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144) clinical benchmark.
+Sara is a 4-billion parameter clinical workflow agent capable of orchestrating end-to-end digital clinical tasks. Built on [MedGemma](https://huggingface.co/google/medgemma-1.5-4b-it) and fine-tuned on just 284 examples, Sara outperforms models up to 100x its size on the [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144) clinical benchmark.
 
 ## What Sara Can Do
 
@@ -60,20 +60,7 @@ See [`Notebooks/`](Notebooks/) for the full fine-tuning and inference notebooks.
 
 ## Benchmarking
 
-Evaluated on 300 clinical tasks across 10 task types using the [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144) protocol (pass@1, 8 rounds max).
-
-| Rank | Model | Parameters | Accuracy |
-|:----:|-------|:----------:|:--------:|
-| 1 | Claude Opus 4.5 | Frontier | **95.0%** |
-| 2 | Gemini 3 Flash Preview | Mid-tier | **90.0%** |
-| 3 | Grok 4.1 Fast | Frontier | **87.7%** |
-| 4 | Claude Sonnet 4.5 | Frontier | **86.0%** |
-| 5 | GPT-4.1 | Frontier | **77.3%** |
-| ... | | | |
-| **10** | **Sara 1.5 4B** | **4B** | **66.7%** |
-| 11 | Mistral Small 3.2 | 24B | 51.7% |
-| 12 | Llama 4 Scout | 109B (MoE) | 41.3% |
-| 14 | Llama 4 Maverick | 400B (MoE) | 37.3% |
+Evaluated on 300 clinical tasks across 10 task types using the [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144) protocol (pass@1, 8 rounds max, 15 models).
 
 Sara achieves **state-of-the-art** on 4 tasks (Procedure History at 96.7%, and perfect scores on Patient Search, Allergy Information, and Immunization Records) and has **zero invalid actions** across all 300 tasks.
 
