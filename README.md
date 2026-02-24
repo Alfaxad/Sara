@@ -18,7 +18,7 @@ Sara executes multi-step clinical workflows against a FHIR R4 server through aut
 - **Patient lookup** — search by name, DOB, MRN
 - **Lab result retrieval** — magnesium, potassium, HbA1c, glucose
 - **Vital signs recording** — blood pressure, CBG e.t.c
-- **Medication ordering** — IV replacements with dosing calculations
+- **Medication ordering** — replacements with dosing calculations
 - **Referrals & service requests** — orthopedic surgery, follow-up labs
 - **Care plan management** — conditional check-and-order workflows
 
