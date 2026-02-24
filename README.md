@@ -17,7 +17,7 @@ Sara executes multi-step clinical workflows against a FHIR R4 server through aut
 
 - **Patient lookup** — search by name, DOB, MRN
 - **Lab result retrieval** — magnesium, potassium, HbA1c, glucose
-- **Vital signs recording** — blood pressure, CBG
+- **Vital signs recording** — blood pressure, CBG e.t.c
 - **Medication ordering** — IV replacements with dosing calculations
 - **Referrals & service requests** — orthopedic surgery, follow-up labs
 - **Care plan management** — conditional check-and-order workflows
@@ -152,7 +152,7 @@ This project is for illustrative purposes only and does not represent a finished
 
 ```bibtex
 @misc{sara-clinical-workflow-agent,
-    author = {Alfaxad},
+    author = {Alfaxad Eyembe},
     title = {Introducing Sara: A Clinical Workflow Agent},
     year = {2026},
     howpublished = {\url{https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara}},
