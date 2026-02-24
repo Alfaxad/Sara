@@ -24,34 +24,6 @@ This directory contains benchmark results, analysis, and visualizations for 15 L
 
 **Key Finding:** Sara 1.5 4B (4 billion parameters) outperforms Llama 4 Scout (109B), Llama 4 Maverick (400B), Qwen3-8B (8B), and Mistral Small 3.2 (24B), demonstrating that targeted fine-tuning on 284 examples can beat models up to 100x larger.
 
-## Directory Structure
-
-```
-outputs/benchmarks/
-├── README.md                      # This file
-├── BENCHMARKING_REPORT.md         # Full technical report (~4,200 words)
-│
-├── plots/                         # Visualizations (300 DPI PNG)
-│   ├── leaderboard.png            # Overall model rankings
-│   ├── task_heatmap.png           # Task-by-task accuracy matrix
-│   ├── sara_vs_field.png          # Sara performance vs field average
-│   ├── task_difficulty.png        # Score distribution by task (dark theme)
-│   └── task_grouped_bars.png      # Per-task comparison of selected models
-│
-├── *.csv                          # Analysis tables
-│   ├── leaderboard.csv            # Overall rankings with metrics
-│   ├── task_accuracy_matrix.csv   # Full 10x10 accuracy matrix
-│   ├── task_rankings.csv          # Per-task model rankings (1st-10th)
-│   ├── model_rankings_per_task.csv# Each model's rank per task
-│   ├── sara_comparison.csv        # Sara vs field average per task
-│   ├── task_difficulty.csv        # Tasks ranked by difficulty
-│   └── task_analysis.csv          # Combined analysis table
-│
-└── <model_name>/                  # Per-model results (15 directories)
-    ├── runs.jsonl                 # Raw task-by-task results
-    └── summary.json               # Aggregated metrics and breakdown
-```
-
 ## Benchmark Details
 
 ### Evaluation Protocol
@@ -82,29 +54,29 @@ outputs/benchmarks/
 
 ### Models Evaluated
 
-| Model | Provider | API Endpoint |
-|-------|----------|--------------|
-| Claude Opus 4.5 | Anthropic | OSV Engineering |
-| Claude Sonnet 4.5 | Anthropic | OSV Engineering |
-| GPT-4o | OpenAI | OSV Engineering |
-| GPT-4.1 | OpenAI | OSV Engineering |
-| GPT-5.1 | OpenAI | OSV Engineering |
-| Gemini 3 Flash Preview | Google | OpenRouter |
-| Gemini 2.5 Flash | Google | OpenRouter |
-| Grok 4.1 Fast | xAI | OpenRouter |
-| Qwen3-14B | Alibaba | OpenRouter |
-| Qwen3-8B | Alibaba | OpenRouter |
-| Mistral Small 3.2 24B | Mistral | OpenRouter |
-| Llama 3.1-8B Instruct | Meta | OpenRouter |
-| Sara 1.5 4B | Alfaxad | Modal (self-hosted) |
-| Llama 4 Scout | Meta | OpenRouter |
-| Llama 4 Maverick | Meta | OpenRouter |
+| Model | Provider |
+|-------|----------|
+| Claude Opus 4.5 | Anthropic |
+| Claude Sonnet 4.5 | Anthropic |
+| GPT-4o | OpenAI |
+| GPT-4.1 | OpenAI |
+| GPT-5.1 | OpenAI |
+| Gemini 3 Flash Preview | Google |
+| Gemini 2.5 Flash | Google |
+| Grok 4.1 Fast | xAI |
+| Qwen3-14B | Alibaba |
+| Qwen3-8B | Alibaba |
+| Mistral Small 3.2 24B | Mistral |
+| Llama 3.1-8B Instruct | Meta |
+| Sara 1.5 4B | Alfaxad |
+| Llama 4 Scout | Meta |
+| Llama 4 Maverick | Meta |
 
 ## Sara 1.5 4B Highlights
 
 Sara 1.5 4B is a fine-tuned variant of MedGemma-1.5-4B-it, trained on 284 correct interaction traces.
 
-> **Detailed Analysis:** See the [Sara Showcase](sara_showcase/SARA_SHOWCASE.md) for in-depth efficiency metrics, size comparisons, and visualizations demonstrating Sara's remarkable performance relative to its parameter count.
+> **Detailed Analysis:** See the [Sara Showcase](outputs/benchmarks/sara_showcase/SARA_SHOWCASE.md) for in-depth efficiency metrics, size comparisons, and visualizations demonstrating Sara's remarkable performance relative to its parameter count.
 
 ### State-of-the-Art Performance (4 tasks)
 
@@ -156,10 +128,10 @@ docker run -p 8080:8080 jyxsu6/medagentbench:latest
 ### Running Benchmarks
 
 ```bash
-# Benchmark a model via OSV Engineering
+# Benchmark a model
 python benchmark_models.py \
     --model "anthropic/claude-opus-4-5-20251101" \
-    --base-url "https://developer.osv.engineering/inference/v1" \
+    --base-url "https://your-api-endpoint/v1" \
     --api-key "YOUR_API_KEY"
 
 # Benchmark via OpenRouter
@@ -175,19 +147,6 @@ python benchmark_models.py \
     --model "Alfaxad/Sara-1.5-4B-it" \
     --base-url "https://your-modal-endpoint.modal.run/v1" \
     --api-key "unused"
-```
-
-### Generating Analysis
-
-```bash
-# Generate CSV analysis files
-python generate_csvs.py
-
-# Generate visualizations
-python visualize_benchmarks.py
-
-# Run terminal analysis
-python analyze_benchmarks.py
 ```
 
 ## File Formats
@@ -237,28 +196,19 @@ Aggregated metrics for a model run:
 ## Visualizations
 
 ### Leaderboard
-![Leaderboard](plots/leaderboard.png)
+![Leaderboard](outputs/benchmarks/plots/leaderboard.png)
 
-### Task-by-Task Heatmap
-![Heatmap](plots/task_heatmap.png)
+### Sara vs Larger Models
+![Sara vs Larger Models](outputs/benchmarks/sara_showcase/sara_vs_larger.png)
 
-### Sara vs Field Average
-![Sara Comparison](plots/sara_vs_field.png)
-
-### Task Difficulty Distribution
-![Task Difficulty](plots/task_difficulty.png)
-
-### Per-Task Model Comparison
-![Grouped Bars](plots/task_grouped_bars.png)
+### Small Model Leaderboard
+![Small Model Leaderboard](outputs/benchmarks/sara_showcase/small_model_leaderboard.png)
 
 ## Scripts
 
 | Script | Description |
 |--------|-------------|
 | `benchmark_models.py` | Run benchmarks on any OpenAI-compatible API |
-| `generate_csvs.py` | Generate all CSV analysis files |
-| `visualize_benchmarks.py` | Generate all PNG visualizations |
-| `analyze_benchmarks.py` | Print terminal analysis and task_analysis.csv |
 
 ## Citation
 

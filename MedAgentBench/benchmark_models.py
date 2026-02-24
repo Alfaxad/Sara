@@ -49,7 +49,7 @@ DEFAULT_FHIR_API_BASE = "http://localhost:8080/fhir/"
 DEFAULT_DATA_FILE = "data/medagentbench/test_data_v2.json"
 DEFAULT_FUNC_FILE = "data/medagentbench/funcs_v1.json"
 DEFAULT_MAX_ROUNDS = 8
-DEFAULT_BASE_URL = "https://developer.osv.engineering/inference/v1"
+DEFAULT_BASE_URL = "https://openrouter.ai/api/v1"
 DEFAULT_OUTPUT_DIR = "outputs/benchmarks"
 DEFAULT_MAX_TOKENS = 2048
 DEFAULT_TEMPERATURE = 0.0
@@ -628,7 +628,7 @@ def main():
     parser.add_argument("--func-file", default=DEFAULT_FUNC_FILE)
     parser.add_argument("--fhir-api-base", default=DEFAULT_FHIR_API_BASE)
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
-    parser.add_argument("--api-key", default=os.environ.get("OSV_API_KEY", ""))
+    parser.add_argument("--api-key", default=os.environ.get("API_KEY", ""))
     parser.add_argument("--max-rounds", type=int, default=DEFAULT_MAX_ROUNDS)
     parser.add_argument("--max-tokens", type=int, default=DEFAULT_MAX_TOKENS)
     parser.add_argument("--temperature", type=float, default=DEFAULT_TEMPERATURE)
@@ -651,7 +651,7 @@ def main():
         parser.error("Specify --model MODEL or --all")
 
     if not args.api_key:
-        log.error("No API key. Use --api-key or set OSV_API_KEY env var.")
+        log.error("No API key. Use --api-key or set API_KEY env var.")
         sys.exit(1)
 
     log.info("Verifying FHIR server...")

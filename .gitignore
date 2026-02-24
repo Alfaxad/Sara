@@ -44,8 +44,9 @@ sara-overview.md
 sara_clinical_workflow_agent_plan_v2.md
 sara_modal.py
 
-# MedAgentBench - only keep benchmark_models.py and outputs/benchmarks
+# MedAgentBench - only keep README, benchmark_models.py and outputs/benchmarks
 MedAgentBench/*
+!MedAgentBench/README.md
 !MedAgentBench/benchmark_models.py
 !MedAgentBench/outputs/
 MedAgentBench/outputs/*
