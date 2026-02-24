@@ -38,7 +38,7 @@ Three serverless services on [Modal](https://modal.com):
 | Sara Agent | CPU | Orchestrates agent loop |
 | FHIR Server | CPU | HAPI FHIR R4 |
 
-The frontend is a Next.js app deployed on Vercel at [sara.nadhari.ai](https://sara.nadhari.ai/).
+The frontend is a Next.js app then deployed on Vercel.
 
 ### Agent Workflow
 
