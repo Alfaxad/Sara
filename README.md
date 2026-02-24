@@ -150,14 +150,4 @@ This project is for illustrative purposes only and does not represent a finished
 
 ## Citation
 
-```bibtex
-@article{jiang2025medagentbench,
-  title={MedAgentBench: A Virtual EHR Environment to Benchmark Medical LLM Agents},
-  author={Jiang, Yixing and Black, Kameron C and Geng, Gloria and Park, Danny
-          and Zou, James and Ng, Andrew Y and Chen, Jonathan H},
-  journal={NEJM AI},
-  pages={AIdbp2500144},
-  year={2025},
-  publisher={Massachusetts Medical Society}
-}
-```
+Alfaxad. Introducing Sara: A Clinical Workflow Agent. https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara. 2026. Kaggle
