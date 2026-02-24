@@ -67,15 +67,10 @@ Deploys the fine-tuned Sara 1.5 4B model (based on MedGemma) on an A100 GPU.
 
 **Configuration:**
 ```python
-MODEL_NAME = "Alfaxad/Sara-1.5-4B-it"  # Private HF repo
+MODEL_NAME = "Nadhari/Sara-1.5-4B-it"
 GPU = "A100"
 WARM_WINDOW = 15 minutes
 TIMEOUT = 10 minutes
-```
-
-**Requires HuggingFace secret:**
-```bash
-modal secret create huggingface HF_TOKEN=hf_xxxxxxxxxxxxx
 ```
 
 ### 2. Sara Agent (`sara_agent.py`)
@@ -152,9 +147,6 @@ pip install modal
 
 # Authenticate with Modal
 modal setup
-
-# Create HuggingFace secret (for Sara model access)
-modal secret create huggingface HF_TOKEN=hf_xxxxxxxxxxxxx
 ```
 
 ### Deploy All Services
@@ -208,7 +200,6 @@ pytest src/backend/test_agent.py -v
 |----------|---------|-------------|
 | `SARA_URL` | Modal URL | Sara model endpoint |
 | `FHIR_URL` | Modal URL | FHIR server base URL |
-| `HF_TOKEN` | (secret) | HuggingFace token |
 
 ## API Reference
 

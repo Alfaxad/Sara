@@ -5,7 +5,6 @@
 # Setup:
 #   pip install modal
 #   modal setup
-#   modal secret create huggingface HF_TOKEN=<your-token>
 #
 # Run:   modal run src/backend/sara_model.py
 # Deploy: modal deploy src/backend/sara_model.py
@@ -47,7 +46,7 @@ app = modal.App("sara-model")
 @app.function(
     image=image,
     gpu=f"{SARA_GPU}:1",
-    secrets=[modal.Secret.from_name("huggingface-nadhari"), modal.Secret.from_name("sara-api-key")],
+    secrets=[modal.Secret.from_name("sara-api-key")],
     volumes={"/root/.cache/huggingface": hf_cache_vol},
     scaledown_window=GPU_WARM_WINDOW,
     timeout=REQUEST_TIMEOUT,

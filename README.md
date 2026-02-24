@@ -7,7 +7,7 @@
 [![Demo](https://img.shields.io/badge/Demo-sara.nadhari.ai-green)](https://sara.nadhari.ai/)
 [![Kaggle](https://img.shields.io/badge/Kaggle-Writeup-20BEFF)](https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara)
 [![Blog](https://img.shields.io/badge/Blog-nadhari.ai-orange)](https://nadhari.ai/sara)
-[![YouTube](https://img.shields.io/badge/YouTube-Demo-red)](https://youtube.com)
+[![YouTube](https://img.shields.io/badge/YouTube-Sara-red)](https://youtu.be/9w3sipwLRfk)
 
 Sara is a 4-billion parameter clinical workflow agent capable of orchestrating end-to-end digital clinical tasks. Built on [MedGemma](https://huggingface.co/google/medgemma-1.5-4b-it) and fine-tuned on just 284 examples, Sara outperforms models up to 100x its size on the [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144) clinical benchmark.
 
@@ -143,7 +143,6 @@ npm run dev
 | `NEXT_PUBLIC_MODAL_URL` | Frontend | Sara Agent API URL |
 | `SARA_URL` | Modal (sara_agent) | Sara Model endpoint |
 | `FHIR_URL` | Modal (sara_agent) | FHIR Server endpoint |
-| `HF_TOKEN` | Modal (sara_model) | HuggingFace token for model access |
 
 ## Disclaimer
 
