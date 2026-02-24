@@ -150,4 +150,12 @@ This project is for illustrative purposes only and does not represent a finished
 
 ## Citation
 
-Alfaxad. Introducing Sara: A Clinical Workflow Agent. https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara. 2026. Kaggle
+```bibtex
+@misc{sara-clinical-workflow-agent,
+    author = {Alfaxad},
+    title = {Introducing Sara: A Clinical Workflow Agent},
+    year = {2026},
+    howpublished = {\url{https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara}},
+    note = {Kaggle}
+}
+```
