@@ -67,6 +67,8 @@ Sara achieves **state-of-the-art** on 4 tasks (Procedure History at 96.7%, and p
 
 ![Sara vs Larger Models](MedAgentBench/outputs/benchmarks/sara_showcase/sara_vs_larger.png)
 
+![Small Model Leaderboard](MedAgentBench/outputs/benchmarks/sara_showcase/small_model_leaderboard.png)
+
 See [`MedAgentBench/`](MedAgentBench/) for full results, per-task breakdowns, and the benchmarking script.
 
 ## Repository Structure
