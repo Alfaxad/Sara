@@ -9,11 +9,11 @@
 
 Sara is a 4-billion parameter clinical workflow agent capable of orchestrating end-to-end digital clinical tasks. Built on [MedGemma](https://huggingface.co/google/medgemma-1.5-4b-it) and fine-tuned on 284 examples, Sara performs medical tool calling against FHIR resources, reads patient data, creates clinical actions, and returns concise clinical answers.
 
-This repository now includes **Sara for IRIS**, an InterSystems contest edition that runs Sara against **InterSystems IRIS for Health**. It deploys an IRIS for Health FHIR R4 server, loads synthetic FHIR resources, routes summary requests through an Interoperability production, runs deterministic clinical helper logic through Embedded Python, and calls the Sara model for final LLM inference.
+This repository includes **Sara for IRIS**, an InterSystems contest edition that runs Sara against **InterSystems IRIS for Health**. It deploys an IRIS for Health FHIR R4 server, loads synthetic FHIR resources, routes summary requests through an Interoperability production, runs deterministic clinical helper logic through Embedded Python, and calls the Sara model for final LLM inference.
 
 Video walkthrough: [https://youtu.be/UAjI9O848wU?si=Gfm0aiaPbxqmB1Fy](https://youtu.be/UAjI9O848wU?si=Gfm0aiaPbxqmB1Fy)
 
-> The Modal deployment is intentionally not treated as a permanent public demo link because GPU and IRIS containers can incur cost. The instructions below show how judges can clone, deploy, test, and stop the full stack in their own Modal workspace.
+> The Modal deployment is intentionally not treated as a permanent public demo link because GPU and IRIS containers can incur cost. The instructions below show how one can clone, deploy, test, and stop the full stack in their own Modal workspace.
 
 ## Screenshots
 
@@ -41,7 +41,6 @@ Sara executes multi-step clinical workflows against a FHIR R4 server through too
 - **Care gap detection**: missing or stale labs such as A1C.
 - **Patient summary generation**: role-specific summaries for ED clinicians, care managers, and patients.
 
-The original Sara loop reasons about which FHIR call to make, executes it, reads the result, and decides the next step. The IRIS edition adds deterministic clinical helpers before LLM wording so facts and actions are auditable.
 
 ## Sara for IRIS
 
