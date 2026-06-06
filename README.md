@@ -557,6 +557,10 @@ See [MedAgentBench/](MedAgentBench/) for full results, per-task breakdowns, and 
 - Package metadata: [module.xml](module.xml)
 - YouTube video: [https://youtu.be/UAjI9O848wU?si=Gfm0aiaPbxqmB1Fy](https://youtu.be/UAjI9O848wU?si=Gfm0aiaPbxqmB1Fy)
 
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
+
 ## Disclaimer
 
 This project is for illustrative purposes only and does not represent a finished or approved product. It is not representative of compliance to any regulations or standards for quality, safety, or efficacy. Any real-world application would require additional development, training, validation, governance, and adaptation. Demo data is synthetic and derived from the MedAgentBench-style workflow examples.
