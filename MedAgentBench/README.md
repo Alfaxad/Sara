@@ -1,4 +1,4 @@
-# MedAgentBench Benchmarking Results
+# MedAgentBench Benchmarking Results 
 
 This directory contains benchmark results, analysis, and visualizations for 15 LLMs evaluated on [MedAgentBench](https://ai.nejm.org/doi/full/10.1056/AIdbp2500144), a benchmark for medical LLM agents operating in a virtual EHR environment.
 
