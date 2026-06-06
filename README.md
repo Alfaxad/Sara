@@ -57,7 +57,6 @@ Implemented InterSystems features:
 - **ZPM/IPM package metadata** in `module.xml`.
 - **Docker/Modal/native setup paths** for reviewers.
 
-The main contest task is a **Smart Patient Summary Generator**. Sara reads `Patient`, `Condition`, `Observation`, `MedicationRequest`, and `ServiceRequest` resources, calculates lab trends and clinical rules, identifies magnesium/potassium replacement actions, flags stale A1C follow-up, and returns role-specific summaries.
 
 ## Architecture
 
