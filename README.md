@@ -79,8 +79,7 @@ Why Modal:
 
 - It lets the IRIS container, FastAPI agent layer, Next.js frontend, and GPU model endpoint live in one reproducible deployment workflow.
 - It provides persistent volumes for IRIS data and Hugging Face model cache.
-- It supports A100 GPU inference for Sara while keeping the rest of the stack on CPU.
-- It can be stopped after judging or testing to control cost.
+- It supports GPU inference for Sara while keeping the rest of the stack on CPU.
 
 ### Agent Workflow
 
