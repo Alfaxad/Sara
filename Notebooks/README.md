@@ -1,6 +1,6 @@
 # Sara Notebooks
 
-This directory contains the notebooks used to fine-tune and run inference with the Sara clinical workflow model.
+This directory contains the notebooks used to fine-tune and run inference with the Sara clinical workflow model. 
 
 ## Fine-Tuning (`Sara.ipynb`)
 
