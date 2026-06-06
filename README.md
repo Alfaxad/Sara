@@ -179,6 +179,8 @@ The bundle is loaded into IRIS by:
 
 These steps deploy the full judge-testable stack in a Modal workspace.
 
+If you are new to Modal, start with the official [Modal guide](https://modal.com/docs/guide) for account setup, CLI authentication, secrets, deployed apps, volumes, and web endpoints.
+
 ### 1. Clone the repository
 
 ```bash
