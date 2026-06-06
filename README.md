@@ -4,7 +4,6 @@
 
 [![HuggingFace Model](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Sara--1.5--4B--it-yellow)](https://huggingface.co/Nadhari/Sara-1.5-4B-it)
 [![HuggingFace Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-MedToolCalling-blue)](https://huggingface.co/datasets/Nadhari/MedToolCalling)
-[![Kaggle](https://img.shields.io/badge/Kaggle-Writeup-20BEFF)](https://www.kaggle.com/competitions/med-gemma-impact-challenge/writeups/sara)
 [![Blog](https://img.shields.io/badge/Blog-nadhari.ai-orange)](https://nadhari.ai/sara)
 [![YouTube](https://img.shields.io/badge/YouTube-Sara-red)](https://youtu.be/UAjI9O848wU?si=Gfm0aiaPbxqmB1Fy)
 
