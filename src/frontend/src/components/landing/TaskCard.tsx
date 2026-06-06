@@ -38,29 +38,32 @@ export interface TaskCardProps {
 
 export function TaskCard({ task, index, className }: TaskCardProps) {
   const IconComponent = iconMap[task.icon] || Activity;
+  const isFeatured = task.id === "iris-summary";
 
   return (
     <Link href={`/chat/${task.id}`} className="block group">
       <div
         className={cn(
           "sara-card",
-          "flex items-start gap-3.5",
+          "flex min-h-[90px] items-center gap-4",
           "cursor-pointer",
           "animate-card-in",
+          isFeatured && "sara-card-featured",
           className
         )}
         style={{ animationDelay: `${index * 45}ms` }}
       >
-        {/* Icon */}
-        <div className="sara-icon-box">
+        <div className={cn("sara-icon-box", isFeatured && "sara-icon-box-featured")}>
           <IconComponent className="w-[17px] h-[17px]" />
         </div>
 
-        {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-subheading text-sara-text-primary mb-1 group-hover:text-sara-accent transition-colors">
-            {task.name}
-          </h3>
+          <div className="mb-1 flex items-center gap-2">
+            <h3 className="text-subheading text-sara-text-primary group-hover:text-sara-accent transition-colors">
+              {task.name}
+            </h3>
+            {isFeatured && <span className="sara-card-kicker">IRIS</span>}
+          </div>
           <p className="text-body-small text-sara-text-muted leading-snug">
             {task.description}
           </p>

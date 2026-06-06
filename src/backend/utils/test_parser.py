@@ -4,7 +4,7 @@ Written first following TDD approach.
 """
 
 import pytest
-from src.backend.utils.parser import ActionType, Action, parse_action
+from src.backend.utils.parser import ActionType, Action, extract_action, parse_action
 
 
 class TestParseGetSimple:
@@ -113,6 +113,34 @@ class TestParseFinishSimple:
         assert action.type == ActionType.FINISH
         assert action.answer == "The patient has hypertension"
 
+    def test_parse_finish_empty_array(self):
+        """FINISH([]) is valid and means no answer/action needed."""
+        action = parse_action("FINISH([])")
+
+        assert action.type == ActionType.FINISH
+        assert action.answer == ""
+
+    def test_parse_finish_numeric_answer(self):
+        """FINISH with a numeric value returns a stringified value."""
+        action = parse_action("FINISH([125.5])")
+
+        assert action.type == ActionType.FINISH
+        assert action.answer == "125.5"
+
+    def test_parse_finish_multiple_values(self):
+        """FINISH with multiple values preserves JSON array semantics."""
+        action = parse_action('FINISH([6.5, "2022-10-15T08:30:00+00:00"])')
+
+        assert action.type == ActionType.FINISH
+        assert action.answer == '[6.5, "2022-10-15T08:30:00+00:00"]'
+
+    def test_parse_finish_unquoted_identifier(self):
+        """Some benchmark answers are unquoted identifiers like MRNs."""
+        action = parse_action("FINISH([S1234567])")
+
+        assert action.type == ActionType.FINISH
+        assert action.answer == "S1234567"
+
 
 class TestParseFinishWithReasoning:
     """Test FINISH actions that have reasoning text before them."""
@@ -205,14 +233,13 @@ class TestEdgeCases:
         assert action.type == ActionType.UNKNOWN
 
     def test_finish_with_multiple_answers(self):
-        """FINISH with multiple items in array takes first."""
+        """FINISH with multiple items preserves the whole JSON array."""
         content = 'FINISH(["answer1", "answer2"])'
 
         action = parse_action(content)
 
         assert action.type == ActionType.FINISH
-        # Take first answer
-        assert action.answer == "answer1"
+        assert action.answer == '["answer1", "answer2"]'
 
     def test_case_sensitivity(self):
         """Action keywords should be case-sensitive."""
@@ -222,3 +249,28 @@ class TestEdgeCases:
 
         # lowercase 'get' should not match
         assert action.type == ActionType.UNKNOWN
+
+
+class TestExtractAction:
+    """Test extraction from verbose or fenced model output."""
+
+    def test_extract_code_fenced_get(self):
+        raw = "```tool_code\nGET http://localhost:8080/fhir/Patient?family=Smith\n```"
+
+        assert extract_action(raw) == "GET http://localhost:8080/fhir/Patient?family=Smith"
+
+    def test_extract_finish_from_verbose_text(self):
+        raw = "I checked the chart.\nFINISH([42])"
+
+        assert extract_action(raw) == "FINISH([42])"
+
+    def test_extract_complete_post_json(self):
+        raw = '''I will create the order.
+POST http://localhost:8080/fhir/ServiceRequest
+{"resourceType":"ServiceRequest","status":"active"}
+extra text'''
+
+        assert extract_action(raw) == (
+            'POST http://localhost:8080/fhir/ServiceRequest\n'
+            '{"resourceType":"ServiceRequest","status":"active"}'
+        )

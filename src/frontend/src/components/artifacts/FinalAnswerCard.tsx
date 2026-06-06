@@ -215,6 +215,7 @@ function StatusIcon({ status }: { status?: ParsedAnswer['status'] }) {
 
 export function FinalAnswerCard({ taskId, answer, className }: FinalAnswerCardProps) {
   const parsed = parseAnswer(taskId, answer);
+  const isNarrativeResult = taskId === 'iris-summary' || (!parsed.unit && parsed.value.length > 80);
 
   return (
     <div
@@ -234,11 +235,18 @@ export function FinalAnswerCard({ taskId, answer, className }: FinalAnswerCardPr
 
       {/* Content */}
       <div className="p-4">
-        <div className="text-caption text-sara-text-muted uppercase tracking-wider mb-1">
+        <div className="text-caption text-sara-text-muted uppercase mb-1">
           {parsed.label}
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="text-display-lg font-medium text-sara-text-primary">
+        <div className={cn(isNarrativeResult ? 'block' : 'flex items-baseline gap-2')}>
+          <span
+            className={cn(
+              'font-medium text-sara-text-primary break-words',
+              isNarrativeResult
+                ? 'block text-[21px] leading-[1.38]'
+                : 'text-display-lg'
+            )}
+          >
             {parsed.value}
           </span>
           {parsed.unit && (

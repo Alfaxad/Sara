@@ -15,6 +15,11 @@ import {
   Hash,
   ChevronDown,
   ChevronRight,
+  Database,
+  GitBranch,
+  ListChecks,
+  Server,
+  ShieldCheck,
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -274,6 +279,193 @@ function BundleSummaryCard({ bundle, className }: { bundle: Record<string, unkno
   );
 }
 
+function TraceEventCard({ event, className }: { event: Record<string, unknown>; className?: string }) {
+  return (
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border p-4', className)}>
+      <div className="flex items-start gap-3">
+        <div className="w-10 h-10 rounded-full bg-sara-info-soft flex items-center justify-center flex-shrink-0">
+          <GitBranch className="w-5 h-5 text-sara-info" />
+        </div>
+        <div className="min-w-0">
+          <div className="text-subheading text-sara-text-primary break-words">
+            {String(event.step || 'IRIS trace')}
+          </div>
+          <p className="text-body-small text-sara-text-secondary mt-1 break-words">
+            {String(event.detail || 'Interoperability event recorded')}
+          </p>
+          {Boolean(event.endpoint) && (
+            <p className="text-caption text-sara-text-muted mt-2 font-mono break-all">
+              {String(event.endpoint)}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FHIRReadSetCard({ data, className }: { data: Record<string, unknown>; className?: string }) {
+  const resources = (data.resources as Array<Record<string, unknown>> | undefined) || [];
+  const counts = resources.reduce<Record<string, number>>((acc, resource) => {
+    const type = String(resource.resourceType || 'FHIR');
+    acc[type] = (acc[type] || 0) + 1;
+    return acc;
+  }, {});
+
+  return (
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
+      <div className="p-4">
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 rounded-full bg-sara-accent-soft flex items-center justify-center flex-shrink-0">
+            <Server className="w-5 h-5 text-sara-text-secondary" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="text-subheading text-sara-text-primary">
+              IRIS FHIR Read Set
+            </div>
+            <p className="text-body-small text-sara-text-secondary mt-1">
+              {Number(data.resourceCount || resources.length)} resources from {String(data.source || 'FHIR server')}
+            </p>
+            {Object.keys(counts).length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-3">
+                {Object.entries(counts).map(([type, count]) => (
+                  <span key={type} className="px-2 py-1 rounded bg-sara-accent-soft text-caption text-sara-text-secondary">
+                    {count} {type}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      {resources.length > 0 && (
+        <div className="border-t border-sara-border p-4 space-y-3">
+          {resources.slice(0, 4).map((resource, index) => (
+            <FhirResourceRenderer key={`${resource.resourceType}-${resource.id}-${index}`} resource={resource} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PatientSummaryCard({ summary, className }: { summary: Record<string, unknown>; className?: string }) {
+  const patient = (summary.patient as Record<string, unknown>) || {};
+  const labs = (summary.recentLabs as Array<Record<string, unknown>> | undefined) || [];
+  const actions = (summary.recommendedActions as Array<Record<string, unknown>> | undefined) || [];
+  const gaps = (summary.careGaps as Array<Record<string, unknown>> | undefined) || [];
+  const evidence = (summary.irisEvidence as Record<string, unknown>) || {};
+  const interoperability = (evidence.interoperability as Record<string, unknown>) || {};
+  const sqlBuilder = (evidence.sqlBuilder as Record<string, unknown>) || {};
+
+  return (
+    <div className={cn('rounded-sara bg-sara-bg-elevated border border-sara-border overflow-hidden', className)}>
+      <div className="p-4 border-b border-sara-border">
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 rounded-full bg-sara-success-soft flex items-center justify-center flex-shrink-0">
+            <ShieldCheck className="w-5 h-5 text-sara-success" />
+          </div>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-subheading text-sara-text-primary">Smart Patient Summary</span>
+              <span className="px-2 py-0.5 rounded bg-sara-accent-soft text-caption text-sara-text-muted">
+                {String(summary.role || 'ed_clinician')}
+              </span>
+            </div>
+            <p className="text-body-small text-sara-text-secondary mt-1 break-words">
+              {String(summary.roleSummary || '')}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="p-4 space-y-4">
+        <section>
+          <div className="text-caption text-sara-text-muted mb-2">Patient</div>
+          <div className="grid grid-cols-2 gap-2 text-body-small">
+            <div className="text-sara-text-secondary">Name</div>
+            <div className="text-sara-text-primary break-words">{String(patient.name || 'Unknown')}</div>
+            <div className="text-sara-text-secondary">MRN</div>
+            <div className="text-sara-text-primary font-mono break-all">{String(patient.mrn || patient.id || '')}</div>
+            <div className="text-sara-text-secondary">Age</div>
+            <div className="text-sara-text-primary">{String(patient.age ?? '')}</div>
+          </div>
+        </section>
+
+        {labs.length > 0 && (
+          <section>
+            <div className="text-caption text-sara-text-muted mb-2">Recent Labs</div>
+            <div className="grid grid-cols-1 gap-2">
+              {labs.map((lab) => (
+                <div key={String(lab.resourceId || lab.code)} className="flex items-center justify-between gap-3 rounded-sara-sm bg-sara-bg-subtle px-3 py-2">
+                  <span className="text-body-small text-sara-text-secondary">{String(lab.label || lab.code)}</span>
+                  <span className="text-body-small text-sara-text-primary font-mono whitespace-nowrap">
+                    {String(lab.value)} {String(lab.unit || '')}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {actions.length > 0 && (
+          <section>
+            <div className="flex items-center gap-2 text-caption text-sara-text-muted mb-2">
+              <ListChecks className="w-3.5 h-3.5" />
+              Actions
+            </div>
+            <div className="space-y-2">
+              {actions.map((action, index) => (
+                <div key={`${String(action.type)}-${index}`} className="rounded-sara-sm bg-sara-bg-subtle px-3 py-2">
+                  <div className="text-body-small text-sara-text-primary">
+                    {String(action.medication || action.test || action.type)}
+                  </div>
+                  {Boolean(action.rationale) && (
+                    <div className="text-caption text-sara-text-muted mt-1 break-words">
+                      {String(action.rationale)}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {gaps.length > 0 && (
+          <section>
+            <div className="text-caption text-sara-text-muted mb-2">Care Gaps</div>
+            <div className="space-y-1.5">
+              {gaps.map((gap, index) => (
+                <div key={index} className="text-body-small text-sara-text-secondary break-words">
+                  {String(gap.description || gap.type)}
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="border-t border-sara-border pt-4">
+          <div className="flex items-center gap-2 text-caption text-sara-text-muted mb-2">
+            <Database className="w-3.5 h-3.5" />
+            IRIS Evidence
+          </div>
+          <div className="space-y-2 text-body-small">
+            <div className="flex justify-between gap-3">
+              <span className="text-sara-text-secondary">Production</span>
+              <span className="text-sara-text-primary font-mono text-right break-all">
+                {String(interoperability.production || 'Sara.Interop.Production')}
+              </span>
+            </div>
+            <pre className="text-caption text-sara-text-muted bg-sara-bg-subtle rounded-sara-sm p-3 overflow-x-auto whitespace-pre-wrap">
+              {String(sqlBuilder.sql || 'SELECT ... FROM HS_FHIR_R4_Observation')}
+            </pre>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
+}
+
 /**
  * Renders FHIR resources as beautiful semantic cards.
  * Uses specialized card components for known resource types,
@@ -290,11 +482,24 @@ export function FhirResourceRenderer({ resource, className }: FhirResourceRender
 
   const resourceObj = resource as Record<string, unknown>;
   const resourceType = resourceObj.resourceType as string | undefined;
+  const artifactType = resourceObj.artifactType as string | undefined;
   const isError = resourceObj.error || resourceObj.status_code === 0;
 
   // Handle error responses with a nice error card
   if (isError) {
     return <ErrorCard error={resourceObj} className={className} />;
+  }
+
+  if (artifactType === 'SaraPatientSummary') {
+    return <PatientSummaryCard summary={resourceObj} className={className} />;
+  }
+
+  if (artifactType === 'IRISTraceEvent') {
+    return <TraceEventCard event={resourceObj} className={className} />;
+  }
+
+  if (artifactType === 'FHIRReadSet') {
+    return <FHIRReadSetCard data={resourceObj} className={className} />;
   }
 
   // Render based on resource type

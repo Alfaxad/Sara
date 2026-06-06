@@ -46,7 +46,7 @@ class TestFHIRClientGet:
     async def test_get_success(self, httpx_mock):
         """Test successful GET request."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient/123",
+            url="http://localhost:8080/fhir/Patient/123?_format=json",
             json={"resourceType": "Patient", "id": "123", "name": [{"family": "Smith"}]}
         )
 
@@ -65,7 +65,7 @@ class TestFHIRClientGet:
     async def test_get_with_params(self, httpx_mock):
         """Test GET request with query parameters."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient?family=Smith&gender=male",
+            url="http://localhost:8080/fhir/Patient?family=Smith&gender=male&_format=json",
             json={
                 "resourceType": "Bundle",
                 "type": "searchset",
@@ -88,7 +88,7 @@ class TestFHIRClientGet:
     async def test_get_404_error(self, httpx_mock):
         """Test GET request with 404 response."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient/nonexistent",
+            url="http://localhost:8080/fhir/Patient/nonexistent?_format=json",
             status_code=404,
             json={"resourceType": "OperationOutcome", "issue": [{"severity": "error", "code": "not-found"}]}
         )
@@ -107,7 +107,7 @@ class TestFHIRClientGet:
     async def test_get_500_error(self, httpx_mock):
         """Test GET request with 500 response."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient",
+            url="http://localhost:8080/fhir/Patient?_format=json",
             status_code=500,
             json={"resourceType": "OperationOutcome", "issue": [{"severity": "error", "code": "exception"}]}
         )
@@ -125,9 +125,10 @@ class TestFHIRClientGet:
     @pytest.mark.asyncio
     async def test_get_network_error(self, httpx_mock):
         """Test GET request with network error."""
-        httpx_mock.add_exception(
-            ConnectError("Connection refused")
-        )
+        for _ in range(FHIRClient.MAX_RETRIES):
+            httpx_mock.add_exception(
+                ConnectError("Connection refused")
+            )
 
         client = FHIRClient("http://localhost:8080")
         try:
@@ -199,10 +200,11 @@ class TestFHIRClientPost:
     @pytest.mark.asyncio
     async def test_post_network_error(self, httpx_mock):
         """Test POST request with network error."""
-        httpx_mock.add_exception(
-            ConnectError("Connection refused"),
-            method="POST"
-        )
+        for _ in range(FHIRClient.MAX_RETRIES):
+            httpx_mock.add_exception(
+                ConnectError("Connection refused"),
+                method="POST"
+            )
 
         client = FHIRClient("http://localhost:8080")
         try:
@@ -222,7 +224,7 @@ class TestFHIRClientExecute:
     async def test_execute_get_action(self, httpx_mock):
         """Test execute routes GET actions correctly."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Observation?patient=123",
+            url="http://localhost:8080/fhir/Observation?patient=123&_format=json",
             json={"resourceType": "Bundle", "type": "searchset", "entry": []}
         )
 
@@ -310,7 +312,7 @@ class TestFHIRClientContextManager:
     async def test_context_manager(self, httpx_mock):
         """Test using FHIRClient as async context manager."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient/123",
+            url="http://localhost:8080/fhir/Patient/123?_format=json",
             json={"resourceType": "Patient", "id": "123"}
         )
 
@@ -328,7 +330,7 @@ class TestFHIRClientEdgeCases:
     async def test_non_json_response(self, httpx_mock):
         """Test handling non-JSON response."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient/123",
+            url="http://localhost:8080/fhir/Patient/123?_format=json",
             text="Not Found",
             status_code=404,
             headers={"Content-Type": "text/plain"}
@@ -347,7 +349,7 @@ class TestFHIRClientEdgeCases:
     async def test_empty_params(self, httpx_mock):
         """Test GET request with empty params dict."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient",
+            url="http://localhost:8080/fhir/Patient?_format=json",
             json={"resourceType": "Bundle", "type": "searchset", "entry": []}
         )
 
@@ -363,7 +365,7 @@ class TestFHIRClientEdgeCases:
     async def test_base_url_trailing_slash(self, httpx_mock):
         """Test base URL with trailing slash is handled correctly."""
         httpx_mock.add_response(
-            url="http://localhost:8080/fhir/Patient",
+            url="http://localhost:8080/fhir/Patient?_format=json",
             json={"resourceType": "Bundle", "type": "searchset", "entry": []}
         )
 

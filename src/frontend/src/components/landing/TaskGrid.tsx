@@ -9,24 +9,30 @@ export interface TaskGridProps {
 }
 
 export function TaskGrid({ className }: TaskGridProps) {
+  const workflowTasks = TASKS;
+
   return (
     <section className={cn("w-full px-5", className)}>
       <div className="max-w-[840px] mx-auto">
-        {/* Divider + Section Header */}
         <div className="border-t border-sara-border mb-6">
-          <div className="pt-4">
-            <h2 className="text-heading text-sara-text-primary mb-1.5">
-              Clinical Workflows
-            </h2>
-            <p className="text-body-small text-sara-text-muted">
-              Select a task to start a conversation with Sara
-            </p>
+          <div className="pt-5 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-heading text-sara-text-primary mb-1.5">
+                Clinical Workflows
+              </h2>
+              <p className="text-body-small text-sara-text-muted">
+                Select a task to start a conversation with Sara
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-caption text-sara-text-muted">
+              <span className="sara-mini-badge">IRIS enabled</span>
+              <span className="sara-mini-badge">FHIR R4</span>
+            </div>
           </div>
         </div>
 
-        {/* Grid - Responsive 2 columns */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {TASKS.map((task, index) => (
+          {workflowTasks.map((task, index) => (
             <TaskCard key={task.id} task={task} index={index} />
           ))}
         </div>

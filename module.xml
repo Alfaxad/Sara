@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="sara-for-iris.ZPM">
+    <Module>
+      <Name>sara-for-iris</Name>
+      <Version>0.2.0</Version>
+      <Description>Sara AI Agent for InterSystems IRIS for Health FHIR and Interoperability Productions</Description>
+      <Keywords>FHIR,AI Agent,IRIS for Health,Interoperability,Embedded Python,Healthcare</Keywords>
+      <Packaging>module</Packaging>
+      <SystemRequirements Interoperability="enabled" Health="true"/>
+      <Default Name="Namespace" Value="SARAFHIR"/>
+      <Default Name="FHIRWebApp" Value="/fhir/r4"/>
+      <Default Name="RESTWebApp" Value="/sara/api"/>
+      <Default Name="LoadDemoData" Value="1"/>
+      <Default Name="InteractionsStrategy" Value="JsonAdvSql"/>
+      <SourcesRoot>src/iris</SourcesRoot>
+      <Invokes>
+        <Invoke Class="Sara.Setup" Method="Install" Phase="Activate" When="After">
+          <Arg>${Namespace}</Arg>
+          <Arg>${FHIRWebApp}</Arg>
+          <Arg>${RESTWebApp}</Arg>
+          <Arg>${LoadDemoData}</Arg>
+          <Arg>${InteractionsStrategy}</Arg>
+        </Invoke>
+      </Invokes>
+      <Resource Name="Sara.PKG"/>
+      <FileCopy Name="data/iris-fhir/" Target="${mgrdir}sara-demo-fhir/"/>
+      <FileCopy Name="src/iris/python/" Target="${mgrdir}sara-python/"/>
+      <CSPApplication
+        Url="/sara/api"
+        DispatchClass="Sara.REST.TaskService"
+        ServeFiles="0"
+        Recurse="0"
+        CookiePath="/sara/api"
+      />
+      <AfterInstallMessage>
+Sara for IRIS installed.
+
+FHIR endpoint: /fhir/r4
+Task endpoint: /sara/api/summary
+Production: Sara.Interop.Production
+
+Example:
+POST /sara/api/summary
+{"patientId":"sara-demo-patient","role":"ed_clinician"}
+      </AfterInstallMessage>
+    </Module>
+  </Document>
+</Export>

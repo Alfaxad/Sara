@@ -1,0 +1,1665 @@
+{
+  "resourceType": "Bundle",
+  "id": "sara-demo-patient-bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:sara-demo-patient",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "sara-demo-patient",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "SARA1001"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Yusuf",
+            "given": [
+              "Amina"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1974-04-12"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/sara-demo-patient"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-cond-diabetes",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "sara-demo-cond-diabetes",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Type 2 diabetes mellitus"
+            }
+          ],
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "recordedDate": "2025-01-20"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/sara-demo-cond-diabetes"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-cond-hypertension",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "sara-demo-cond-hypertension",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "38341003",
+              "display": "Hypertension"
+            }
+          ],
+          "text": "Hypertension"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "recordedDate": "2024-08-14"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/sara-demo-cond-hypertension"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-mg-low",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "sara-demo-mg-low",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2601-3",
+              "display": "Magnesium"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "MG",
+              "display": "Magnesium"
+            }
+          ],
+          "text": "MG"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "effectiveDateTime": "2026-06-05T06:00:00+00:00",
+        "valueQuantity": {
+          "value": 1.3,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/sara-demo-mg-low"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-k-low",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "sara-demo-k-low",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2823-3",
+              "display": "Potassium"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "K",
+              "display": "Potassium"
+            }
+          ],
+          "text": "K"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "effectiveDateTime": "2026-06-05T05:30:00+00:00",
+        "valueQuantity": {
+          "value": 3.2,
+          "unit": "mEq/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "mEq/L"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/sara-demo-k-low"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-glu-1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "sara-demo-glu-1",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "effectiveDateTime": "2026-06-05T04:00:00+00:00",
+        "valueQuantity": {
+          "value": 144,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/sara-demo-glu-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-glu-2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "sara-demo-glu-2",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "effectiveDateTime": "2026-06-04T21:00:00+00:00",
+        "valueQuantity": {
+          "value": 118,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/sara-demo-glu-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-a1c-old",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "sara-demo-a1c-old",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1C"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "A1C",
+              "display": "Hemoglobin A1C"
+            }
+          ],
+          "text": "A1C"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "effectiveDateTime": "2024-11-12T09:30:00+00:00",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/sara-demo-a1c-old"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:sara-demo-med-metformin",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "sara-demo-med-metformin",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Metformin 500 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/sara-demo-patient"
+        },
+        "authoredOn": "2026-03-10"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/sara-demo-med-metformin"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2874099",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S2874099",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S2874099"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Stafford",
+            "given": [
+              "Peter"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1932-12-29"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S2874099"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2874099-cond-afib",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S2874099-cond-afib",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "49436004",
+              "display": "Atrial fibrillation"
+            }
+          ],
+          "text": "Atrial fibrillation"
+        },
+        "subject": {
+          "reference": "Patient/S2874099"
+        },
+        "recordedDate": "2021-06-18"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S2874099-cond-afib"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2874099-med-apixaban",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "S2874099-med-apixaban",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Apixaban 5 mg tablet"
+        },
+        "subject": {
+          "reference": "Patient/S2874099"
+        },
+        "authoredOn": "2023-08-01"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/S2874099-med-apixaban"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2380121",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S2380121",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S2380121"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Morrison",
+            "given": [
+              "Lena"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1968-05-21"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S2380121"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2380121-cond-htn",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S2380121-cond-htn",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "38341003",
+              "display": "Hypertension"
+            }
+          ],
+          "text": "Hypertension"
+        },
+        "subject": {
+          "reference": "Patient/S2380121"
+        },
+        "recordedDate": "2020-03-12"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S2380121-cond-htn"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2380121-bp-20231113",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S2380121-bp-20231113",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "vital-signs",
+                "display": "Vital Signs"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "85354-9",
+              "display": "Blood pressure panel with all children optional"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "BP",
+              "display": "Blood pressure"
+            }
+          ],
+          "text": "BP"
+        },
+        "subject": {
+          "reference": "Patient/S2380121"
+        },
+        "effectiveDateTime": "2023-11-13T10:15:00+00:00",
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8480-6",
+                  "display": "Systolic blood pressure"
+                }
+              ],
+              "text": "Systolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 118,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "8462-4",
+                  "display": "Diastolic blood pressure"
+                }
+              ],
+              "text": "Diastolic blood pressure"
+            },
+            "valueQuantity": {
+              "value": 77,
+              "unit": "mmHg",
+              "system": "http://unitsofmeasure.org",
+              "code": "mm[Hg]"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S2380121-bp-20231113"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3032536",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S3032536",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S3032536"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Owens",
+            "given": [
+              "Grace"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1955-02-18"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S3032536"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3032536-cond-ckd",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S3032536-cond-ckd",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "433144002",
+              "display": "Chronic kidney disease stage 3"
+            }
+          ],
+          "text": "Chronic kidney disease stage 3"
+        },
+        "subject": {
+          "reference": "Patient/S3032536"
+        },
+        "recordedDate": "2022-04-02"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S3032536-cond-ckd"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3032536-mg-recent",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S3032536-mg-recent",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2601-3",
+              "display": "Magnesium"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "MG",
+              "display": "Magnesium"
+            }
+          ],
+          "text": "MG"
+        },
+        "subject": {
+          "reference": "Patient/S3032536"
+        },
+        "effectiveDateTime": "2023-11-13T08:20:00+00:00",
+        "valueQuantity": {
+          "value": 1.8,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S3032536-mg-recent"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3032536-mg-older",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S3032536-mg-older",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2601-3",
+              "display": "Magnesium"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "MG",
+              "display": "Magnesium"
+            }
+          ],
+          "text": "MG"
+        },
+        "subject": {
+          "reference": "Patient/S3032536"
+        },
+        "effectiveDateTime": "2023-11-11T08:20:00+00:00",
+        "valueQuantity": {
+          "value": 1.6,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S3032536-mg-older"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3084624",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S3084624",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S3084624"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Kim",
+            "given": [
+              "Martin"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1971-07-03"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S3084624"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3084624-cond-hypomag",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S3084624-cond-hypomag",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "190855004",
+              "display": "Hypomagnesemia"
+            }
+          ],
+          "text": "Hypomagnesemia"
+        },
+        "subject": {
+          "reference": "Patient/S3084624"
+        },
+        "recordedDate": "2023-11-12"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S3084624-cond-hypomag"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3084624-mg-low",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S3084624-mg-low",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2601-3",
+              "display": "Magnesium"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "MG",
+              "display": "Magnesium"
+            }
+          ],
+          "text": "MG"
+        },
+        "subject": {
+          "reference": "Patient/S3084624"
+        },
+        "effectiveDateTime": "2023-11-13T05:45:00+00:00",
+        "valueQuantity": {
+          "value": 1.2,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S3084624-mg-low"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S6307599",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S6307599",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S6307599"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Baker",
+            "given": [
+              "Elaine"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1984-10-09"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S6307599"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S6307599-cond-diabetes",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S6307599-cond-diabetes",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Type 2 diabetes mellitus"
+            }
+          ],
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "Patient/S6307599"
+        },
+        "recordedDate": "2022-09-22"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S6307599-cond-diabetes"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S6307599-glu-1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S6307599-glu-1",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/S6307599"
+        },
+        "effectiveDateTime": "2023-11-13T08:00:00+00:00",
+        "valueQuantity": {
+          "value": 164,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S6307599-glu-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S6307599-glu-2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S6307599-glu-2",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/S6307599"
+        },
+        "effectiveDateTime": "2023-11-13T02:30:00+00:00",
+        "valueQuantity": {
+          "value": 148,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S6307599-glu-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S6307599-glu-3",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S6307599-glu-3",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/S6307599"
+        },
+        "effectiveDateTime": "2023-11-12T18:00:00+00:00",
+        "valueQuantity": {
+          "value": 132,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S6307599-glu-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S6307599-glu-old",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S6307599-glu-old",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/S6307599"
+        },
+        "effectiveDateTime": "2023-11-10T08:00:00+00:00",
+        "valueQuantity": {
+          "value": 210,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S6307599-glu-old"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2197736",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S2197736",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S2197736"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Nguyen",
+            "given": [
+              "Victor"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1979-03-14"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S2197736"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2197736-cond-diabetes",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S2197736-cond-diabetes",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "73211009",
+              "display": "Diabetes mellitus"
+            }
+          ],
+          "text": "Diabetes mellitus"
+        },
+        "subject": {
+          "reference": "Patient/S2197736"
+        },
+        "recordedDate": "2019-05-03"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S2197736-cond-diabetes"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2197736-glu-recent",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S2197736-glu-recent",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/S2197736"
+        },
+        "effectiveDateTime": "2023-11-13T09:40:00+00:00",
+        "valueQuantity": {
+          "value": 202,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S2197736-glu-recent"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2197736-glu-older",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S2197736-glu-older",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2339-0",
+              "display": "Blood glucose"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "GLU",
+              "display": "Blood glucose"
+            }
+          ],
+          "text": "GLU"
+        },
+        "subject": {
+          "reference": "Patient/S2197736"
+        },
+        "effectiveDateTime": "2023-11-12T19:15:00+00:00",
+        "valueQuantity": {
+          "value": 176,
+          "unit": "mg/dL",
+          "system": "http://unitsofmeasure.org",
+          "code": "mg/dL"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S2197736-glu-older"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2016972",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S2016972",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S2016972"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Patel",
+            "given": [
+              "Nora"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1992-01-30"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S2016972"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2016972-cond-acl",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S2016972-cond-acl",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "239725005",
+              "display": "Left anterior cruciate ligament tear grade II"
+            }
+          ],
+          "text": "Left anterior cruciate ligament tear grade II"
+        },
+        "subject": {
+          "reference": "Patient/S2016972"
+        },
+        "recordedDate": "2023-11-13"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S2016972-cond-acl"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2016972-rad-knee",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "S2016972-rad-knee",
+        "status": "final",
+        "code": {
+          "text": "Left knee MRI report"
+        },
+        "subject": {
+          "reference": "Patient/S2016972"
+        },
+        "effectiveDateTime": "2023-11-13T09:00:00+00:00",
+        "conclusion": "Radiology report indicates ACL tear, grade II."
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/S2016972-rad-knee"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S2016972-ortho-referral",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "S2016972-ortho-referral",
+        "status": "active",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "306181000000106",
+              "display": "Referral to orthopedic surgery service"
+            }
+          ],
+          "text": "Referral to orthopedic surgery service"
+        },
+        "subject": {
+          "reference": "Patient/S2016972"
+        },
+        "authoredOn": "2023-11-13T10:15:00+00:00",
+        "note": [
+          {
+            "text": "Situation: acute left knee injury, Background: radiology report indicates ACL tear. Assessment: ACL tear grade II. Recommendation: request for Orthopedic service to evaluate and provide management recommendations."
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ServiceRequest/S2016972-ortho-referral"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3241217",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S3241217",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S3241217"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Johnson",
+            "given": [
+              "Caleb"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1961-12-04"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S3241217"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3241217-cond-hypokalemia",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S3241217-cond-hypokalemia",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "43339004",
+              "display": "Hypokalemia"
+            }
+          ],
+          "text": "Hypokalemia"
+        },
+        "subject": {
+          "reference": "Patient/S3241217"
+        },
+        "recordedDate": "2023-11-13"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S3241217-cond-hypokalemia"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3241217-k-low",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S3241217-k-low",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "2823-3",
+              "display": "Potassium"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "K",
+              "display": "Potassium"
+            }
+          ],
+          "text": "K"
+        },
+        "subject": {
+          "reference": "Patient/S3241217"
+        },
+        "effectiveDateTime": "2023-11-13T06:10:00+00:00",
+        "valueQuantity": {
+          "value": 3.2,
+          "unit": "mEq/L",
+          "system": "http://unitsofmeasure.org",
+          "code": "mEq/L"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S3241217-k-low"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S3241217-k-follow-up",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "S3241217-k-follow-up",
+        "status": "active",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "2823-3",
+              "display": "Serum potassium level"
+            }
+          ],
+          "text": "Serum potassium level"
+        },
+        "subject": {
+          "reference": "Patient/S3241217"
+        },
+        "authoredOn": "2023-11-13T10:15:00+00:00",
+        "note": [
+          {
+            "text": "Morning serum potassium level next day at 08:00."
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ServiceRequest/S3241217-k-follow-up"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S1311412",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "S1311412",
+        "identifier": [
+          {
+            "system": "http://nadhari.ai/sara/mrn",
+            "value": "S1311412"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Morgan",
+            "given": [
+              "Iris"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1976-06-26"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/S1311412"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S1311412-cond-diabetes",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "S1311412-cond-diabetes",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Type 2 diabetes mellitus"
+            }
+          ],
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "Patient/S1311412"
+        },
+        "recordedDate": "2020-02-10"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/S1311412-cond-diabetes"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S1311412-a1c-old",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "S1311412-a1c-old",
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "laboratory",
+                "display": "Laboratory"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1C"
+            },
+            {
+              "system": "http://nadhari.ai/sara/lab-code",
+              "code": "A1C",
+              "display": "Hemoglobin A1C"
+            }
+          ],
+          "text": "A1C"
+        },
+        "subject": {
+          "reference": "Patient/S1311412"
+        },
+        "effectiveDateTime": "2022-09-01T11:00:00+00:00",
+        "valueQuantity": {
+          "value": 8.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/S1311412-a1c-old"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:S1311412-a1c-order",
+      "resource": {
+        "resourceType": "ServiceRequest",
+        "id": "S1311412-a1c-order",
+        "status": "active",
+        "intent": "order",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "4548-4",
+              "display": "Hemoglobin A1C lab test"
+            }
+          ],
+          "text": "Hemoglobin A1C lab test"
+        },
+        "subject": {
+          "reference": "Patient/S1311412"
+        },
+        "authoredOn": "2023-11-13T10:15:00+00:00",
+        "note": [
+          {
+            "text": "A1C result is more than one year old."
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "ServiceRequest/S1311412-a1c-order"
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 """Shared configuration for Sara Modal services."""
 
-MODEL_NAME = "Alfaxad/Sara-1.5-4B-it"
+MODEL_NAME = "Nadhari/Sara-1.5-4B-it"
 MODEL_REVISION = "main"
 
 MINUTES = 60

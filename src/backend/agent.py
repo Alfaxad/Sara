@@ -7,6 +7,7 @@ and yields events for streaming to the frontend.
 """
 
 import json
+import os
 import time
 from dataclasses import dataclass, field
 from typing import Any, AsyncGenerator, Dict, List
@@ -14,7 +15,7 @@ from typing import Any, AsyncGenerator, Dict, List
 from openai import AsyncOpenAI
 
 from src.backend.utils.fhir_client import FHIRClient, FHIRResult
-from src.backend.utils.parser import parse_action, ActionType
+from src.backend.utils.parser import ActionType, extract_action, parse_action
 
 # Maximum agent iterations before giving up
 MAX_ROUNDS = 8
@@ -76,9 +77,11 @@ class SaraAgent:
         self.sara_url = sara_url
         self.fhir_url = fhir_url
         self.functions = functions
+        api_key = os.environ.get("SARA_API_KEY", "not-needed")
         self._sara_client = AsyncOpenAI(
             base_url=f"{sara_url}/v1",
-            api_key="not-needed"  # Sara model doesn't require auth
+            api_key=api_key,
+            default_headers={"X-API-Key": api_key}
         )
 
     def _build_prompt(self, context: str, question: str) -> str:
@@ -118,7 +121,7 @@ class SaraAgent:
         )
         return response.choices[0].message.content
 
-    def _format_fhir_result(self, result: FHIRResult) -> str:
+    def _format_fhir_result(self, result: FHIRResult, action_type: ActionType) -> str:
         """
         Format a FHIR result for injection into the conversation context.
 
@@ -128,10 +131,33 @@ class SaraAgent:
         Returns:
             Formatted string representation of the result
         """
-        if result.success:
-            return json.dumps(result.data, indent=2)
-        else:
-            return f"Error (HTTP {result.status_code}): {result.error}"
+        if action_type == ActionType.GET:
+            if result.success:
+                return (
+                    "Here is the response from the GET request:\n"
+                    f"{json.dumps(result.data, indent=2)}. "
+                    "Please call FINISH if you have got answers for all the questions "
+                    "and finished all the requested tasks"
+                )
+            error_msg = result.error
+            if result.data and result.data.get("resourceType") == "OperationOutcome":
+                issues = result.data.get("issue", [])
+                if issues:
+                    diagnostics = issues[0].get("diagnostics", "")
+                    if diagnostics:
+                        error_msg = f"{error_msg} - {diagnostics}"
+            return f"Error in sending the GET request: {error_msg}"
+
+        if action_type == ActionType.POST:
+            if result.success:
+                return (
+                    "POST request accepted and executed successfully. "
+                    "Please call FINISH if you have got answers for all the questions "
+                    "and finished all the requested tasks"
+                )
+            return "Invalid POST request"
+
+        return json.dumps(result.data, indent=2) if result.success else result.error
 
     async def run(
         self,
@@ -173,6 +199,8 @@ class SaraAgent:
                         timestamp=time.time()
                     )
                     return
+
+                response = extract_action(response)
 
                 # Yield thinking event
                 yield AgentEvent(
@@ -218,9 +246,9 @@ class SaraAgent:
                 )
 
                 # 6. Inject result into context
-                formatted_result = self._format_fhir_result(fhir_result)
+                formatted_result = self._format_fhir_result(fhir_result, action.type)
                 messages.append({"role": "assistant", "content": response})
-                messages.append({"role": "user", "content": f"Result: {formatted_result}"})
+                messages.append({"role": "user", "content": formatted_result})
 
             # Reached max rounds without FINISH
             yield AgentEvent(

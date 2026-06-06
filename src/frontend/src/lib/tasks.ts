@@ -11,6 +11,14 @@ export interface Task {
 // The backend serves these via /api/tasks
 export const TASKS: Task[] = [
   {
+    id: "iris-summary",
+    name: "IRIS Patient Summary",
+    description: "Generate an auditable summary through IRIS for Health",
+    icon: "clipboard-list",
+    context: "Use InterSystems IRIS for Health FHIR R4 resources and return an auditable patient summary with production trace evidence.",
+    question: "Create an ED clinician summary for patient sara-demo-patient and identify deterministic follow-up actions.",
+  },
+  {
     id: "task1",
     name: "Patient Lookup",
     description: "Find patient by name and DOB to get their MRN",

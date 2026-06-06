@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -65,12 +64,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="antialiased">
-        {/* Skip link for keyboard navigation */}
         <a href="#main-content" className="skip-link">
           Skip to main content
         </a>
         <div id="main-content">{children}</div>
-        <Analytics />
       </body>
     </html>
   );

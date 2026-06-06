@@ -189,7 +189,7 @@ export function PatientCard({ data, className }: PatientCardProps) {
           <div className="mb-4 p-3 bg-sara-accent-soft rounded-sara-sm border border-sara-border">
             <div className="flex items-center gap-2">
               <Hash className="w-3.5 h-3.5 text-sara-text-secondary" />
-              <span className="text-caption text-sara-text-muted uppercase tracking-wider">
+              <span className="text-caption text-sara-text-muted uppercase">
                 MRN
               </span>
               <span className="text-body font-medium text-sara-text-primary ml-auto font-mono">

@@ -82,7 +82,7 @@ export function WorkflowTimeline({ steps, className }: WorkflowTimelineProps) {
         className
       )}
     >
-      <h4 className="text-caption font-medium text-sara-text-muted uppercase tracking-wider mb-3">
+      <h4 className="text-caption font-medium text-sara-text-muted uppercase mb-3">
         Progress
       </h4>
       <div>

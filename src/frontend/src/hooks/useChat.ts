@@ -239,6 +239,38 @@ export function useChat(taskId: string) {
         });
         break;
 
+      case 'trace':
+        setState(prev => {
+          const traceStep = event.data.step as string || 'IRIS trace';
+          const stepId = event.data.id as string || generateStepId();
+          return {
+            ...prev,
+            artifacts: [
+              ...prev.artifacts,
+              {
+                id: generateId(),
+                type: 'IRIS Trace',
+                data: {
+                  artifactType: 'IRISTraceEvent',
+                  ...event.data,
+                },
+                timestamp: Date.now(),
+              },
+            ],
+            workflowSteps: [
+              ...prev.workflowSteps,
+              {
+                id: stepId,
+                action: traceStep,
+                description: traceStep,
+                status: 'complete',
+                timestamp: Date.now(),
+              },
+            ],
+          };
+        });
+        break;
+
       case 'complete':
         // Final response
         setState(prev => {

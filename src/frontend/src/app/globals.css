@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================
-   Sara Design System - Monochromatic Black
+   Sara Design System - monochrome clinical black
    Refined, minimal, clinical elegance
    ============================================ */
 
@@ -40,6 +40,8 @@
   --sara-error-soft: rgba(248, 113, 113, 0.15);
   --sara-info: #60A5FA;
   --sara-info-soft: rgba(96, 165, 250, 0.15);
+  --sara-iris: #7dd3fc;
+  --sara-iris-soft: rgba(125, 211, 252, 0.12);
 
   /* Font - System stack for SF Pro feel */
   --font-sans: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif;
@@ -75,7 +77,7 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     font-weight: 500;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   /* Focus styles */
@@ -137,14 +139,25 @@
   .sara-card {
     background: transparent;
     border: 1px solid var(--sara-border);
-    border-radius: 12px;
-    padding: 18px 20px;
-    transition: all 0.2s ease;
+    border-radius: 8px;
+    padding: 16px 18px;
+    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
   }
 
   .sara-card:hover {
     background: var(--sara-bg-elevated);
     border-color: var(--sara-border-hover);
+    transform: translateY(-1px);
+  }
+
+  .sara-card-featured {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .sara-card-featured:hover {
+    border-color: rgba(125, 211, 252, 0.36);
+    background: linear-gradient(180deg, rgba(125, 211, 252, 0.075), rgba(255, 255, 255, 0.025));
   }
 
   /* Button */
@@ -261,14 +274,14 @@
     font-size: 20px;
     font-weight: 600;
     color: var(--sara-bg-base);
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   /* Icon container */
   .sara-icon-box {
     width: 36px;
     height: 36px;
-    border-radius: 10px;
+    border-radius: 8px;
     background: var(--sara-accent-soft);
     border: 1px solid rgba(255, 255, 255, 0.06);
     display: flex;
@@ -279,6 +292,61 @@
 
   .sara-icon-box svg {
     color: var(--sara-text-secondary);
+  }
+
+  .sara-icon-box-featured {
+    background: var(--sara-iris-soft);
+    border-color: rgba(125, 211, 252, 0.22);
+  }
+
+  .sara-icon-box-featured svg {
+    color: var(--sara-iris);
+  }
+
+  .sara-card-kicker {
+    display: inline-flex;
+    align-items: center;
+    height: 18px;
+    padding: 0 6px;
+    border-radius: 9999px;
+    border: 1px solid rgba(125, 211, 252, 0.22);
+    background: var(--sara-iris-soft);
+    color: var(--sara-iris);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .sara-capability {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 24px;
+    padding: 0 9px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.075);
+    background: rgba(255, 255, 255, 0.025);
+    color: var(--sara-text-secondary);
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .sara-capability-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: var(--sara-iris);
+  }
+
+  .sara-mini-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 22px;
+    padding: 0 8px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--sara-text-muted);
   }
 
   /* Tab navigation */
@@ -293,7 +361,7 @@
     cursor: pointer;
     position: relative;
     transition: color 0.15s ease;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
   }
 
   .sara-tab:hover {
@@ -362,7 +430,7 @@
     padding: 4px 8px;
     border-radius: 9999px;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0;
   }
 
   .sara-badge-success {

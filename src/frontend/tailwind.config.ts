@@ -61,19 +61,19 @@ const config: Config = {
       fontSize: {
         "display-xl": [
           "40px",
-          { lineHeight: "1.1", fontWeight: "500", letterSpacing: "-0.04em" },
+          { lineHeight: "1.1", fontWeight: "500", letterSpacing: "0" },
         ],
         "display-lg": [
           "28px",
-          { lineHeight: "1.2", fontWeight: "500", letterSpacing: "-0.03em" },
+          { lineHeight: "1.2", fontWeight: "500", letterSpacing: "0" },
         ],
         heading: [
           "15px",
-          { lineHeight: "1.4", fontWeight: "500", letterSpacing: "-0.02em" },
+          { lineHeight: "1.4", fontWeight: "500", letterSpacing: "0" },
         ],
         subheading: [
           "14px",
-          { lineHeight: "1.5", fontWeight: "500", letterSpacing: "-0.01em" },
+          { lineHeight: "1.5", fontWeight: "500", letterSpacing: "0" },
         ],
         body: ["14px", { lineHeight: "1.6", fontWeight: "400" }],
         "body-small": [
@@ -82,7 +82,7 @@ const config: Config = {
         ],
         caption: [
           "11px",
-          { lineHeight: "1.4", fontWeight: "500", letterSpacing: "0.02em" },
+          { lineHeight: "1.4", fontWeight: "500", letterSpacing: "0" },
         ],
       },
 

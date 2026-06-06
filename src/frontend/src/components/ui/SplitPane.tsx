@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef, useEffect, ReactNode } from 'react';
+import { useState, useCallback, useRef, useEffect, ReactNode, CSSProperties } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface SplitPaneProps {
@@ -23,6 +23,9 @@ export function SplitPane({
   const [leftWidth, setLeftWidth] = useState(defaultLeftWidth);
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const splitStyle = {
+    '--split-left-width': `${leftWidth}%`,
+  } as CSSProperties;
 
   const handleMouseDown = useCallback(() => {
     setIsDragging(true);
@@ -71,6 +74,7 @@ export function SplitPane({
   return (
     <div
       ref={containerRef}
+      style={splitStyle}
       className={cn(
         'flex h-full w-full',
         // Stack vertically on mobile
@@ -78,23 +82,15 @@ export function SplitPane({
         className
       )}
     >
-      {/* Left Pane */}
       <div
         className={cn(
           'flex-shrink-0 overflow-hidden',
-          // Full width on mobile, percentage on desktop
-          'h-1/2 md:h-full'
+          'h-1/2 w-full md:h-full md:w-[var(--split-left-width)]'
         )}
-        style={{
-          width: typeof window !== 'undefined' && window.innerWidth >= 768
-            ? `${leftWidth}%`
-            : '100%',
-        }}
       >
         {left}
       </div>
 
-      {/* Divider */}
       <div
         className={cn(
           'flex-shrink-0 bg-sara-border',
@@ -107,7 +103,6 @@ export function SplitPane({
         onMouseDown={handleMouseDown}
       />
 
-      {/* Right Pane */}
       <div className="flex-1 overflow-hidden h-1/2 md:h-full">
         {right}
       </div>

@@ -146,7 +146,7 @@ def test_sara_fhir_query(sara_url: str, patient_id: str) -> bool:
 
     try:
         payload = {
-            "model": "Alfaxad/Sara-1.5-4B-it",
+            "model": "Nadhari/Sara-1.5-4B-it",
             "messages": [
                 {
                     "role": "user",

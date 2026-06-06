@@ -34,6 +34,7 @@ image = (
         "fastapi[standard]>=0.115.0",
         "uvicorn>=0.34.0",
         "sentencepiece>=0.2.0",
+        "pillow>=11.0.0",
     )
     .env({"HF_XET_HIGH_PERFORMANCE": "1"})
 )
@@ -46,7 +47,10 @@ app = modal.App("sara-model")
 @app.function(
     image=image,
     gpu=f"{SARA_GPU}:1",
-    secrets=[modal.Secret.from_name("sara-api-key")],
+    secrets=[
+        modal.Secret.from_name("sara-api-key"),
+        modal.Secret.from_name("huggingface-nadhari"),
+    ],
     volumes={"/root/.cache/huggingface": hf_cache_vol},
     scaledown_window=GPU_WARM_WINDOW,
     timeout=REQUEST_TIMEOUT,
@@ -57,6 +61,7 @@ def serve():
     import subprocess
     import sys
     import os
+    from pathlib import Path
 
     # Write the FastAPI server as a standalone script
     server_code = r'''
@@ -98,7 +103,7 @@ def verify_api_key(request: Request, api_key: str = Depends(api_key_header)):
 # --- Pydantic Models for Request Validation ---
 class ChatMessage(BaseModel):
     role: Literal["system", "user", "assistant"]
-    content: str
+    content: str = Field(..., min_length=1, max_length=32768)
 
     @field_validator("content")
     @classmethod
@@ -110,7 +115,7 @@ class ChatMessage(BaseModel):
 
 class ChatRequest(BaseModel):
     model: Optional[str] = None
-    messages: list[ChatMessage] = Field(..., min_length=1)
+    messages: list[ChatMessage] = Field(..., min_length=1, max_length=32)
     max_tokens: int = Field(default=256, ge=1, le=4096)
     temperature: float = Field(default=0.0, ge=0.0, le=2.0)
     top_p: float = Field(default=1.0, ge=0.0, le=1.0)
@@ -123,20 +128,53 @@ class ChatRequest(BaseModel):
         return v
 
 # --- Load model at startup ---
-from transformers import AutoTokenizer, Gemma3ForConditionalGeneration
+from transformers import AutoProcessor, AutoModelForImageTextToText
 
-print(f"Loading tokenizer: {MODEL_NAME}")
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, revision=MODEL_REVISION)
+print(f"Loading processor: {MODEL_NAME}")
+processor = AutoProcessor.from_pretrained(MODEL_NAME, revision=MODEL_REVISION)
 
 print(f"Loading model: {MODEL_NAME}")
-model = Gemma3ForConditionalGeneration.from_pretrained(
+model = AutoModelForImageTextToText.from_pretrained(
     MODEL_NAME,
     revision=MODEL_REVISION,
     torch_dtype=torch.bfloat16,
-    device_map="cuda",
+    device_map="auto",
 )
 model.eval()
 print("Model loaded successfully")
+
+
+def format_messages(messages: list[dict[str, str]], assistant_role: str = "assistant") -> list[dict[str, object]]:
+    """Format text-only OpenAI messages for the Gemma image-text chat template."""
+    formatted = []
+    for message in messages:
+        role = assistant_role if message["role"] == "assistant" else message["role"]
+        formatted.append(
+            {
+                "role": role,
+                "content": [{"type": "text", "text": message["content"]}],
+            }
+        )
+    return formatted
+
+
+def apply_template(messages: list[dict[str, str]]):
+    try:
+        return processor.apply_chat_template(
+            format_messages(messages),
+            tokenize=True,
+            add_generation_prompt=True,
+            return_dict=True,
+            return_tensors="pt",
+        ).to(model.device)
+    except Exception:
+        return processor.apply_chat_template(
+            format_messages(messages, assistant_role="model"),
+            tokenize=True,
+            add_generation_prompt=True,
+            return_dict=True,
+            return_tensors="pt",
+        ).to(model.device)
 
 
 @app.get("/health")
@@ -161,10 +199,7 @@ def chat_completions(request: ChatRequest, auth: bool = Depends(verify_api_key))
         temperature = request.temperature
         top_p = request.top_p
 
-        input_text = tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
-        inputs = tokenizer(input_text, return_tensors="pt").to("cuda")
+        inputs = apply_template(messages)
         input_len = inputs["input_ids"].shape[1]
 
         gen_kwargs = {
@@ -175,11 +210,15 @@ def chat_completions(request: ChatRequest, auth: bool = Depends(verify_api_key))
         if temperature > 0:
             gen_kwargs["temperature"] = temperature
 
+        tokenizer = processor.tokenizer
+        if tokenizer.pad_token_id is not None:
+            gen_kwargs["pad_token_id"] = tokenizer.pad_token_id
+
         with torch.no_grad():
             outputs = model.generate(**inputs, **gen_kwargs)
 
         new_tokens = outputs[0][input_len:]
-        response_text = tokenizer.decode(new_tokens, skip_special_tokens=True)
+        response_text = processor.decode(new_tokens, skip_special_tokens=True).strip()
         completion_tokens = len(new_tokens)
 
         return {
@@ -251,8 +290,8 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 '''
 
-    server_path = "/tmp/server.py"
-    with open(server_path, "w") as f:
+    server_path = Path("/root/sara_model_server.py")
+    with server_path.open("w") as f:
         f.write(server_code)
 
     env = os.environ.copy()
@@ -262,7 +301,7 @@ if __name__ == "__main__":
     if "SARA_API_KEY" in os.environ:
         env["SARA_API_KEY"] = os.environ["SARA_API_KEY"]
 
-    subprocess.Popen([sys.executable, server_path], env=env)
+    subprocess.Popen([sys.executable, str(server_path)], env=env)
 
 
 # --- Local test entrypoint ---

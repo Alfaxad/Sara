@@ -1,0 +1,5 @@
+[config]
+globals=0,0,512,0,0,0
+gmheap=131072
+routines=128
+jrnbufs=16

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sara Security Pass - 2026-06-06</title>
+    <style>
+      body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 880px; margin: 40px auto; line-height: 1.55; color: #111; }
+      h1, h2 { line-height: 1.2; }
+      code { background: #f2f2f2; padding: 1px 4px; border-radius: 4px; }
+      li { margin: 8px 0; }
+    </style>
+  </head>
+  <body>
+    <h1>Sara Security Pass - 2026-06-06</h1>
+    <p><strong>Scope:</strong> changed Sara for IRIS API, Modal model service, Modal frontend wrapper, frontend API/SSE client, and landing/chat UI changes.</p>
+
+    <h2>Findings And Fixes</h2>
+    <ul>
+      <li>Validated FHIR <code>Patient.id</code> before resource-path interpolation.</li>
+      <li>Added request size bounds for API and model payloads.</li>
+      <li>Anchored CORS origin regex and limited known frontend origins.</li>
+      <li>Verified model completion endpoint rejects unauthenticated requests with <code>401</code>.</li>
+    </ul>
+
+    <h2>Validation</h2>
+    <ul>
+      <li>Focused backend tests: <code>47 passed</code>.</li>
+      <li>Invalid patient id returns <code>422</code> locally and on Modal.</li>
+      <li>Hosted frontend renders trace, summary, and artifacts with a clean current console.</li>
+      <li>Frontend production audit: <code>npm audit --omit=dev</code> reports <code>0 vulnerabilities</code>.</li>
+      <li>Model health endpoint returns <code>200</code>.</li>
+    </ul>
+
+    <h2>Residual Risk</h2>
+    <p>Public <code>/api/run</code> is intentionally unauthenticated for the online demo and uses synthetic data. Add an API key, rate limit, or Modal usage guard before using non-demo data.</p>
+    <p>This was a diff-scoped pass over changed implementation, not an exhaustive repository-wide audit.</p>
+  </body>
+</html>

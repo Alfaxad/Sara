@@ -5,6 +5,7 @@ Provides async HTTP operations against a FHIR R4 server.
 Used by the Sara agent orchestrator to execute actions parsed by the action parser.
 """
 
+import asyncio
 from dataclasses import dataclass, field
 from typing import Any, Dict
 
@@ -38,7 +39,17 @@ class FHIRClient:
             await client.close()
     """
 
-    def __init__(self, base_url: str):
+    MAX_RETRIES = 3
+    RETRY_DELAY_SECONDS = 1.5
+
+    def __init__(
+        self,
+        base_url: str,
+        timeout_seconds: float = 120.0,
+        max_retries: int | None = None,
+        retry_delay_seconds: float | None = None,
+        auth: tuple[str, str] | httpx.Auth | None = None,
+    ):
         """
         Initialize the FHIR client.
 
@@ -47,9 +58,18 @@ class FHIRClient:
         """
         # Remove trailing slash for consistent URL building
         self.base_url = base_url.rstrip("/")
+        self.max_retries = max_retries if max_retries is not None else self.MAX_RETRIES
+        self.retry_delay_seconds = (
+            retry_delay_seconds if retry_delay_seconds is not None else self.RETRY_DELAY_SECONDS
+        )
         self._client = httpx.AsyncClient(
-            timeout=30.0,
-            headers={"Accept": "application/fhir+json", "Content-Type": "application/fhir+json"}
+            timeout=httpx.Timeout(timeout_seconds, connect=timeout_seconds),
+            headers={
+                "Accept": "application/fhir+json",
+                "Content-Type": "application/fhir+json",
+            },
+            follow_redirects=True,
+            auth=auth,
         )
 
     async def __aenter__(self) -> "FHIRClient":
@@ -107,25 +127,10 @@ class FHIRClient:
         Returns:
             FHIRResult with response data or error
         """
-        url = f"{self.base_url}{endpoint}"
-
-        try:
-            response = await self._client.get(url, params=params if params else None)
-            return self._process_response(response)
-        except httpx.ConnectError as e:
-            return FHIRResult(
-                success=False,
-                status_code=0,
-                data={},
-                error=f"Connection error: {str(e)}"
-            )
-        except httpx.RequestError as e:
-            return FHIRResult(
-                success=False,
-                status_code=0,
-                data={},
-                error=f"Request error: {str(e)}"
-            )
+        url = self._build_url(endpoint)
+        request_params = dict(params) if params else {}
+        request_params.setdefault("_format", "json")
+        return await self._request_with_retry("GET", url, params=request_params)
 
     async def post(self, endpoint: str, body: Dict[str, Any]) -> FHIRResult:
         """
@@ -138,25 +143,64 @@ class FHIRClient:
         Returns:
             FHIRResult with response data or error
         """
-        url = f"{self.base_url}{endpoint}"
+        url = self._build_url(endpoint)
+        return await self._request_with_retry("POST", url, json=body)
 
-        try:
-            response = await self._client.post(url, json=body)
-            return self._process_response(response)
-        except httpx.ConnectError as e:
-            return FHIRResult(
-                success=False,
-                status_code=0,
-                data={},
-                error=f"Connection error: {str(e)}"
-            )
-        except httpx.RequestError as e:
-            return FHIRResult(
-                success=False,
-                status_code=0,
-                data={},
-                error=f"Request error: {str(e)}"
-            )
+    async def put(self, endpoint: str, body: Dict[str, Any]) -> FHIRResult:
+        """
+        Execute a PUT request against the FHIR server.
+
+        Args:
+            endpoint: FHIR endpoint path (e.g., "/fhir/Patient/123")
+            body: JSON body for the resource
+
+        Returns:
+            FHIRResult with response data or error
+        """
+        url = self._build_url(endpoint)
+        return await self._request_with_retry("PUT", url, json=body)
+
+    def _build_url(self, endpoint: str) -> str:
+        """Join a FHIR base URL and action endpoint without duplicating /fhir."""
+        normalized = endpoint
+        if self.base_url.endswith("/fhir") and normalized.startswith("/fhir"):
+            normalized = normalized[5:]
+        if self.base_url.endswith("/fhir/r4") and normalized.startswith("/fhir/r4"):
+            normalized = normalized[8:]
+        return f"{self.base_url}{normalized}"
+
+    async def _request_with_retry(self, method: str, url: str, **kwargs) -> FHIRResult:
+        """Execute an HTTP request with bounded retries for transient failures."""
+        last_error = "Unknown request error"
+        for attempt in range(self.max_retries):
+            try:
+                if method == "GET":
+                    response = await self._client.get(url, **kwargs)
+                elif method == "POST":
+                    response = await self._client.post(url, **kwargs)
+                elif method == "PUT":
+                    response = await self._client.put(url, **kwargs)
+                else:
+                    return FHIRResult(
+                        success=False,
+                        status_code=0,
+                        data={},
+                        error=f"Unsupported HTTP method: {method}",
+                    )
+                return self._process_response(response)
+            except httpx.TimeoutException as exc:
+                last_error = f"Timeout: {repr(exc)}"
+            except httpx.ConnectError as exc:
+                last_error = f"Connection error: {repr(exc)}"
+            except httpx.RequestError as exc:
+                last_error = f"Request error: {type(exc).__name__}: {repr(exc)}"
+            except Exception as exc:
+                last_error = f"Unexpected error: {type(exc).__name__}: {str(exc)}"
+
+            if attempt < self.max_retries - 1:
+                await asyncio.sleep(self.retry_delay_seconds * (attempt + 1))
+
+        return FHIRResult(success=False, status_code=0, data={}, error=last_error)
 
     def _process_response(self, response: httpx.Response) -> FHIRResult:
         """
