@@ -161,7 +161,7 @@ Sara/
 
 The demo data is synthetic FHIR R4 data in `data/iris-fhir/sara-demo-patient-bundle.json`. It includes patients, conditions, observations, medications, and service-request style follow-up actions for the showcased workflows.
 
-The default contest patient is:
+The default patient is:
 
 ```text
 Patient.id: sara-demo-patient
